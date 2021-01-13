@@ -15,7 +15,7 @@ jobs:
       - name: generate-catalog
         shell: bash -l {0}
         env:
-          GITHUB_TOKEN: {{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: {{ secrets.TOKEN }}
         run: |
           python scripts/generate-catalog.py
       - name: push to repo

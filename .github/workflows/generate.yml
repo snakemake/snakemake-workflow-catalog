@@ -1,0 +1,22 @@
+name: Generate catalog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-catalog:
+    runs-on: ubuntu-latest
+  
+  steps:
+    - uses: actions/checkout@v1
+    - name: deployment
+        uses: mamba-org/provision-with-micromamba@main
+    - name: generate-catalog
+      run: |
+        python scripts/generate-catalog.py
+    - name: push to repo
+      run: |
+        git commit -a -m "updated index.html"
+        git push

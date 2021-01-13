@@ -71,7 +71,7 @@
           <td>{{ repo.get_topics()|join(", ") }}</td>
           <td>
             <img src="https://img.shields.io/github/license/{{ repo.full_name }}" /><br />
-            <img src="https://img.shields.io/github/last-commit/{{ repo.full_name }}" /><br />
+            <a href="https://github.com/{{ repo.full_name }}/commits"><img src="https://img.shields.io/github/last-commit/{{ repo.full_name }}" /></a><br />
             {{ check_badge("linting", repo.linting) }}<br />
             {{ check_badge("formatting", repo.formatting) }}
           </td>

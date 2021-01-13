@@ -77,8 +77,6 @@ for repo in g.search_repositories("snakemake workflow in:readme archived:false")
             repo.formatting = e.stderr.decode()
     
     repos.append(repo)
-    if len(repos) == 2:
-        break
 
 repos.sort(key=lambda repo: repo.stargazers_count)
 

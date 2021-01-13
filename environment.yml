@@ -1,0 +1,9 @@
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - jinja2
+  - pygithub
+  - gitpython
+  - snakemake
+  - snakefmt

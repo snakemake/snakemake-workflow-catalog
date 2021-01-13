@@ -13,6 +13,7 @@ jobs:
       - name: deployment
         uses: mamba-org/provision-with-micromamba@main
       - name: generate-catalog
+        shell: bash -l {0}
         run: |
           python scripts/generate-catalog.py
       - name: push to repo

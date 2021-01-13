@@ -14,6 +14,8 @@ jobs:
         uses: mamba-org/provision-with-micromamba@main
       - name: generate-catalog
         shell: bash -l {0}
+        env:
+          GITHUB_TOKEN: {{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/generate-catalog.py
       - name: push to repo

@@ -12,7 +12,7 @@ jobs:
   steps:
     - uses: actions/checkout@v1
     - name: deployment
-        uses: mamba-org/provision-with-micromamba@main
+      uses: mamba-org/provision-with-micromamba@main
     - name: generate-catalog
       run: |
         python scripts/generate-catalog.py

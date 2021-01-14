@@ -82,7 +82,7 @@ for repo in g.search_repositories("snakemake workflow in:readme archived:false")
         rule_modules = (
             [] if not rules.exists() else [rules / f for f in rules.glob("*.smk")]
         )
-        if not any(f.suffix == ".smk" for f in rule_modules):
+        if rule_modules and not any(f.suffix == ".smk" for f in rule_modules):
             log_skip("rule modules are not using .smk extension")
             continue
 

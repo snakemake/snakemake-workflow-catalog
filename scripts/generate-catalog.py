@@ -4,10 +4,11 @@ import subprocess as sp
 import os
 from pathlib import Path
 import json
+import calendar
 
 from jinja2 import Environment
 from github import Github
-from github.GithubException import UnknownObjectException
+from github.GithubException import UnknownObjectException, RateLimitExceededException
 import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -19,7 +20,23 @@ env = Environment(
 
 # do not clone LFS files
 os.environ["GIT_LFS_SKIP_SMUDGE"] = "1"
+g = Github(os.environ["GITHUB_TOKEN"])
+core_rate_limit = g.get_rate_limit().core
 
+with open("data.js", "r") as f:
+    next(f)
+    previous_repos = {repo["full_name"]: repo for repo in json.loads(next(f))}
+
+with open("skips.json", "r") as f:
+    previous_skips = {repo["full_name"]: repo for repo in json.load(f)}
+
+blacklist = set(l.strip() for l in open("blacklist.txt", "r"))
+
+repos = []
+skips = []
+
+def register_skip(repo):
+    skips.append({"full_name": repo.full_name, "updated_at": repo.updated_at.timestamp()})
 
 class Repo:
     data_format = 1
@@ -40,18 +57,27 @@ class Repo:
         # increase this if fields above change
         self.data_format = Repo.data_format
 
+def rate_limit_wait():
+    reset_timestamp = calendar.timegm(core_rate_limit.reset.timetuple())
+    # add 5 seconds to be sure the rate limit has been reset
+    sleep_time = reset_timestamp - calendar.timegm(time.gmtime()) + 5
+    logging.warning(f"Rate limit exceeded, waiting {sleep_time}")
+    time.sleep(sleep_time)
 
-g = Github(os.environ["GITHUB_TOKEN"])
+def store_data():
+    repos.sort(key=lambda repo: repo["stargazers_count"])
 
-with open("data.js", "r") as f:
-    next(f)
-    previous_repos = {repo["full_name"]: repo for repo in json.loads(next(f))}
+    with open("data.js", "w") as out:
+        print(env.get_template("data.js").render(data=repos), file=out)
+    with open("skips.json", "w") as out:
+        json.dump(skips, out)
 
-blacklist = set(l.strip() for l in open("blacklist.txt", "r"))
+repo_search = g.search_repositories("snakemake workflow in:readme archived:false")
 
-repos = []
+for i, repo in enumerate(repo_search):
+    if i % 10 == 0:
+        logging.info(f"{i} of {repo_search.totalCount} repos done")
 
-for repo in g.search_repositories("snakemake workflow in:readme archived:false"):
     log_skip = lambda reason: logging.info(
         f"Skipped {repo.full_name} because {reason}."
     )
@@ -71,9 +97,24 @@ for repo in g.search_repositories("snakemake workflow in:readme archived:false")
         logging.info("Repo hasn't changed, using old data.")
         repos.append(prev)
         continue
+    prev = previous_skips.get(repo.full_name)
+    if (
+        prev is not None
+        and prev["updated_at"] == repo.updated_at.timestamp()
+    ):
+        # keep old data, it hasn't changed
+        logging.info("Repo hasn't changed, skipping again based on old data.")
+        skips.append(prev)
+        continue
 
     with tempfile.TemporaryDirectory() as tmp:
-        git.Git().clone(repo.clone_url, tmp, depth=1)
+        try:
+            git.Git().clone(repo.clone_url, tmp, depth=1)
+        except git.GitCommandError:
+            log_skip("error cloning repository")
+            register_skip(repo)
+            continue
+
         glob_path = lambda path: glob.glob(str(Path(tmp) / path))
         get_path = lambda path: "{}{}".format(workflow_base, path)
 
@@ -83,6 +124,7 @@ for repo in g.search_repositories("snakemake workflow in:readme archived:false")
 
         if not (workflow / "Snakefile").exists():
             log_skip("of missing Snakefile")
+            register_skip(repo)
             continue
 
         rules = workflow / "rules"
@@ -92,6 +134,7 @@ for repo in g.search_repositories("snakemake workflow in:readme archived:false")
         )
         if rule_modules and not any(f.suffix == ".smk" for f in rule_modules):
             log_skip("rule modules are not using .smk extension")
+            register_skip(repo)
             continue
 
         linting = None
@@ -117,12 +160,19 @@ for repo in g.search_repositories("snakemake workflow in:readme archived:false")
         except sp.CalledProcessError as e:
             formatting = e.stderr.decode()
 
-    repos.append(Repo(repo, linting, formatting).__dict__)
+    while True:
+        try:
+            parsed = Repo(repo, linting, formatting)
+            repos.append(parsed.__dict__)
+            break
+        except RateLimitExceededException:
+            rate_limit_wait()
+    
+    if len(repos) % 20 == 0:
+        logging.info("Storing intermediate results.")
+        store_data()
 
     # if len(repos) >= 2:
     #     break
 
-repos.sort(key=lambda repo: repo["stargazers_count"])
-
-with open("data.js", "w") as out:
-    print(env.get_template("data.js").render(data=repos), file=out)
+store_data()

@@ -41,214 +41,25 @@
   <!-- Image and text -->
   <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-      <img src="logo-snake.svg" id="logo" /> Snakemake workflow catalog <small>- a comprehensive catalog of public, standards compliant Snakemake workflows on github</small>
+      <img src="logo-snake.svg" id="logo" /> Snakemake workflow catalog <small>- a comprehensive catalog of public,
+        standards compliant Snakemake workflows on github</small>
     </a>
   </nav>
-
-  
 
   <div id="content">
     <table id="repos" data-toggle="table" data-pagination="true" data-search="true" data-pagination="true">
       <thead>
         <tr>
-          <th data-searchable="true" data-sortable="true">Workflow</th>
-          <th data-searchable="true">Description</th>
-          <th data-searchable="true">Topics</th>
-          <th>QC</td>
-          <th data-sortable="true">Stars</th>
-          <th data-sortable="true">Watchers</th>
+          <th data-searchable="true" data-sortable="true" data-field="full_name" data-formatter="name_formatter">
+            Workflow</th>
+          <th data-searchable="true" data-field="description">Description</th>
+          <th data-searchable="true" data-field="topics" data-formatter="topics_formatter">Topics</th>
+          <th data-field="full_name" data-formatter="qc_formatter">QC</td>
+          <th data-sortable="true" data-field="stargazers_count" data_formatter="stargazers_formatter">Stars</th>
+          <th data-sortable="true" data-field="subscribers_count" data_formatter="watchers_formatter">Watchers</th>
         </tr>
       </thead>
       <tbody>
-        
-        <tr>
-          <td><a href="https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling">snakemake-workflows/dna-seq-gatk-variant-calling</a></td>
-          <td>This Snakemake pipeline implements the GATK best-practices workflow</td>
-          <td>reproducibility, snakemake, sciworkflows</td>
-          <td>
-            <img src="https://img.shields.io/github/license/snakemake-workflows/dna-seq-gatk-variant-calling" /><br />
-            <a href="https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/commits"><img src="https://img.shields.io/github/last-commit/snakemake-workflows/dna-seq-gatk-variant-calling" /></a><br />
-            <a href="#" data-msg="Workflow defines that rule get_genome is eligible for caching between workflows (use the --cache argument to enable this).
-Workflow defines that rule genome_faidx is eligible for caching between workflows (use the --cache argument to enable this).
-Workflow defines that rule genome_dict is eligible for caching between workflows (use the --cache argument to enable this).
-Workflow defines that rule get_known_variation is eligible for caching between workflows (use the --cache argument to enable this).
-Workflow defines that rule remove_iupac_codes is eligible for caching between workflows (use the --cache argument to enable this).
-Workflow defines that rule tabix_known_variants is eligible for caching between workflows (use the --cache argument to enable this).
-Workflow defines that rule bwa_index is eligible for caching between workflows (use the --cache argument to enable this).
-Lints for snakefile /tmp/tmp5bnzy2oe/rules/filtering.smk:
-    * Mixed rules and functions in same snakefile.:
-      Small one-liner functions used only once should be defined as lambda
-      expressions. Other functions should be collected in a common module, e.g.
-      &#39;rules/common.smk&#39;. This makes the workflow steps more readable.
-      Also see:
-      https://snakemake.readthedocs.io/en/latest/snakefiles/modularization.html#includes
-
-Lints for rule get_vep_plugins (line 243, /tmp/tmp5bnzy2oe/rules/ref.smk):
-    * No log directive defined:
-      Without a log directive, all output will be printed to the terminal. In
-      distributed environments, this means that errors are harder to discover.
-      In local environments, output of concurrent jobs will be mixed and become
-      unreadable.
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files
-
-Lints for rule samtools_index (line 160, /tmp/tmp5bnzy2oe/rules/mapping.smk):
-    * No log directive defined:
-      Without a log directive, all output will be printed to the terminal. In
-      distributed environments, this means that errors are harder to discover.
-      In local environments, output of concurrent jobs will be mixed and become
-      unreadable.
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files
-
-Lints for rule vcf_to_tsv (line 1, /tmp/tmp5bnzy2oe/rules/stats.smk):
-    * No log directive defined:
-      Without a log directive, all output will be printed to the terminal. In
-      distributed environments, this means that errors are harder to discover.
-      In local environments, output of concurrent jobs will be mixed and become
-      unreadable.
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files
-
-Lints for rule plot_stats (line 29, /tmp/tmp5bnzy2oe/rules/stats.smk):
-    * No log directive defined:
-      Without a log directive, all output will be printed to the terminal. In
-      distributed environments, this means that errors are harder to discover.
-      In local environments, output of concurrent jobs will be mixed and become
-      unreadable.
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files
-
-Lints for rule fastqc (line 1, /tmp/tmp5bnzy2oe/rules/qc.smk):
-    * No log directive defined:
-      Without a log directive, all output will be printed to the terminal. In
-      distributed environments, this means that errors are harder to discover.
-      In local environments, output of concurrent jobs will be mixed and become
-      unreadable.
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files
-
-" data-title="linting errors" data-toggle="modal" data-target="#detail-popup">
-    <img src="https://img.shields.io/badge/linting-failed-red" />
-  </a><br />
-            <a href="#" data-msg="[INFO] 9 file(s) would be changed 😬
-" data-title="formatting errors" data-toggle="modal" data-target="#detail-popup">
-    <img src="https://img.shields.io/badge/formatting-failed-red" />
-  </a>
-          </td>
-          <td><a href="https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/stargazers">121</a></td>
-          <td><a href="https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/watchers">2</a></td>
-        </tr>
-        
-        <tr>
-          <td><a href="https://github.com/snakemake-workflows/rna-seq-star-deseq2">snakemake-workflows/rna-seq-star-deseq2</a></td>
-          <td>RNA-seq workflow using STAR and DESeq2</td>
-          <td>snakemake, snakemake-workflows, ngs, rna-seq, reproducible-science</td>
-          <td>
-            <img src="https://img.shields.io/github/license/snakemake-workflows/rna-seq-star-deseq2" /><br />
-            <a href="https://github.com/snakemake-workflows/rna-seq-star-deseq2/commits"><img src="https://img.shields.io/github/last-commit/snakemake-workflows/rna-seq-star-deseq2" /></a><br />
-            <a href="#" data-msg="Lints for snakefile /tmp/tmp4ozjztwr/Snakefile:
-    * Deprecated singularity directive used for container definition in line 35.:
-      Use the container directive instead (it is agnostic of the underlying
-      container runtime).
-      Also see:
-      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers
-
-Lints for snakefile /tmp/tmp4ozjztwr/rules/trim.smk:
-    * Mixed rules and functions in same snakefile.:
-      Small one-liner functions used only once should be defined as lambda
-      expressions. Other functions should be collected in a common module, e.g.
-      &#39;rules/common.smk&#39;. This makes the workflow steps more readable.
-      Also see:
-      https://snakemake.readthedocs.io/en/latest/snakefiles/modularization.html#includes
-
-Lints for snakefile /tmp/tmp4ozjztwr/rules/align.smk:
-    * Mixed rules and functions in same snakefile.:
-      Small one-liner functions used only once should be defined as lambda
-      expressions. Other functions should be collected in a common module, e.g.
-      &#39;rules/common.smk&#39;. This makes the workflow steps more readable.
-      Also see:
-      https://snakemake.readthedocs.io/en/latest/snakefiles/modularization.html#includes
-
-Lints for snakefile /tmp/tmp4ozjztwr/rules/diffexp.smk:
-    * Mixed rules and functions in same snakefile.:
-      Small one-liner functions used only once should be defined as lambda
-      expressions. Other functions should be collected in a common module, e.g.
-      &#39;rules/common.smk&#39;. This makes the workflow steps more readable.
-      Also see:
-      https://snakemake.readthedocs.io/en/latest/snakefiles/modularization.html#includes
-
-Lints for rule count_matrix (line 8, /tmp/tmp4ozjztwr/rules/diffexp.smk):
-    * No log directive defined:
-      Without a log directive, all output will be printed to the terminal. In
-      distributed environments, this means that errors are harder to discover.
-      In local environments, output of concurrent jobs will be mixed and become
-      unreadable.
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files
-
-Lints for rule rseqc_junction_annotation (line 32, /tmp/tmp4ozjztwr/rules/qc.smk):
-    * Param prefix is a prefix of input or output file but hardcoded:
-      If this is meant to represent a file path prefix, it will fail when
-      running workflow in environments without a shared filesystem. Instead,
-      provide a function that infers the appropriate prefix from the input or
-      output file, e.g.: lambda w, input: os.path.splitext(input[0])[0]
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules
-      https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#tutorial-input-functions
-
-Lints for rule rseqc_junction_saturation (line 71, /tmp/tmp4ozjztwr/rules/qc.smk):
-    * Param prefix is a prefix of input or output file but hardcoded:
-      If this is meant to represent a file path prefix, it will fail when
-      running workflow in environments without a shared filesystem. Instead,
-      provide a function that infers the appropriate prefix from the input or
-      output file, e.g.: lambda w, input: os.path.splitext(input[0])[0]
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules
-      https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#tutorial-input-functions
-
-Lints for rule rseqc_innerdis (line 173, /tmp/tmp4ozjztwr/rules/qc.smk):
-    * Param prefix is a prefix of input or output file but hardcoded:
-      If this is meant to represent a file path prefix, it will fail when
-      running workflow in environments without a shared filesystem. Instead,
-      provide a function that infers the appropriate prefix from the input or
-      output file, e.g.: lambda w, input: os.path.splitext(input[0])[0]
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules
-      https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#tutorial-input-functions
-
-Lints for rule rseqc_readdup (line 241, /tmp/tmp4ozjztwr/rules/qc.smk):
-    * Param prefix is a prefix of input or output file but hardcoded:
-      If this is meant to represent a file path prefix, it will fail when
-      running workflow in environments without a shared filesystem. Instead,
-      provide a function that infers the appropriate prefix from the input or
-      output file, e.g.: lambda w, input: os.path.splitext(input[0])[0]
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules
-      https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#tutorial-input-functions
-
-Lints for rule rseqc_readgc (line 276, /tmp/tmp4ozjztwr/rules/qc.smk):
-    * Param prefix is a prefix of input or output file but hardcoded:
-      If this is meant to represent a file path prefix, it will fail when
-      running workflow in environments without a shared filesystem. Instead,
-      provide a function that infers the appropriate prefix from the input or
-      output file, e.g.: lambda w, input: os.path.splitext(input[0])[0]
-      Also see:
-      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules
-      https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#tutorial-input-functions
-
-" data-title="linting errors" data-toggle="modal" data-target="#detail-popup">
-    <img src="https://img.shields.io/badge/linting-failed-red" />
-  </a><br />
-            <a href="#" data-msg="[INFO] 6 file(s) would be changed 😬
-" data-title="formatting errors" data-toggle="modal" data-target="#detail-popup">
-    <img src="https://img.shields.io/badge/formatting-failed-red" />
-  </a>
-          </td>
-          <td><a href="https://github.com/snakemake-workflows/rna-seq-star-deseq2/stargazers">150</a></td>
-          <td><a href="https://github.com/snakemake-workflows/rna-seq-star-deseq2/watchers">5</a></td>
-        </tr>
-        
       </tbody>
     </table>
   </div>
@@ -257,7 +68,8 @@ Lints for rule rseqc_readgc (line 276, /tmp/tmp4ozjztwr/rules/qc.smk):
 
   <div class="footer">
     <p><small><a href="https://github.com/snakemake">&copy; 2020 The Snakemake team</a></small></p>
-    <p><small>This catalog is generated automatically by querying Github APIs; the Snakemake team is not responsible for the linked workflows.</small></p>
+    <p><small>This catalog is generated automatically by querying Github APIs; the Snakemake team is not responsible for
+        the linked workflows.</small></p>
   </div>
 
   <div class="modal fade" tabindex="-1" role="dialog" id="detail-popup">
@@ -284,7 +96,57 @@ Lints for rule rseqc_readgc (line 276, /tmp/tmp4ozjztwr/rules/qc.smk):
     crossorigin="anonymous"></script>
   <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
 
+  <script src="data.js"></script>
+
   <script>
+    function name_formatter(full_name) {
+      return `<a href="https://github.com/${full_name}">${full_name}</a>`
+    }
+
+    function topics_formatter(topics) {
+      return topics.join(", ")
+    }
+
+    function escapeHtml(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function check_badge(check, msg) {
+      const passed = msg ? 'failed' : 'passed'
+      const color = msg ? 'red' : 'green'
+      return `
+      <a href="#" data-msg="${escapeHtml(msg)}" data-title="${check} errors" data-toggle="modal" data-target="#detail-popup">
+        <img src="https://img.shields.io/badge/${check}-${passed}-${color}" />
+      </a>
+      `
+    }
+
+    function qc_formatter(_, repo) {
+      return `
+      <img src="https://img.shields.io/github/license/${repo.full_name}" /><br />
+      <a href="https://github.com/${repo.full_name}/commits"><img src="https://img.shields.io/github/last-commit/${repo.full_name}" /></a><br />
+      ${check_badge("linting", repo.linting)}<br />
+      ${check_badge("formatting", repo.formatting)}
+      `
+    }
+
+    function stargazers_formatter(_, repo) {
+      return `<a href="https://github.com/${repo.full_name}/stargazers">${repo.stargazers_count}</a>`
+    }
+
+    function watchers_formatter(_, repo) {
+      return `<a href="https://github.com/${repo.full_name}/watchers">${repo.subscribers_count}</a>`
+    }
+
+    $("#repos").bootstrapTable({
+      data: data
+    })
+
     $('#detail-popup').on('show.bs.modal', function (event) {
       var source = $(event.relatedTarget) // item that triggered the modal
       var msg = source.data('msg')

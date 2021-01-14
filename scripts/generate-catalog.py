@@ -17,9 +17,13 @@ env = Environment(
     autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
 )
 
+# do not clone LFS files
+os.environ["GIT_LFS_SKIP_SMUDGE"] = "1"
+
 
 class Repo:
     data_format = 1
+
     def __init__(self, github_repo, linting, formatting):
         for attr in [
             "full_name",
@@ -58,14 +62,18 @@ for repo in g.search_repositories("snakemake workflow in:readme archived:false")
         continue
 
     prev = previous_repos.get(repo.full_name)
-    if prev is not None and Repo.data_format == prev["data_format"] and prev["updated_at"] == repo.updated_at.timestamp():
+    if (
+        prev is not None
+        and Repo.data_format == prev["data_format"]
+        and prev["updated_at"] == repo.updated_at.timestamp()
+    ):
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, using old data.")
         repos.append(prev)
         continue
 
     with tempfile.TemporaryDirectory() as tmp:
-        git.Git().clone(repo.clone_url, tmp, depth=1, filter="blob:limit=1m")
+        git.Git().clone(repo.clone_url, tmp, depth=1)
         glob_path = lambda path: glob.glob(str(Path(tmp) / path))
         get_path = lambda path: "{}{}".format(workflow_base, path)
 

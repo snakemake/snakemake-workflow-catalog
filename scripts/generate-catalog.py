@@ -19,6 +19,7 @@ env = Environment(
 
 
 class Repo:
+    data_format = 1
     def __init__(self, github_repo, linting, formatting):
         for attr in [
             "full_name",
@@ -32,6 +33,8 @@ class Repo:
 
         self.linting = linting
         self.formatting = formatting
+        # increase this if fields above change
+        self.data_format = Repo.data_format
 
 
 g = Github(os.environ["GITHUB_TOKEN"])
@@ -55,7 +58,7 @@ for repo in g.search_repositories("snakemake workflow in:readme archived:false")
         continue
 
     prev = previous_repos.get(repo.full_name)
-    if prev is not None and prev["updated_at"] == repo.updated_at.timestamp():
+    if prev is not None and Repo.data_format == prev["data_format"] and prev["updated_at"] == repo.updated_at.timestamp():
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, using old data.")
         repos.append(prev)

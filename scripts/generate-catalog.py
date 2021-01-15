@@ -77,7 +77,7 @@ def store_data():
     with open("data.js", "w") as out:
         print(env.get_template("data.js").render(data=repos), file=out)
     with open("skips.json", "w") as out:
-        json.dump(skips, out)
+        json.dump(skips, out, sort_keys=True, indent=2)
 
 
 repo_search = g.search_repositories("snakemake workflow in:readme archived:false")

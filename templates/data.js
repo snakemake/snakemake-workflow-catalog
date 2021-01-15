@@ -1,2 +1,2 @@
 var data =
-{{ data|tojson|safe }}
+{{ data|tojson(indent=2)|safe }}

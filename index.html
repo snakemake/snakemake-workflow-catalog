@@ -30,6 +30,10 @@
       overflow: auto;
       max-height: 80vh;
     }
+
+    .navbar a:not(.navbar-brand) {
+      color: #007bff !important;
+    }
   </style>
 
   <title>Snakemake workflow catalog</title>
@@ -41,9 +45,14 @@
   <!-- Image and text -->
   <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-      <img src="logo-snake.svg" id="logo" /> Snakemake workflow catalog <small>- a comprehensive catalog of public,
-        standards compliant Snakemake workflows on github</small>
+      <img src="logo-snake.svg" id="logo" /> Snakemake workflow catalog
     </a>
+    <div class="navbar-nav">
+      <div class="navbar-text">A comprehensive catalog of
+        <a href="#" data-toggle="modal" data-target="#rule-popup">standards compliant</a>, public, <a
+          href="https://snakemake.github.io">Snakemake</a> workflows
+      </div>
+    </div>
   </nav>
 
   <div id="content">
@@ -71,6 +80,9 @@
     <p><small><a href="https://github.com/snakemake">&copy; 2020 The Snakemake team</a></small></p>
     <p><small>This catalog is generated automatically by querying Github APIs; the Snakemake team is not responsible for
         the linked workflows.</small></p>
+    <p><small>Source code: <a
+          href="https://github.com/snakemake/snakemake-workflow-catalog">https://github.com/snakemake/snakemake-workflow-catalog</a></small>
+    </p>
   </div>
 
   <div class="modal fade" tabindex="-1" role="dialog" id="detail-popup">
@@ -84,6 +96,36 @@
         </div>
         <div class="modal-body">
           <pre id="check-msg"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="rule-popup">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Rules for inclusion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>
+            This catalog includes workflows based on the following criteria:
+          <ul>
+            <li>The workflow is contained in a public <a href="https://github.com">Github</a> repository.</li>
+            <li>The repository has a readme, containing the words "snakemake" and "workflow" (case insensitive).</li>
+            <li>The repository contains a workflow definition named either <samp>Snakefile</samp> or
+              <samp>workflow/Snakefile</samp>.</li>
+            <li>If the repository contains a folder <samp>rules</samp> or <samp>workflow/rules</samp> that folder must
+              at least contain one file ending on <samp>.smk</samp>.</li>
+            <li>The repository is small enough to be cloned into a Github actions job (very large files should be
+              handled via Git LFS, so that they can be stripped out during cloning).</li>
+            <li>The repository is not blacklisted <a
+                href="https://github.com/snakemake/snakemake-workflow-catalog/blob/main/blacklist.txt">here</a>.</li>
+          </ul>
+          </p>
         </div>
       </div>
     </div>
@@ -105,7 +147,7 @@
     }
 
     function topics_formatter(topics) {
-      return topics.join(", ")
+      return topics.map(topic => `<a href="https://github.com/topics/${topic}">${topic}</a>`).join(", ")
     }
 
     function escapeHtml(unsafe) {

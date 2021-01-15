@@ -36,8 +36,12 @@ blacklist = set(l.strip() for l in open("blacklist.txt", "r"))
 repos = []
 skips = []
 
+
 def register_skip(repo):
-    skips.append({"full_name": repo.full_name, "updated_at": repo.updated_at.timestamp()})
+    skips.append(
+        {"full_name": repo.full_name, "updated_at": repo.updated_at.timestamp()}
+    )
+
 
 class Repo:
     data_format = 1
@@ -58,12 +62,14 @@ class Repo:
         # increase this if fields above change
         self.data_format = Repo.data_format
 
+
 def rate_limit_wait():
     reset_timestamp = calendar.timegm(core_rate_limit.reset.timetuple())
     # add 5 seconds to be sure the rate limit has been reset
     sleep_time = reset_timestamp - calendar.timegm(time.gmtime()) + 5
     logging.warning(f"Rate limit exceeded, waiting {sleep_time}")
     time.sleep(sleep_time)
+
 
 def store_data():
     repos.sort(key=lambda repo: repo["stargazers_count"])
@@ -72,6 +78,7 @@ def store_data():
         print(env.get_template("data.js").render(data=repos), file=out)
     with open("skips.json", "w") as out:
         json.dump(skips, out)
+
 
 repo_search = g.search_repositories("snakemake workflow in:readme archived:false")
 
@@ -99,10 +106,7 @@ for i, repo in enumerate(repo_search):
         repos.append(prev)
         continue
     prev = previous_skips.get(repo.full_name)
-    if (
-        prev is not None
-        and prev["updated_at"] == repo.updated_at.timestamp()
-    ):
+    if prev is not None and prev["updated_at"] == repo.updated_at.timestamp():
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, skipping again based on old data.")
         skips.append(prev)
@@ -168,7 +172,7 @@ for i, repo in enumerate(repo_search):
             break
         except RateLimitExceededException:
             rate_limit_wait()
-    
+
     if len(repos) % 20 == 0:
         logging.info("Storing intermediate results.")
         store_data()

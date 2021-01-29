@@ -26,7 +26,7 @@ core_rate_limit = g.get_rate_limit().core
 
 with open("data.js", "r") as f:
     next(f)
-    previous_repos = {repo["full_name"]: repo for repo in json.loads(next(f))}
+    previous_repos = {repo["full_name"]: repo for repo in json.loads(f.read())}
 
 with open("skips.json", "r") as f:
     previous_skips = {repo["full_name"]: repo for repo in json.load(f)}

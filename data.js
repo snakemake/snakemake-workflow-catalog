@@ -6835,7 +6835,13 @@ var data =
     "stargazers_count": 32,
     "subscribers_count": 4,
     "topics": [],
-    "updated_at": 1617977162.0
+    "updated_at": 1617977162.0,
+    "standardized": true,
+    "mandatory_flags": { "flags": "", "desc": ""},
+    "report": true,
+    "software_stack_deployment": ["conda"],
+    "latest_release": "v1.0.0",
+    "config_readme": "<html><head></head><body>dummy config readme</body></html>"
   },
   {
     "data_format": 1,

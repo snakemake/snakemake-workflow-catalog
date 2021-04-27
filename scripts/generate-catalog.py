@@ -126,15 +126,15 @@ for i, repo in enumerate(repo_search):
         logging.info("Repo hasn't changed, using old data.")
         repos.append(prev)
         continue
-    prev = previous_skips.get(repo.full_name)
+    prev_skip = previous_skips.get(repo.full_name)
     if (
-        prev is not None
+        prev_skip is not None
         and Repo.data_format == prev["data_format"]
-        and prev["updated_at"] == repo.updated_at.timestamp()
+        and prev_skip["updated_at"] == repo.updated_at.timestamp()
     ):
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, skipping again based on old data.")
-        skips.append(prev)
+        skips.append(prev_skip)
         continue
 
     with tempfile.TemporaryDirectory() as tmp:

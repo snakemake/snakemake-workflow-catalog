@@ -64,9 +64,11 @@ class Repo:
         self.linting = linting
         self.formatting = formatting
 
-        self.latest_release = github_repo.get_latest_release()
-        if self.latest_release:
-            self.latest_release = self.latest_release.tag_name
+        try:
+            self.latest_release = github_repo.get_latest_release().tag_name
+        except UnknownObjectException:
+            # no release
+            self.latest_release = None
 
         if settings is not None and config_readme is not None:
             self.mandatory_flags = settings.get("usage", {}).get(

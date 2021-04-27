@@ -61,15 +61,19 @@ class Repo:
 
         self.linting = linting
         self.formatting = formatting
-        
+
         self.latest_release = github_repo.get_latest_release()
         if self.latest_release:
             self.latest_release = self.latest_release.tag_name
 
         if settings is not None and config_readme is not None:
-            self.mandatory_flags = settings.get("usage", {}).get("mandatory-flags", None)
+            self.mandatory_flags = settings.get("usage", {}).get(
+                "mandatory-flags", None
+            )
             self.report = settings.get("report", False)
-            self.software_stack_deployment = settings.get("software-stack-deployment", {})
+            self.software_stack_deployment = settings.get(
+                "software-stack-deployment", {}
+            )
             self.standardized = True
             self.config_readme = g.render_markdown(config_readme)
         else:
@@ -123,7 +127,11 @@ for i, repo in enumerate(repo_search):
         repos.append(prev)
         continue
     prev = previous_skips.get(repo.full_name)
-    if (prev is not None and Repo.data_format == prev["data_format"] and prev["updated_at"] == repo.updated_at.timestamp()):
+    if (
+        prev is not None
+        and Repo.data_format == prev["data_format"]
+        and prev["updated_at"] == repo.updated_at.timestamp()
+    ):
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, skipping again based on old data.")
         skips.append(prev)
@@ -137,8 +145,7 @@ for i, repo in enumerate(repo_search):
             register_skip(repo)
             continue
 
-        glob_path = lambda path: glob.glob(str(Path(tmp) / path))
-        get_path = lambda path: "{}{}".format(workflow_base, path)
+        tmp = Path(tmp)
 
         release = repo.get_latest_release()
         if release is not None:
@@ -146,9 +153,9 @@ for i, repo in enumerate(repo_search):
             gitrepo.head.reference = gitrepo.commit(release.target_commitish)
             gitrepo.head.reset(index=True, working_tree=True)
 
-        workflow = Path(tmp) / "workflow"
+        workflow = tmp / "workflow"
         if not workflow.exists():
-            workflow = Path(tmp)
+            workflow = tmp
 
         if not (workflow / "Snakefile").exists():
             log_skip("of missing Snakefile")

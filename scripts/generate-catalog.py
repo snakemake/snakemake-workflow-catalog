@@ -6,6 +6,8 @@ from pathlib import Path
 import json
 import calendar
 import time
+import urllib
+import tarfile
 
 from jinja2 import Environment
 from github import Github
@@ -127,29 +129,31 @@ for i, repo in enumerate(repo_search):
         repos.append(prev)
         continue
     prev_skip = previous_skips.get(repo.full_name)
-    if (
-        prev_skip is not None
-        and prev_skip["updated_at"] == repo.updated_at.timestamp()
-    ):
+    if prev_skip is not None and prev_skip["updated_at"] == repo.updated_at.timestamp():
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, skipping again based on old data.")
         skips.append(prev_skip)
         continue
 
     with tempfile.TemporaryDirectory() as tmp:
-        try:
-            gitrepo = git.Repo.clone_from(repo.clone_url, tmp, depth=1)
-        except git.GitCommandError:
-            log_skip("error cloning repository")
-            register_skip(repo)
-            continue
-
         tmp = Path(tmp)
 
         release = repo.get_latest_release()
         if release is not None:
             # go to release tag
-            gitrepo.heads[release.tag_name].checkout()
+            get_tarfile = lambda: tarfile.open(
+                fileobj=urllib.request.urlopen(release.tarball_url), mode="r|gz"
+            )
+            root_dir = get_tarfile().getmembers()[0].name
+            get_tarfile().extractall(path=tmp)
+            tmp /= root_dir
+        else:
+            try:
+                gitrepo = git.Repo.clone_from(repo.clone_url, str(tmp), depth=1)
+            except git.GitCommandError:
+                log_skip("error cloning repository")
+                register_skip(repo)
+                continue
 
         workflow = tmp / "workflow"
         if not workflow.exists():

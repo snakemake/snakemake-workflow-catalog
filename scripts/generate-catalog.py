@@ -149,7 +149,7 @@ for i, repo in enumerate(repo_search):
         release = repo.get_latest_release()
         if release is not None:
             # go to release tag
-            gitrepo.checkout(release.tag_name)
+            gitrepo.heads[release.tag_name].checkout()
 
         workflow = tmp / "workflow"
         if not workflow.exists():

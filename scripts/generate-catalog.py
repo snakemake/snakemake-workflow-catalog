@@ -131,7 +131,7 @@ for i, repo in enumerate(repo_search):
 
     with tempfile.TemporaryDirectory() as tmp:
         try:
-            git.Git().clone(repo.clone_url, tmp, depth=1)
+            gitrepo = git.Repo.clone_from(repo.clone_url, tmp, depth=1)
         except git.GitCommandError:
             log_skip("error cloning repository")
             register_skip(repo)
@@ -143,8 +143,8 @@ for i, repo in enumerate(repo_search):
         release = repo.get_latest_release()
         if release is not None:
             # go to release commit
-            repo.head.reference = repo.commit(release.target_commitish)
-            repo.head.reset(index=True, working_tree=True)
+            gitrepo.head.reference = gitrepo.commit(release.target_commitish)
+            gitrepo.head.reset(index=True, working_tree=True)
 
         workflow = Path(tmp) / "workflow"
         if not workflow.exists():

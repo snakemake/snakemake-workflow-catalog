@@ -12,6 +12,7 @@ from github import Github
 from github.GithubException import UnknownObjectException, RateLimitExceededException
 import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+import yaml
 
 logging.basicConfig(level=logging.INFO)
 
@@ -44,9 +45,9 @@ def register_skip(repo):
 
 
 class Repo:
-    data_format = 1
+    data_format = 2
 
-    def __init__(self, github_repo, linting, formatting):
+    def __init__(self, github_repo, linting, formatting, config_readme, settings: dict):
         for attr in [
             "full_name",
             "description",
@@ -54,11 +55,27 @@ class Repo:
             "subscribers_count",
         ]:
             setattr(self, attr, getattr(github_repo, attr))
+
         self.topics = github_repo.get_topics()
         self.updated_at = github_repo.updated_at.timestamp()
 
         self.linting = linting
         self.formatting = formatting
+        
+        self.latest_release = github_repo.get_latest_release()
+        if self.latest_release:
+            self.latest_release = self.latest_release.tag_name
+
+        if settings is not None and config_readme is not None:
+            self.mandatory_flags = settings.get("usage", {}).get("mandatory-flags", None)
+            self.report = settings.get("report", False)
+            self.software_stack_deployment = settings.get("software-stack-deployment", {})
+            self.standardized = True
+            self.config_readme = g.render_markdown(config_readme)
+        else:
+            self.snakemake_flags = []
+            self.standardized = False
+
         # increase this if fields above change
         self.data_format = Repo.data_format
 
@@ -106,7 +123,7 @@ for i, repo in enumerate(repo_search):
         repos.append(prev)
         continue
     prev = previous_skips.get(repo.full_name)
-    if prev is not None and prev["updated_at"] == repo.updated_at.timestamp():
+    if (prev is not None and Repo.data_format == prev["data_format"] and prev["updated_at"] == repo.updated_at.timestamp()):
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, skipping again based on old data.")
         skips.append(prev)
@@ -122,6 +139,12 @@ for i, repo in enumerate(repo_search):
 
         glob_path = lambda path: glob.glob(str(Path(tmp) / path))
         get_path = lambda path: "{}{}".format(workflow_base, path)
+
+        release = repo.get_latest_release()
+        if release is not None:
+            # go to release commit
+            repo.head.reference = repo.commit(release.target_commitish)
+            repo.head.reset(index=True, working_tree=True)
 
         workflow = Path(tmp) / "workflow"
         if not workflow.exists():
@@ -142,8 +165,22 @@ for i, repo in enumerate(repo_search):
             register_skip(repo)
             continue
 
+        # catalog settings
+        settings = None
+        settings_file = tmp / ".snakemake-workflow-catalog.yml"
+        if settings.exists():
+            with open(settings) as settings_file:
+                settings = yaml.load(settings_file, yaml.Loader)
+
         linting = None
         formatting = None
+
+        # config readme
+        config_readme = None
+        config_readme_path = tmp / "config" / "README.md"
+        if config_readme_path.exists():
+            with open(config_readme_path, "r") as f:
+                config_readme = f.read()
 
         # linting
         try:
@@ -167,7 +204,7 @@ for i, repo in enumerate(repo_search):
 
     while True:
         try:
-            parsed = Repo(repo, linting, formatting)
+            parsed = Repo(repo, linting, formatting, config_readme, settings)
             repos.append(parsed.__dict__)
             break
         except RateLimitExceededException:

@@ -129,7 +129,6 @@ for i, repo in enumerate(repo_search):
     prev_skip = previous_skips.get(repo.full_name)
     if (
         prev_skip is not None
-        and Repo.data_format == prev["data_format"]
         and prev_skip["updated_at"] == repo.updated_at.timestamp()
     ):
         # keep old data, it hasn't changed

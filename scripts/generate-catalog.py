@@ -148,9 +148,8 @@ for i, repo in enumerate(repo_search):
 
         release = repo.get_latest_release()
         if release is not None:
-            # go to release commit
-            gitrepo.head.reference = gitrepo.commit(release.target_commitish)
-            gitrepo.head.reset(index=True, working_tree=True)
+            # go to release tag
+            gitrepo.checkout(release.tag_name)
 
         workflow = tmp / "workflow"
         if not workflow.exists():

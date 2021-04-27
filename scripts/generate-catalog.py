@@ -138,8 +138,8 @@ for i, repo in enumerate(repo_search):
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
 
-        release = repo.get_latest_release()
-        if release is not None:
+        try:
+            release = repo.get_latest_release()
             # go to release tag
             get_tarfile = lambda: tarfile.open(
                 fileobj=urllib.request.urlopen(release.tarball_url), mode="r|gz"
@@ -147,7 +147,8 @@ for i, repo in enumerate(repo_search):
             root_dir = get_tarfile().getmembers()[0].name
             get_tarfile().extractall(path=tmp)
             tmp /= root_dir
-        else:
+        except UnknownObjectException:
+            # no latest release, clone main branch
             try:
                 gitrepo = git.Repo.clone_from(repo.clone_url, str(tmp), depth=1)
             except git.GitCommandError:

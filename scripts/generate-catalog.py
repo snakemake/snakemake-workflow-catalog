@@ -89,9 +89,10 @@ class Repo:
 
 
 def rate_limit_wait():
+    curr_timestamp = calendar.timegm(time.gmtime())
     reset_timestamp = calendar.timegm(core_rate_limit.reset.timetuple())
     # add 5 seconds to be sure the rate limit has been reset
-    sleep_time = reset_timestamp - calendar.timegm(time.gmtime()) + 5
+    sleep_time = max(0, reset_timestamp - curr_timestamp) + 5
     logging.warning(f"Rate limit exceeded, waiting {sleep_time}")
     time.sleep(sleep_time)
 

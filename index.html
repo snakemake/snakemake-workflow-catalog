@@ -45,10 +45,24 @@
       opacity: 1.0;
     }
 
-    #config-readme {
-      border: 0;
-      width: 100%;
-      height: 100%;
+    #config-readme h1 {
+      font-size: 1.5rem
+    }
+
+    #config-readme h2 {
+      font-size: 1.4rem
+    }
+
+    #config-readme h3 {
+      font-size: 1.3rem
+    }
+
+    #config-readme h4 {
+      font-size: 1.2rem
+    }
+
+    #config-readme h5 {
+      font-size: 1.1rem
     }
   </style>
 
@@ -127,7 +141,7 @@
   </div>
 
   <div class="modal fade" tabindex="-1" role="dialog" id="usage-popup">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Usage</h5>
@@ -212,7 +226,7 @@
               </div>
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                 <div class="card-body">
-                  <iframe id="config-readme"></iframe>
+                  <div id="config-readme"></div>
                 </div>
               </div>
             </div>
@@ -228,6 +242,28 @@
               <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                 <div class="card-body" id="run-workflow-content">
                   
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="generate-report">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive"
+                    aria-expanded="false" aria-controls="collapseFive">
+                    Step 5: generate report
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                <div class="card-body" id="generate-report-content">
+                  After finalizing your data analysis, you can automatically generate an interactive visual HTML report for inspection of
+                  results together with parameters and code inside of the browser via
+
+                  <pre><code class="language-bash">snakemake --report report.zip</code></pre>
+
+                  The resulting <code>report.zip</code> file can be passed on to collaborators, 
+                  provided as a supplementary file in publications, or uploaded to a service like <a href="https://zenodo.org">Zenodo</a>
+                  in order to obtain a citable <a href="https://en.wikipedia.org/wiki/Digital_object_identifier">DOI</a>.
                 </div>
               </div>
             </div>
@@ -402,7 +438,6 @@ usage:
         flags = rowdata.mandatory_flags.flags
       }
 
-      var config_readme = `data:text/html;base64,${btoa(rowdata.config_readme)}`
       var modal = $(this)
 
       var method_flags = {
@@ -420,7 +455,7 @@ usage:
       modal.find("#run-workflow-content").empty().append(nunjucks.render("templates/run-instructions.html.njk", { "deployment_methods": deployment_methods}))
 
       modal.find('#snakedeploy-cmd').text(`snakedeploy deploy-workflow ${repo_url} . --tag ${rowdata.latest_release}`)
-      modal.find('#config-readme').attr("src", config_readme)
+      modal.find('#config-readme').empty().append($(rowdata.config_readme))
     })
   
     $("#standardized-tab").on("click", function(e) {

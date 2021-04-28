@@ -77,7 +77,7 @@
         <a class="nav-link active" id="standardized-tab" data-toggle="tab" href="#standardized" role="tab" aria-controls="standardized" aria-selected="true">Standardized usage</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All workflows</a>
+        <a class="nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All workflows <span class="badge badge-primary" id="workflow-count-badge"></span></a>
       </li>
     </ul>
     <table id="repos" data-toggle="table" data-pagination="true" data-search="true" data-pagination="true"
@@ -375,6 +375,12 @@ usage:
     $("#repos").bootstrapTable({
       data: data
     })
+
+    // show number of workflows
+    var nrows = $("#repos").bootstrapTable('getOptions').totalRows
+    $("#workflow-count-badge").text(nrows)
+
+    // filter to standardized by default
     $("#repos").bootstrapTable("filterBy", { standardized: [true] })
 
     $('#detail-popup').on('show.bs.modal', function (event) {
@@ -421,7 +427,7 @@ usage:
     })
     $("#all-tab").on("click", function(e) {
       e.preventDefault()
-      $("#repos").bootstrapTable("filterBy", { standardized: [undefined, false] })
+      $("#repos").bootstrapTable("filterBy", { standardized: [undefined, false, true] })
     })
   </script>
 </body>

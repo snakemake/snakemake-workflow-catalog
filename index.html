@@ -74,10 +74,10 @@
   <div id="content">
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="standardized-tab" data-toggle="tab" href="#standardized" role="tab" aria-controls="standardized" aria-selected="true">Standardized usage</a>
+        <a class="nav-link" id="standardized-tab" data-toggle="tab" href="#standardized" role="tab" aria-controls="standardized" aria-selected="false">Standardized usage</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All workflows <span class="badge badge-primary" id="workflow-count-badge"></span></a>
+        <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All workflows <span class="badge badge-primary" id="workflow-count-badge"></span></a>
       </li>
     </ul>
     <table id="repos" data-toggle="table" data-pagination="true" data-search="true" data-pagination="true"
@@ -381,7 +381,7 @@ usage:
     $("#workflow-count-badge").text(nrows)
 
     // filter to standardized by default
-    $("#repos").bootstrapTable("filterBy", { standardized: [true] })
+    //$("#repos").bootstrapTable("filterBy", { standardized: [true] })
 
     $('#detail-popup').on('show.bs.modal', function (event) {
       var source = $(event.relatedTarget) // item that triggered the modal

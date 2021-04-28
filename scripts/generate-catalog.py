@@ -6,6 +6,8 @@ from pathlib import Path
 import json
 import calendar
 import time
+import urllib
+import tarfile
 
 from jinja2 import Environment
 from github import Github
@@ -61,15 +63,21 @@ class Repo:
 
         self.linting = linting
         self.formatting = formatting
-        
-        self.latest_release = github_repo.get_latest_release()
-        if self.latest_release:
-            self.latest_release = self.latest_release.tag_name
+
+        try:
+            self.latest_release = github_repo.get_latest_release().tag_name
+        except UnknownObjectException:
+            # no release
+            self.latest_release = None
 
         if settings is not None and config_readme is not None:
-            self.mandatory_flags = settings.get("usage", {}).get("mandatory-flags", None)
+            self.mandatory_flags = settings.get("usage", {}).get(
+                "mandatory-flags", None
+            )
             self.report = settings.get("report", False)
-            self.software_stack_deployment = settings.get("software-stack-deployment", {})
+            self.software_stack_deployment = settings.get(
+                "software-stack-deployment", {}
+            )
             self.standardized = True
             self.config_readme = g.render_markdown(config_readme)
         else:
@@ -81,11 +89,20 @@ class Repo:
 
 
 def rate_limit_wait():
+    curr_timestamp = calendar.timegm(time.gmtime())
     reset_timestamp = calendar.timegm(core_rate_limit.reset.timetuple())
     # add 5 seconds to be sure the rate limit has been reset
-    sleep_time = reset_timestamp - calendar.timegm(time.gmtime()) + 5
+    sleep_time = max(0, reset_timestamp - curr_timestamp) + 5
     logging.warning(f"Rate limit exceeded, waiting {sleep_time}")
     time.sleep(sleep_time)
+
+
+def call_rate_limit_aware(func):
+    while True:
+        try:
+            return func()
+        except RateLimitExceededException:
+            rate_limit_wait()
 
 
 def store_data():
@@ -122,33 +139,37 @@ for i, repo in enumerate(repo_search):
         logging.info("Repo hasn't changed, using old data.")
         repos.append(prev)
         continue
-    prev = previous_skips.get(repo.full_name)
-    if (prev is not None and Repo.data_format == prev["data_format"] and prev["updated_at"] == repo.updated_at.timestamp()):
+    prev_skip = previous_skips.get(repo.full_name)
+    if prev_skip is not None and prev_skip["updated_at"] == repo.updated_at.timestamp():
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, skipping again based on old data.")
-        skips.append(prev)
+        skips.append(prev_skip)
         continue
 
     with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+
         try:
-            git.Git().clone(repo.clone_url, tmp, depth=1)
-        except git.GitCommandError:
-            log_skip("error cloning repository")
-            register_skip(repo)
-            continue
+            release = call_rate_limit_aware(repo.get_latest_release)
+            # go to release tag
+            get_tarfile = lambda: tarfile.open(
+                fileobj=urllib.request.urlopen(release.tarball_url), mode="r|gz"
+            )
+            root_dir = get_tarfile().getmembers()[0].name
+            get_tarfile().extractall(path=tmp)
+            tmp /= root_dir
+        except UnknownObjectException:
+            # no latest release, clone main branch
+            try:
+                gitrepo = git.Repo.clone_from(repo.clone_url, str(tmp), depth=1)
+            except git.GitCommandError:
+                log_skip("error cloning repository")
+                register_skip(repo)
+                continue
 
-        glob_path = lambda path: glob.glob(str(Path(tmp) / path))
-        get_path = lambda path: "{}{}".format(workflow_base, path)
-
-        release = repo.get_latest_release()
-        if release is not None:
-            # go to release commit
-            repo.head.reference = repo.commit(release.target_commitish)
-            repo.head.reset(index=True, working_tree=True)
-
-        workflow = Path(tmp) / "workflow"
+        workflow = tmp / "workflow"
         if not workflow.exists():
-            workflow = Path(tmp)
+            workflow = tmp
 
         if not (workflow / "Snakefile").exists():
             log_skip("of missing Snakefile")
@@ -168,8 +189,8 @@ for i, repo in enumerate(repo_search):
         # catalog settings
         settings = None
         settings_file = tmp / ".snakemake-workflow-catalog.yml"
-        if settings.exists():
-            with open(settings) as settings_file:
+        if settings_file.exists():
+            with open(settings_file) as settings_file:
                 settings = yaml.load(settings_file, yaml.Loader)
 
         linting = None
@@ -202,13 +223,11 @@ for i, repo in enumerate(repo_search):
         except sp.CalledProcessError as e:
             formatting = e.stderr.decode()
 
-    while True:
-        try:
-            parsed = Repo(repo, linting, formatting, config_readme, settings)
-            repos.append(parsed.__dict__)
-            break
-        except RateLimitExceededException:
-            rate_limit_wait()
+    call_rate_limit_aware(
+        lambda: repos.append(
+            Repo(repo, linting, formatting, config_readme, settings).__dict__
+        )
+    )
 
     if len(repos) % 20 == 0:
         logging.info("Storing intermediate results.")

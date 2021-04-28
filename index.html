@@ -268,13 +268,13 @@
             <ul>
               <li>provide configuration instructions under <code>config/README.md</code></li>
               <li>
-                contain a <a href="https://yaml.org">YAML</a> file <code>.snakemake-workflow-catalog.yml</code> in their root directory, with a list of recommended snakemake CLI flags in the following format
+                contain a <a href="https://yaml.org">YAML</a> file <code>.snakemake-workflow-catalog.yml</code> in their root directory, which configures the usage instructions displayed by this workflow catalog.
                 <pre><code class="language-yaml">
 usage:
-  mandatory-flags:
+  mandatory-flags: # optional definition of additional flags
     desc: # describe your flags here in a few sentences (they will be inserted below the example commands)
     flags: # put your flags here
-  software-stack-deployment:
+  software-stack-deployment: # definition of software deployment method (at least one of conda, singularity, or singularity+conda)
     conda: true # whether pipeline works with --use-conda
     singularity: true # whether pipeline works with --use-singularity
     singularity+conda: true # whether pipeline works with --use-singularity --use-conda

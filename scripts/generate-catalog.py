@@ -74,14 +74,17 @@ class Repo:
             self.mandatory_flags = settings.get("usage", {}).get(
                 "mandatory-flags", None
             )
-            self.report = settings.get("report", False)
-            self.software_stack_deployment = settings.get(
+            self.report = settings.get("usage", {}).get("report", False)
+            self.software_stack_deployment = settings.get("usage", {}).get(
                 "software-stack-deployment", {}
             )
-            self.standardized = True
             self.config_readme = g.render_markdown(config_readme)
+            self.standardized = True
         else:
-            self.snakemake_flags = []
+            self.mandatory_flags = []
+            self.software_stack_deployment = None
+            self.config_readme = None
+            self.report = False
             self.standardized = False
 
         # increase this if fields above change

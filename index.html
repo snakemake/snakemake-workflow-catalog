@@ -395,7 +395,7 @@ usage:
     $('#usage-popup').on('show.bs.modal', function (event) {
       var source = $(event.relatedTarget) // item that triggered the modal
       var rowdata = source.data('row')
-      var repo_raw_url = get_repo_raw_path_url(rowdata.full_name, rowdata.latest_release, "workflow/Snakefile")
+      var repo_url = get_repo_url(rowdata.full_name)
 
       var flags = ""
       if(rowdata.mandatory_flags) {
@@ -417,9 +417,9 @@ usage:
         }
       }
 
-      modal.find("#run-workflow-content").append(nunjucks.render("templates/run-instructions.html.njk", { "deployment_methods": deployment_methods}))
+      modal.find("#run-workflow-content").empty().append(nunjucks.render("templates/run-instructions.html.njk", { "deployment_methods": deployment_methods}))
 
-      modal.find('#snakedeploy-cmd').text(`snakedeploy deploy-workflow ${repo_raw_url} . --tag ${rowdata.latest_release}`)
+      modal.find('#snakedeploy-cmd').text(`snakedeploy deploy-workflow ${repo_url} . --tag ${rowdata.latest_release}`)
       modal.find('#config-readme').attr("src", config_readme)
     })
   

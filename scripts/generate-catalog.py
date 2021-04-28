@@ -222,7 +222,11 @@ for i, repo in enumerate(repo_search):
         except sp.CalledProcessError as e:
             formatting = e.stderr.decode()
 
-    call_rate_limit_aware(lambda: repos.append(Repo(repo, linting, formatting, config_readme, settings).__dict__))
+    call_rate_limit_aware(
+        lambda: repos.append(
+            Repo(repo, linting, formatting, config_readme, settings).__dict__
+        )
+    )
 
     if len(repos) % 20 == 0:
         logging.info("Storing intermediate results.")

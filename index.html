@@ -411,8 +411,10 @@ usage:
         "singularity+conda": "--use-conda --use-singularity"
       }
       var deployment_methods = {}
-      for(const method of rowdata.software_stack_deployment) {
-        deployment_methods[method] = `snakemake --cores all ${method_flags[method]} ${flags}`
+      for(const method in rowdata.software_stack_deployment) {
+        if(rowdata.software_stack_deployment[method]) {
+          deployment_methods[method] = `snakemake --cores all ${method_flags[method]} ${flags}`
+        }
       }
 
       modal.find("#run-workflow-content").append(nunjucks.render("templates/run-instructions.html.njk", { "deployment_methods": deployment_methods}))

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
     integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
 
   <style>
     #content {
@@ -33,6 +34,21 @@
 
     .navbar a:not(.navbar-brand) {
       color: #007bff !important;
+    }
+
+    #repos tr td:nth-child(1) a {
+      opacity: 0.0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    #repos tr:hover td:nth-child(1) a {
+      opacity: 1.0;
+    }
+
+    #config-readme {
+      border: 0;
+      width: 100%;
+      height: 100%;
     }
   </style>
 
@@ -56,10 +72,19 @@
   </nav>
 
   <div id="content">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="standardized-tab" data-toggle="tab" href="#standardized" role="tab" aria-controls="standardized" aria-selected="true">Standardized usage</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All workflows <span class="badge badge-primary" id="workflow-count-badge"></span></a>
+      </li>
+    </ul>
     <table id="repos" data-toggle="table" data-pagination="true" data-search="true" data-pagination="true"
-      data-sort-name="stargazers_count" data-sort-order="desc">
+      data-sort-name="stargazers_count" data-sort-order="desc" data-classes="table">
       <thead>
         <tr>
+          <th data-field="usage" data-formatter="usage_formatter">&nbsp;</th>
           <th data-searchable="true" data-sortable="true" data-field="full_name" data-formatter="name_formatter">
             Workflow</th>
           <th data-searchable="true" data-field="description">Description</th>
@@ -101,6 +126,117 @@
     </div>
   </div>
 
+  <div class="modal fade" tabindex="-1" role="dialog" id="usage-popup">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Usage</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="setup-snakemake">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    Step 1: install Snakemake and Snakedeploy
+                  </button>
+                </h5>
+              </div>
+
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  <p>
+                    Snakemake and Snakedeploy are best installed via the <a
+                      href="https://github.com/mamba-org/mamba">Mamba package manager</a> (a drop-in replacement for
+                    conda).
+                    If you have neither Conda nor Mamba, it can be installed via <a
+                      href="https://github.com/conda-forge/miniforge#mambaforge">Mambaforge</a>.
+                    For other options see <a href="https://github.com/mamba-org/mamba">here</a>.
+                  </p>
+
+                  <p>
+                    Given that Mamba is installed, run
+
+                  <pre><code class="language-bash">mamba create -c bioconda -c conda-forge --name snakemake snakemake snakedeploy</code></pre>
+
+                  to install both Snakemake and Snakedeploy in an isolated environment.
+                  For all following commands ensure that this environment is activated via
+
+
+                  </p>
+                  <p>
+                  <pre><code class="language-bash">conda activate snakemake</code></pre>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="deploy-workflow">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="false" aria-controls="collapseTwo">
+                    Step 2: deploy workflow
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  <p>
+                    Given that Snakemake and Snakedeploy are installed and available (see Step 1), the workflow can be
+                    deployed as follows.
+
+                    First, create an appropriate directory on your system, and enter it.
+                    Second, run
+
+                  <pre><code id="snakedeploy-cmd" class="language-bash"></code></pre>
+
+                  Third, consider to put this directory under version control, e.g. by <a
+                    href="https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">managing
+                    it via a (private) Github repository</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="configure-workflow">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="false" aria-controls="collapseThree">
+                    Step 3: configure workflow
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                  <iframe id="config-readme"></iframe>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="run-workflow">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour"
+                    aria-expanded="false" aria-controls="collapseFour">
+                    Step 4: run workflow
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                <div class="card-body" id="run-workflow-content">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal fade" tabindex="-1" role="dialog" id="rule-popup">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -116,20 +252,43 @@
           <ul>
             <li>The workflow is contained in a public <a href="https://github.com">Github</a> repository.</li>
             <li>The repository has a readme, containing the words "snakemake" and "workflow" (case insensitive).</li>
-            <li>The repository contains a workflow definition named either <samp>Snakefile</samp> or
-              <samp>workflow/Snakefile</samp>.</li>
-            <li>If the repository contains a folder <samp>rules</samp> or <samp>workflow/rules</samp> that folder must
-              at least contain one file ending on <samp>.smk</samp>.</li>
+            <li>The repository contains a workflow definition named either <code>Snakefile</code> or
+              <code>workflow/Snakefile</code>.
+            </li>
+            <li>If the repository contains a folder <code>rules</code> or <code>workflow/rules</code> that folder must
+              at least contain one file ending on <code>.smk</code>.</li>
             <li>The repository is small enough to be cloned into a Github actions job (very large files should be
               handled via Git LFS, so that they can be stripped out during cloning).</li>
             <li>The repository is not blacklisted <a
                 href="https://github.com/snakemake/snakemake-workflow-catalog/blob/main/blacklist.txt">here</a>.</li>
           </ul>
           </p>
+          <p>
+            In order to additionally appear in the "standardized" area, repositories additionally have to
+            <ul>
+              <li>provide configuration instructions under <code>config/README.md</code></li>
+              <li>
+                contain a <a href="https://yaml.org">YAML</a> file <code>.snakemake-workflow-catalog.yml</code> in their root directory, with a list of recommended snakemake CLI flags in the following format
+                <pre><code class="language-yaml">
+usage:
+  mandatory-flags:
+    desc: # describe your flags here in a few sentences (they will be inserted below the example commands)
+    flags: # put your flags here
+  software-stack-deployment:
+    conda: true # whether pipeline works with --use-conda
+    singularity: true # whether pipeline works with --use-singularity
+    singularity+conda: true # whether pipeline works with --use-singularity --use-conda
+  report: true # add this to confirm that the workflow allows to use 'snakemake --report report.zip' to generate a report containing all results and explanations
+                </code></pre>
+              </li>
+            </ul>
+          </p>
         </div>
       </div>
     </div>
   </div>
+
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
     integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
@@ -138,12 +297,35 @@
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
   <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.0.1/nunjucks.min.js"
+    integrity="sha512-IIuR+Zp8wvP0dxNcSsRPoL7SXzP1kGmosDtcU7f6cPObZ9F5Ze/icFSRH/SqigP468jGwDm2XOE0/gSGm/cTBw=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-yaml.min.js" integrity="sha512-QRKKJS95wG2dOCdc7Cm0Zbu+L04xY8fTwhHG3UnqZPMiFrAN8uXrqVTx//eqvTaoYwNJ7oFN3Vej5gnJ+GAxkw==" crossorigin="anonymous"></script>
 
   <script src="data.js"></script>
 
   <script>
+    function get_repo_url(full_name) {
+      return `https://github.com/${full_name}`
+    }
+
+    function get_repo_raw_path_url(full_name, tag, path) {
+      return `${get_repo_url(full_name)}/raw/${tag}/${path}`
+    }
+
     function name_formatter(full_name) {
-      return `<a href="https://github.com/${full_name}">${full_name}</a>`
+      return `<a href="${get_repo_url(full_name)}">${full_name}</a>`
+    }
+
+    function usage_formatter(usage, row) {
+      if(row.standardized === true) {
+        var link = $(`<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#usage-popup">Usage</a>`)
+        link.attr("data-row", JSON.stringify(row))
+        return link.prop("outerHTML")
+      } else {
+        return ""
+      }
     }
 
     function topics_formatter(topics) {
@@ -194,6 +376,13 @@
       data: data
     })
 
+    // show number of workflows
+    var nrows = $("#repos").bootstrapTable('getOptions').totalRows
+    $("#workflow-count-badge").text(nrows)
+
+    // filter to standardized by default
+    $("#repos").bootstrapTable("filterBy", { standardized: [true] })
+
     $('#detail-popup').on('show.bs.modal', function (event) {
       var source = $(event.relatedTarget) // item that triggered the modal
       var msg = source.data('msg')
@@ -201,6 +390,44 @@
       var modal = $(this)
       modal.find('.modal-title').text(title)
       modal.find('.modal-body pre').text(msg)
+    })
+
+    $('#usage-popup').on('show.bs.modal', function (event) {
+      var source = $(event.relatedTarget) // item that triggered the modal
+      var rowdata = source.data('row')
+      var repo_raw_url = get_repo_raw_path_url(rowdata.full_name, rowdata.latest_release, "workflow/Snakefile")
+
+      var flags = ""
+      if(rowdata.mandatory_flags) {
+        flags = rowdata.mandatory_flags.flags
+      }
+
+      var config_readme = `data:text/html;base64,${btoa(rowdata.config_readme)}`
+      var modal = $(this)
+
+      var method_flags = {
+        "conda": "--use-conda",
+        "singularity": "--use-singularity",
+        "singularity+conda": "--use-conda --use-singularity"
+      }
+      var deployment_methods = {}
+      for(const method of rowdata.software_stack_deployment) {
+        deployment_methods[method] = `snakemake --cores all ${method_flags[method]} ${flags}`
+      }
+
+      modal.find("#run-workflow-content").append(nunjucks.render("templates/run-instructions.html.njk", { "deployment_methods": deployment_methods}))
+
+      modal.find('#snakedeploy-cmd').text(`snakedeploy deploy-workflow ${repo_raw_url} . --tag ${rowdata.latest_release}`)
+      modal.find('#config-readme').attr("src", config_readme)
+    })
+  
+    $("#standardized-tab").on("click", function(e) {
+      e.preventDefault()
+      $("#repos").bootstrapTable("filterBy", { standardized: [true] })
+    })
+    $("#all-tab").on("click", function(e) {
+      e.preventDefault()
+      $("#repos").bootstrapTable("filterBy", { standardized: [undefined, false, true] })
     })
   </script>
 </body>

@@ -1,0 +1,25 @@
+<p>
+  Given that the workflow has been properly deployed and configured, it can be executed as follows.
+</p>
+
+{% for method, cmd in deployment_methods %}
+<p>
+{% if method == "conda" %}
+  Fow running the workflow while deploying any necessary software via conda (using the <a href="https://github.com/mamba-org/mamba">Mamba package manager</a> by default), run Snakemake with
+{% elif method == "singularity" %}
+  Fow running the workflow while deploying any necessary software via <a href="https://sylabs.io/">singularity</a> (i.e. using containers), run Snakemake with
+{% elif method == "singularity+conda" %}
+  For running the workflow while using a combination of conda and <a href="https://sylabs.io/">singularity</a> for software deployment, run Snakemake with
+{% endif %}
+
+  <pre><code class="language-bash">{{ cmd }}</code></pre>
+</p>
+{% endfor %}
+
+{% if desc %}
+<p>{{ desc }}</p>
+{% endif %}
+
+<p>
+  For further options, e.g. for cluster and cloud execution, see <a href="https://snakemake.readthedocs.io">the docs</a>.
+</p>

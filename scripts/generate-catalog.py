@@ -15,8 +15,13 @@ from github.GithubException import UnknownObjectException, RateLimitExceededExce
 import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import yaml
+from ratelimiter import RateLimiter
 
 logging.basicConfig(level=logging.INFO)
+
+# 1000 requests per hour allowed, see https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting
+# we try to stay a bit below the limit
+rate_limiter = RateLimiter(max_calls=990, period=3600)
 
 env = Environment(
     autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
@@ -58,14 +63,16 @@ class Repo:
         ]:
             setattr(self, attr, getattr(github_repo, attr))
 
-        self.topics = github_repo.get_topics()
+        with rate_limiter:
+            self.topics = github_repo.get_topics()
         self.updated_at = github_repo.updated_at.timestamp()
 
         self.linting = linting
         self.formatting = formatting
 
         try:
-            self.latest_release = github_repo.get_latest_release().tag_name
+            with rate_limiter:
+                self.latest_release = github_repo.get_latest_release().tag_name
         except UnknownObjectException:
             # no release
             self.latest_release = None
@@ -79,30 +86,14 @@ class Repo:
                 "software-stack-deployment", {}
             )
             self.standardized = True
-            self.config_readme = g.render_markdown(config_readme)
+            with rate_limiter:
+                self.config_readme = g.render_markdown(config_readme)
         else:
             self.snakemake_flags = []
             self.standardized = False
 
         # increase this if fields above change
         self.data_format = Repo.data_format
-
-
-def rate_limit_wait():
-    curr_timestamp = calendar.timegm(time.gmtime())
-    reset_timestamp = calendar.timegm(core_rate_limit.reset.timetuple())
-    # add 5 seconds to be sure the rate limit has been reset
-    sleep_time = max(0, reset_timestamp - curr_timestamp) + 5
-    logging.warning(f"Rate limit exceeded, waiting {sleep_time}")
-    time.sleep(sleep_time)
-
-
-def call_rate_limit_aware(func):
-    while True:
-        try:
-            return func()
-        except RateLimitExceededException:
-            rate_limit_wait()
 
 
 def store_data():
@@ -114,7 +105,8 @@ def store_data():
         json.dump(skips, out, sort_keys=True, indent=2)
 
 
-repo_search = g.search_repositories("snakemake workflow in:readme archived:false")
+with rate_limiter:
+    repo_search = g.search_repositories("snakemake workflow in:readme archived:false")
 
 for i, repo in enumerate(repo_search):
     if i % 10 == 0:
@@ -150,18 +142,22 @@ for i, repo in enumerate(repo_search):
         tmp = Path(tmp)
 
         try:
-            release = call_rate_limit_aware(repo.get_latest_release)
+            with rate_limiter:
+                release = repo.get_latest_release()
             # go to release tag
             get_tarfile = lambda: tarfile.open(
                 fileobj=urllib.request.urlopen(release.tarball_url), mode="r|gz"
             )
-            root_dir = get_tarfile().getmembers()[0].name
-            get_tarfile().extractall(path=tmp)
+            with rate_limiter:
+                root_dir = get_tarfile().getmembers()[0].name
+            with rate_limiter:
+                get_tarfile().extractall(path=tmp)
             tmp /= root_dir
         except UnknownObjectException:
             # no latest release, clone main branch
             try:
-                gitrepo = git.Repo.clone_from(repo.clone_url, str(tmp), depth=1)
+                with rate_limiter:
+                    gitrepo = git.Repo.clone_from(repo.clone_url, str(tmp), depth=1)
             except git.GitCommandError:
                 log_skip("error cloning repository")
                 register_skip(repo)
@@ -223,11 +219,7 @@ for i, repo in enumerate(repo_search):
         except sp.CalledProcessError as e:
             formatting = e.stderr.decode()
 
-    call_rate_limit_aware(
-        lambda: repos.append(
-            Repo(repo, linting, formatting, config_readme, settings).__dict__
-        )
-    )
+    repos.append(Repo(repo, linting, formatting, config_readme, settings).__dict__)
 
     if len(repos) % 20 == 0:
         logging.info("Storing intermediate results.")

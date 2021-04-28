@@ -96,6 +96,14 @@ def rate_limit_wait():
     time.sleep(sleep_time)
 
 
+def call_rate_limit_aware(func):
+    while True:
+        try:
+            return func()
+        except RateLimitExceededException:
+            rate_limit_wait()
+
+
 def store_data():
     repos.sort(key=lambda repo: repo["stargazers_count"])
 
@@ -141,7 +149,7 @@ for i, repo in enumerate(repo_search):
         tmp = Path(tmp)
 
         try:
-            release = repo.get_latest_release()
+            release = call_rate_limit_aware(repo.get_latest_release)
             # go to release tag
             get_tarfile = lambda: tarfile.open(
                 fileobj=urllib.request.urlopen(release.tarball_url), mode="r|gz"
@@ -214,13 +222,7 @@ for i, repo in enumerate(repo_search):
         except sp.CalledProcessError as e:
             formatting = e.stderr.decode()
 
-    while True:
-        try:
-            parsed = Repo(repo, linting, formatting, config_readme, settings)
-            repos.append(parsed.__dict__)
-            break
-        except RateLimitExceededException:
-            rate_limit_wait()
+    call_rate_limit_aware(lambda: repos.append(Repo(repo, linting, formatting, config_readme, settings).__dict__))
 
     if len(repos) % 20 == 0:
         logging.info("Storing intermediate results.")

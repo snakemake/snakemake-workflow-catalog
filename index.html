@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha512-DSAA0ziYwggOJ3QyWFZhIaU8bSwQLyfnyIrmShRLBdJMtiYKT7Ju35ujBCZ6ApK3HURt34p2xNo+KX9ebQNEPQ==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 
   <style>
     #content {
@@ -284,6 +285,7 @@
           </button>
         </div>
         <div class="modal-body">
+          <h5>All workflows</h5>
           <p>
             This catalog includes workflows based on the following criteria:
           <ul>
@@ -300,8 +302,9 @@
                 href="https://github.com/snakemake/snakemake-workflow-catalog/blob/main/blacklist.txt">here</a>.</li>
           </ul>
           </p>
+          <h5>Standardized usage</h5>
           <p>
-            In order to additionally appear in the "standardized" area, repositories additionally have to
+            In order to additionally appear in the "standardized usage" area, repositories additionally have to
             <ul>
               <li>have their main workflow definition named <code>workflow/Snakefile</code> (unlike for plain inclusion (see above), which also allows just <code>Snakefile</code> in the root of the repository),</li>
               <li>provide configuration instructions under <code>config/README.md</code>,</li>
@@ -320,6 +323,9 @@ usage:
                 </code></pre>
               </li>
             </ul>
+          </p>
+          <p>
+            Once included in the standardized usage area you can link directly to the usage instructions for your repository via the URL <code>https://varlociraptor.github.io/snakemake-workflow-catalog?usage=&#60;owner&#62;/&#60;repo&#62;</code>.
           </p>
         </div>
       </div>
@@ -430,7 +436,7 @@ usage:
       }
 
       var modal = $("#usage-popup")
-      modal.find(".modal-title").empty().append($(`<span>Usage of <a href=${repo_url}>${rowdata.full_name}</a></span> <a href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
+      modal.find(".modal-title").empty().append($(`<span>Usage of <a href=${repo_url}>${rowdata.full_name}</a></span> <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
 
       var method_flags = {
         "conda": "--use-conda",

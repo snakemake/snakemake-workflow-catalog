@@ -13,6 +13,7 @@
     integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha512-DSAA0ziYwggOJ3QyWFZhIaU8bSwQLyfnyIrmShRLBdJMtiYKT7Ju35ujBCZ6ApK3HURt34p2xNo+KX9ebQNEPQ==" crossorigin="anonymous" />
 
   <style>
     #content {
@@ -302,7 +303,8 @@
           <p>
             In order to additionally appear in the "standardized" area, repositories additionally have to
             <ul>
-              <li>provide configuration instructions under <code>config/README.md</code></li>
+              <li>have their main workflow definition named <code>workflow/Snakefile</code> (unlike for plain inclusion (see above), which also allows just <code>Snakefile</code> in the root of the repository),</li>
+              <li>provide configuration instructions under <code>config/README.md</code>,</li>
               <li>
                 contain a <a href="https://yaml.org">YAML</a> file <code>.snakemake-workflow-catalog.yml</code> in their root directory, which configures the usage instructions displayed by this workflow catalog.
                 <pre><code class="language-yaml">
@@ -337,7 +339,10 @@ usage:
     integrity="sha512-IIuR+Zp8wvP0dxNcSsRPoL7SXzP1kGmosDtcU7f6cPObZ9F5Ze/icFSRH/SqigP468jGwDm2XOE0/gSGm/cTBw=="
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js" integrity="sha512-cu2C9EssrOrVXT4thyL4gz/qWyh3Lq9XbICUXYyh3zJRCSKk1J08tBKPXnsSpdpZXOliaK/OJBygw/l0twAmwA==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" integrity="sha512-bWzyGaP/f19RLeYGN6ZhDgvkS7GM0Fq23lOI1/PB3lV6I775RIDzXLxCGR4iiDGzeMsQ3lncuXUQMFP7qO9lIQ==" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-yaml.min.js" integrity="sha512-QRKKJS95wG2dOCdc7Cm0Zbu+L04xY8fTwhHG3UnqZPMiFrAN8uXrqVTx//eqvTaoYwNJ7oFN3Vej5gnJ+GAxkw==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-bash.min.js" integrity="sha512-JvRd44DHaJAv/o3wxi/dxhz2TO/jwwX8V5/LTr3gj6QMQ6qNNGXk/psoingLDuc5yZmccOq7XhpVaelIZE4tsQ==" crossorigin="anonymous"></script>
 
   <script src="data.js"></script>
 
@@ -408,6 +413,43 @@ usage:
       return `<a href="https://github.com/${repo.full_name}/watchers">${repo.subscribers_count}</a>`
     }
 
+    function get_repo_row(full_name) {
+      for(row of data) {
+        if(row.full_name == full_name) {
+          return row   
+        }
+      }
+    }
+
+    function render_usage_modal(rowdata) {
+      var repo_url = get_repo_url(rowdata.full_name)
+
+      var flags = ""
+      if(rowdata.mandatory_flags) {
+        flags = rowdata.mandatory_flags.flags
+      }
+
+      var modal = $("#usage-popup")
+      modal.find(".modal-title").empty().append($(`<span>Usage of <a href=${repo_url}>${rowdata.full_name}</a></span>`))
+
+      var method_flags = {
+        "conda": "--use-conda",
+        "singularity": "--use-singularity",
+        "singularity+conda": "--use-conda --use-singularity"
+      }
+      var deployment_methods = {}
+      for(const method in rowdata.software_stack_deployment) {
+        if(rowdata.software_stack_deployment[method]) {
+          deployment_methods[method] = `snakemake --cores all ${method_flags[method]} ${flags}`
+        }
+      }
+
+      modal.find("#run-workflow-content").empty().append(nunjucks.render("templates/run-instructions.html.njk", { "deployment_methods": deployment_methods}))
+
+      modal.find('#snakedeploy-cmd').text(`snakedeploy deploy-workflow ${repo_url} . --tag ${rowdata.latest_release}`)
+      modal.find('#config-readme').empty().append($(rowdata.config_readme))
+    }
+
     $("#repos").bootstrapTable({
       data: data
     })
@@ -431,31 +473,11 @@ usage:
     $('#usage-popup').on('show.bs.modal', function (event) {
       var source = $(event.relatedTarget) // item that triggered the modal
       var rowdata = source.data('row')
-      var repo_url = get_repo_url(rowdata.full_name)
-
-      var flags = ""
-      if(rowdata.mandatory_flags) {
-        flags = rowdata.mandatory_flags.flags
+      if(rowdata != undefined) {
+        // rowdata is present when triggered via button
+        console.log(rowdata)
+        render_usage_modal(rowdata)
       }
-
-      var modal = $(this)
-
-      var method_flags = {
-        "conda": "--use-conda",
-        "singularity": "--use-singularity",
-        "singularity+conda": "--use-conda --use-singularity"
-      }
-      var deployment_methods = {}
-      for(const method in rowdata.software_stack_deployment) {
-        if(rowdata.software_stack_deployment[method]) {
-          deployment_methods[method] = `snakemake --cores all ${method_flags[method]} ${flags}`
-        }
-      }
-
-      modal.find("#run-workflow-content").empty().append(nunjucks.render("templates/run-instructions.html.njk", { "deployment_methods": deployment_methods}))
-
-      modal.find('#snakedeploy-cmd').text(`snakedeploy deploy-workflow ${repo_url} . --tag ${rowdata.latest_release}`)
-      modal.find('#config-readme').empty().append($(rowdata.config_readme))
     })
   
     $("#standardized-tab").on("click", function(e) {
@@ -466,6 +488,13 @@ usage:
       e.preventDefault()
       $("#repos").bootstrapTable("filterBy", { standardized: [undefined, false, true] })
     })
+
+    // handle directly linking to usage popup
+    var search_params = new URLSearchParams(window.location.search)
+    if(search_params.has("usage")) {
+      render_usage_modal(get_repo_row(search_params.get("usage")))
+      $("#usage-popup").modal()
+    }
   </script>
 </body>
 

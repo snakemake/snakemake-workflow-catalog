@@ -430,7 +430,7 @@ usage:
       }
 
       var modal = $("#usage-popup")
-      modal.find(".modal-title").empty().append($(`<span>Usage of <a href=${repo_url}>${rowdata.full_name}</a></span>`))
+      modal.find(".modal-title").empty().append($(`<span>Usage of <a href=${repo_url}>${rowdata.full_name}</a></span> <a href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
 
       var method_flags = {
         "conda": "--use-conda",

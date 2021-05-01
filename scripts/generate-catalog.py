@@ -132,18 +132,25 @@ for i, repo in enumerate(repo_search):
         log_skip("it is blacklisted")
         continue
 
+    updated_at = repo.updated_at
+    try:
+        release = call_rate_limit_aware(repo.get_latest_release)
+        updated_at = max(updated_at, release.created_at)
+    except UnknownObjectException:
+        release = None
+
     prev = previous_repos.get(repo.full_name)
     if (
         prev is not None
         and Repo.data_format == prev["data_format"]
-        and prev["updated_at"] == repo.updated_at.timestamp()
+        and prev["updated_at"] == updated_at.timestamp()
     ):
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, using old data.")
         repos.append(prev)
         continue
     prev_skip = previous_skips.get(repo.full_name)
-    if prev_skip is not None and prev_skip["updated_at"] == repo.updated_at.timestamp():
+    if prev_skip is not None and prev_skip["updated_at"] == updated_at.timestamp():
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, skipping again based on old data.")
         skips.append(prev_skip)
@@ -152,16 +159,15 @@ for i, repo in enumerate(repo_search):
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
 
-        try:
-            release = call_rate_limit_aware(repo.get_latest_release)
-            # go to release tag
+        if release is not None:
+            # download release tag
             get_tarfile = lambda: tarfile.open(
                 fileobj=urllib.request.urlopen(release.tarball_url), mode="r|gz"
             )
             root_dir = get_tarfile().getmembers()[0].name
             get_tarfile().extractall(path=tmp)
             tmp /= root_dir
-        except UnknownObjectException:
+        else:
             # no latest release, clone main branch
             try:
                 gitrepo = git.Repo.clone_from(repo.clone_url, str(tmp), depth=1)

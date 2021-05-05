@@ -148,7 +148,7 @@ for i, repo in enumerate(repo_search):
     ):
         # keep old data, it hasn't changed
         logging.info("Remaining repos haven't changed, using old data.")
-        older_repos = [repo for repo in previous_repos.values() if repo["updated_at"] =< updated_at.timestamp()]
+        older_repos = [repo for repo in previous_repos.values() if repo["updated_at"] <= updated_at.timestamp()]
         repos += older_repos
         break
     prev_skip = previous_skips.get(repo.full_name)

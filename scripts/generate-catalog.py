@@ -117,7 +117,8 @@ def store_data():
         json.dump(skips, out, sort_keys=True, indent=2)
 
 
-repo_search = g.search_repositories("snakemake workflow in:readme archived:false")
+repo_search = g.search_repositories("snakemake workflow in:readme archived:false",
+        sort="updated")
 
 for i, repo in enumerate(repo_search):
     if i % 10 == 0:
@@ -146,9 +147,10 @@ for i, repo in enumerate(repo_search):
         and prev["updated_at"] == updated_at.timestamp()
     ):
         # keep old data, it hasn't changed
-        logging.info("Repo hasn't changed, using old data.")
-        repos.append(prev)
-        continue
+        logging.info("Remaining repos haven't changed, using old data.")
+        older_repos = [repo for repo in previous_repos.values() if repo["updated_at"] < updated_at.timestamp()]
+        repos += older_repos
+        break
     prev_skip = previous_skips.get(repo.full_name)
     if prev_skip is not None and prev_skip["updated_at"] == updated_at.timestamp():
         # keep old data, it hasn't changed

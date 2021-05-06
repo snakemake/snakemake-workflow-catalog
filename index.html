@@ -279,7 +279,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Rules for inclusion</h5>
+          <h5 class="modal-title">Rules for inclusion <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?rules=true"><i class="bi bi-link"></i></a></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -503,6 +503,11 @@ usage:
     if(search_params.has("usage")) {
       render_usage_modal(get_repo_row(search_params.get("usage")))
       $("#usage-popup").modal()
+    }
+
+    // handle directly linking to rules
+    if(search_params.has("rules")) {
+      $("#rule-popup").modal()
     }
   </script>
 </body>

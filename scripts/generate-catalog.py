@@ -115,6 +115,7 @@ def call_rate_limit_aware_decorator(func):
                 return func(*args, **kwargs)
             except RateLimitExceededException:
                 rate_limit_wait()
+
     return inner
 
 

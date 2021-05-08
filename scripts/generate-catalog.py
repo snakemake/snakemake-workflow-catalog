@@ -190,9 +190,9 @@ for i, repo in enumerate(repo_search):
         rules = "workflow/" + rules
 
     if not check_file_exists(repo, snakefile):
-            log_skip("of missing Snakefile")
-            register_skip(repo)
-            continue
+        log_skip("of missing Snakefile")
+        register_skip(repo)
+        continue
 
     if check_file_exists(repo, rules):
         rule_contents = repo.get_contents(rules)

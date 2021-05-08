@@ -200,7 +200,7 @@ for i, repo in enumerate(repo_search):
         settings_file = tmp / ".snakemake-workflow-catalog.yml"
         if settings_file.exists():
             with open(settings_file) as settings_file:
-                settings = yaml.load(settings_file, yaml.Loader)
+                settings = yaml.load(settings_file, yaml.SafeLoader)
 
         linting = None
         formatting = None

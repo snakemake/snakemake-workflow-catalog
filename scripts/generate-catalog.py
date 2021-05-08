@@ -108,6 +108,16 @@ def call_rate_limit_aware(func):
             rate_limit_wait()
 
 
+def call_rate_limit_aware_decorator(func):
+    def inner(*args, **kwargs):
+        while True:
+            try:
+                return func(*args, **kwargs)
+            except RateLimitExceededException:
+                rate_limit_wait()
+    return inner
+
+
 def store_data():
     repos.sort(key=lambda repo: repo["stargazers_count"])
 
@@ -126,6 +136,7 @@ def check_repo_exists(g, full_name):
         return False
 
 
+@call_rate_limit_aware_decorator
 def check_file_exists(repo, file_name):
     try:
         repo.get_contents(file_name)

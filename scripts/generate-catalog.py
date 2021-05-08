@@ -126,6 +126,14 @@ def check_repo_exists(g, full_name):
         return False
 
 
+def check_file_exists(repo, file_name):
+    try:
+        repo.get_contents(file_name)
+        return True
+    except UnknownObjectException:
+        return False
+
+
 repo_search = g.search_repositories(
     "snakemake workflow in:readme archived:false", sort="updated"
 )
@@ -175,6 +183,24 @@ for i, repo in enumerate(repo_search):
         skips.append(prev_skip)
         continue
 
+    snakefile = "Snakefile"
+    rules = "rules"
+    if check_file_exists(repo, "workflow"):
+        snakefile = "workflow/" + snakefile
+        rules = "workflow/" + rules
+
+    if not check_file_exists(repo, snakefile):
+            log_skip("of missing Snakefile")
+            register_skip(repo)
+            continue
+
+    if check_file_exists(repo, rules):
+        rule_contents = repo.get_contents(rules)
+        if not any(rule_file.name.endswith(".smk") for rule_file in rule_contents):
+            log_skip("rule modules are not using .smk extension")
+            register_skip(repo)
+            continue
+
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
 
@@ -199,20 +225,7 @@ for i, repo in enumerate(repo_search):
         if not workflow.exists():
             workflow = tmp
 
-        if not (workflow / "Snakefile").exists():
-            log_skip("of missing Snakefile")
-            register_skip(repo)
-            continue
-
         rules = workflow / "rules"
-
-        rule_modules = (
-            [] if not rules.exists() else [rules / f for f in rules.glob("*.smk")]
-        )
-        if rule_modules and not any(f.suffix == ".smk" for f in rule_modules):
-            log_skip("rule modules are not using .smk extension")
-            register_skip(repo)
-            continue
 
         # catalog settings
         settings = None

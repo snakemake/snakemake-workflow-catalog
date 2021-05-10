@@ -1,171 +1,191 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
     integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha512-DSAA0ziYwggOJ3QyWFZhIaU8bSwQLyfnyIrmShRLBdJMtiYKT7Ju35ujBCZ6ApK3HURt34p2xNo+KX9ebQNEPQ==" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.css" integrity="sha512-DSAA0ziYwggOJ3QyWFZhIaU8bSwQLyfnyIrmShRLBdJMtiYKT7Ju35ujBCZ6ApK3HURt34p2xNo+KX9ebQNEPQ==" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 
-  <style>
-    #content {
-      margin-top: 2em;
-      margin-left: auto;
-      margin-right: auto;
-      width: 90%;
-    }
+    <style>
+      #content {
+        margin-top: 2em;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+      }
 
-    #logo {
-      height: 2em;
-      vertical-align: center;
-    }
+      #logo {
+        height: 2em;
+        vertical-align: center;
+      }
 
-    pre#check-msg {
-      overflow: auto;
-      max-height: 80vh;
-    }
+      pre#check-msg {
+        overflow: auto;
+        max-height: 80vh;
+      }
 
-    .navbar a:not(.navbar-brand) {
-      color: #007bff !important;
-    }
+      .navbar a:not(.navbar-brand) {
+        color: #007bff !important;
+      }
 
-    #repos tr td:nth-child(1) a {
-      opacity: 0.0;
-      transition: opacity 0.2s ease-in-out;
-    }
+      #repos tr td:nth-child(1) a {
+        opacity: 0.0;
+        transition: opacity 0.2s ease-in-out;
+      }
 
-    #repos tr:hover td:nth-child(1) a {
-      opacity: 1.0;
-    }
+      #repos tr:hover td:nth-child(1) a {
+        opacity: 1.0;
+      }
 
-    #config-readme h1 {
-      font-size: 1.5rem
-    }
+      #config-readme h1 {
+        font-size: 1.5rem;
+      }
 
-    #config-readme h2 {
-      font-size: 1.4rem
-    }
+      #config-readme h2 {
+        font-size: 1.4rem;
+      }
 
-    #config-readme h3 {
-      font-size: 1.3rem
-    }
+      #config-readme h3 {
+        font-size: 1.3rem;
+      }
 
-    #config-readme h4 {
-      font-size: 1.2rem
-    }
+      #config-readme h4 {
+        font-size: 1.2rem;
+      }
 
-    #config-readme h5 {
-      font-size: 1.1rem
-    }
-  </style>
+      #config-readme h5 {
+        font-size: 1.1rem;
+      }
+    </style>
 
-  <title>Snakemake workflow catalog</title>
-</head>
+    <title>Snakemake workflow catalog</title>
+  </head>
 
-<body>
+  <body>
 
-  <!-- Image and text -->
-  <!-- Image and text -->
-  <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <img src="logo-snake.svg" id="logo" /> Snakemake workflow catalog
+    <!-- Image and text -->
+    <!-- Image and text -->
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="logo-snake.svg" id="logo"/> Snakemake workflow catalog
     </a>
-    <div class="navbar-nav">
-      <div class="navbar-text">A comprehensive catalog of
+      <div class="navbar-nav">
+        <div class="navbar-text">A comprehensive catalog of
         <a href="#" data-toggle="modal" data-target="#rule-popup">standards compliant</a>, public, <a
           href="https://snakemake.github.io">Snakemake</a> workflows
       </div>
-    </div>
-  </nav>
+      </div>
+    </nav>
 
-  <div id="content">
-    <ul class="nav nav-tabs" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link" id="standardized-tab" data-toggle="tab" href="#standardized" role="tab" aria-controls="standardized" aria-selected="false">Standardized usage</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All workflows <span class="badge badge-primary" id="workflow-count-badge"></span></a>
-      </li>
-    </ul>
-    <table id="repos" data-toggle="table" data-pagination="true" data-search="true" data-pagination="true"
+    <div id="content">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link" id="standardized-tab" data-toggle="tab" href="#standardized" role="tab" aria-controls="standardized" aria-selected="false">Standardized usage</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All workflows <span class="badge badge-primary" id="workflow-count-badge"></span></a>
+        </li>
+      </ul>
+      <table id="repos" data-toggle="table" data-pagination="true" data-search="true" data-pagination="true"
       data-sort-name="stargazers_count" data-sort-order="desc" data-classes="table">
-      <thead>
-        <tr>
-          <th data-field="usage" data-formatter="usage_formatter">&nbsp;</th>
-          <th data-searchable="true" data-sortable="true" data-field="full_name" data-formatter="name_formatter">
+        <thead>
+          <tr>
+            <th data-field="usage" data-formatter="usage_formatter">&nbsp;</th>
+            <th data-searchable="true" data-sortable="true" data-field="full_name" data-formatter="name_formatter">
             Workflow</th>
-          <th data-searchable="true" data-field="description">Description</th>
-          <th data-searchable="true" data-field="topics" data-formatter="topics_formatter">Topics</th>
-          <th data-field="full_name" data-formatter="qc_formatter">QC</td>
-          <th data-sortable="true" data-field="stargazers_count" data_formatter="stargazers_formatter">Stars</th>
-          <th data-sortable="true" data-field="subscribers_count" data_formatter="watchers_formatter">Watchers</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
+            <th data-searchable="true" data-field="description">Description</th>
+            <th data-searchable="true" data-field="topics" data-formatter="topics_formatter">Topics</th>
+            <th data-field="full_name" data-formatter="qc_formatter">QC</td>
+            <th data-sortable="true" data-field="stargazers_count" data_formatter="stargazers_formatter">Stars</th>
+            <th data-sortable="true" data-field="subscribers_count" data_formatter="watchers_formatter">Watchers</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
 
-  <hr />
+    <hr/>
 
-  <div class="footer">
-    <p><small><a href="https://github.com/snakemake">&copy; 2020 The Snakemake team</a></small></p>
-    <p><small>This catalog is generated automatically by querying Github APIs; the Snakemake team is not responsible for
-        the linked workflows.</small></p>
-    <p><small>Source code: <a
-          href="https://github.com/snakemake/snakemake-workflow-catalog">https://github.com/snakemake/snakemake-workflow-catalog</a></small>
-    </p>
-  </div>
+    <div class="footer">
+      <p>
+        <small>
+          <a href="https://github.com/snakemake">&copy; 2020 The Snakemake team</a>
+        </small>
+      </p>
+      <p>
+        <small>This catalog is generated automatically by querying Github APIs; the Snakemake team is not responsible for
+        the linked workflows.</small>
+      </p>
+      <p>
+        <small>Source code: <a
+          href="https://github.com/snakemake/snakemake-workflow-catalog">https://github.com/snakemake/snakemake-workflow-catalog</a>
+        </small>
+      </p>
+    </div>
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="detail-popup">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <pre id="check-msg"></pre>
+    <div class="modal fade" tabindex="-1" role="dialog" id="detail-popup">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <pre id="check-msg"></pre>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="usage-popup">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Usage</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="accordion">
-            <div class="card">
-              <div class="card-header" id="setup-snakemake">
-                <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+    <div class="modal fade" tabindex="-1" role="dialog" id="usage-popup">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Workflow</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table" id="repo-info-table">
+              <thead>
+                <tr>
+                  <th data-searchable="true" data-field="description">Description</th>
+                  <th data-searchable="true" data-field="topics" data-formatter="topics_formatter">Topics</th>
+                  <th data-field="full_name" data-formatter="qc_formatter">QC</td>
+                  <th data-sortable="true" data-field="stargazers_count" data_formatter="stargazers_formatter">Stars</th>
+                  <th data-sortable="true" data-field="subscribers_count" data_formatter="watchers_formatter">Watchers</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header" id="setup-snakemake">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
                     aria-controls="collapseOne">
                     Step 1: install Snakemake and Snakedeploy
                   </button>
-                </h5>
-              </div>
+                  </h5>
+                </div>
 
-              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                  <p>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                  <div class="card-body">
+                    <p>
                     Snakemake and Snakedeploy are best installed via the <a
                       href="https://github.com/mamba-org/mamba">Mamba package manager</a> (a drop-in replacement for
                     conda).
@@ -174,7 +194,7 @@
                     For other options see <a href="https://github.com/mamba-org/mamba">here</a>.
                   </p>
 
-                  <p>
+                    <p>
                     Given that Mamba is installed, run
 
                   <pre><code class="language-bash">mamba create -c bioconda -c conda-forge --name snakemake snakemake snakedeploy</code></pre>
@@ -184,24 +204,24 @@
 
 
                   </p>
-                  <p>
-                  <pre><code class="language-bash">conda activate snakemake</code></pre>
-                  </p>
+                    <p>
+                      <pre><code class="language-bash">conda activate snakemake</code></pre>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card">
-              <div class="card-header" id="deploy-workflow">
-                <h5 class="mb-0">
-                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+              <div class="card">
+                <div class="card-header" id="deploy-workflow">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="false" aria-controls="collapseTwo">
                     Step 2: deploy workflow
                   </button>
-                </h5>
-              </div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                <div class="card-body">
-                  <p>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                  <div class="card-body">
+                    <p>
                     Given that Snakemake and Snakedeploy are installed and available (see Step 1), the workflow can be
                     deployed as follows.
 
@@ -213,51 +233,49 @@
                   Third, consider to put this directory under version control, e.g. by <a
                     href="https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">managing
                     it via a (private) Github repository</a>
-                  </p>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card">
-              <div class="card-header" id="configure-workflow">
-                <h5 class="mb-0">
-                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+              <div class="card">
+                <div class="card-header" id="configure-workflow">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="false" aria-controls="collapseThree">
                     Step 3: configure workflow
                   </button>
-                </h5>
-              </div>
-              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                <div class="card-body">
-                  <div id="config-readme"></div>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                  <div class="card-body">
+                    <div id="config-readme"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card">
-              <div class="card-header" id="run-workflow">
-                <h5 class="mb-0">
-                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour"
+              <div class="card">
+                <div class="card-header" id="run-workflow">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour"
                     aria-expanded="false" aria-controls="collapseFour">
                     Step 4: run workflow
                   </button>
-                </h5>
-              </div>
-              <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                <div class="card-body" id="run-workflow-content">
-                  
+                  </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                  <div class="card-body" id="run-workflow-content"></div>
                 </div>
               </div>
-            </div>
-            <div class="card">
-              <div class="card-header" id="generate-report">
-                <h5 class="mb-0">
-                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive"
+              <div class="card">
+                <div class="card-header" id="generate-report">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive"
                     aria-expanded="false" aria-controls="collapseFive">
                     Step 5: generate report
                   </button>
-                </h5>
-              </div>
-              <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                <div class="card-body" id="generate-report-content">
+                  </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                  <div class="card-body" id="generate-report-content">
                   After finalizing your data analysis, you can automatically generate an interactive visual HTML report for inspection of
                   results together with parameters and code inside of the browser via
 
@@ -267,48 +285,51 @@
                   provided as a supplementary file in publications, or uploaded to a service like <a href="https://zenodo.org">Zenodo</a>
                   in order to obtain a citable <a href="https://en.wikipedia.org/wiki/Digital_object_identifier">DOI</a>.
                 </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="rule-popup">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Rules for inclusion <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?rules=true"><i class="bi bi-link"></i></a></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h5>All workflows</h5>
-          <p>
+    <div class="modal fade" tabindex="-1" role="dialog" id="rule-popup">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Rules for inclusion <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?rules=true">
+                <i class="bi bi-link"></i>
+              </a>
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h5>All workflows</h5>
+            <p>
             This catalog includes workflows based on the following criteria:
           <ul>
-            <li>The workflow is contained in a public <a href="https://github.com">Github</a> repository.</li>
-            <li>The repository has a readme, containing the words "snakemake" and "workflow" (case insensitive).</li>
-            <li>The repository contains a workflow definition named either <code>Snakefile</code> or
+                <li>The workflow is contained in a public <a href="https://github.com">Github</a> repository.</li>
+                <li>The repository has a readme, containing the words "snakemake" and "workflow" (case insensitive).</li>
+                <li>The repository contains a workflow definition named either <code>Snakefile</code> or
               <code>workflow/Snakefile</code>.
             </li>
-            <li>If the repository contains a folder <code>rules</code> or <code>workflow/rules</code> that folder must
+                <li>If the repository contains a folder <code>rules</code> or <code>workflow/rules</code> that folder must
               at least contain one file ending on <code>.smk</code>.</li>
-            <li>The repository is small enough to be cloned into a Github actions job (very large files should be
+                <li>The repository is small enough to be cloned into a Github actions job (very large files should be
               handled via Git LFS, so that they can be stripped out during cloning).</li>
-            <li>The repository is not blacklisted <a
+                <li>The repository is not blacklisted <a
                 href="https://github.com/snakemake/snakemake-workflow-catalog/blob/main/blacklist.txt">here</a>.</li>
-          </ul>
-          </p>
-          <h5>Standardized usage</h5>
-          <p>
+              </ul>
+            </p>
+            <h5>Standardized usage</h5>
+            <p>
             In order to additionally appear in the "standardized usage" area, repositories additionally have to
             <ul>
-              <li>have their main workflow definition named <code>workflow/Snakefile</code> (unlike for plain inclusion (see above), which also allows just <code>Snakefile</code> in the root of the repository),</li>
-              <li>provide configuration instructions under <code>config/README.md</code>,</li>
-              <li>
+                <li>have their main workflow definition named <code>workflow/Snakefile</code> (unlike for plain inclusion (see above), which also allows just <code>Snakefile</code> in the root of the repository),</li>
+                <li>provide configuration instructions under <code>config/README.md</code>,</li>
+                <li>
                 contain a <a href="https://yaml.org">YAML</a> file <code>.snakemake-workflow-catalog.yml</code> in their root directory, which configures the usage instructions displayed by this workflow catalog.
                 <pre><code class="language-yaml">
 usage:
@@ -321,195 +342,218 @@ usage:
     singularity+conda: true # whether pipeline works with --use-singularity --use-conda
   report: true # add this to confirm that the workflow allows to use 'snakemake --report report.zip' to generate a report containing all results and explanations
                 </code></pre>
-              </li>
-            </ul>
-          </p>
-          <p>
+                </li>
+              </ul>
+            </p>
+            <p>
             Once included in the standardized usage area you can link directly to the usage instructions for your repository via the URL <code>https://varlociraptor.github.io/snakemake-workflow-catalog?usage=&#60;owner&#62;/&#60;repo&#62;</code>.
           </p>
-          <h5>Release handling</h5>
+            <h5>Release handling</h5>
           If your workflow provides Github releases, we will always just scrape the latest non-preview release.
           Hence, in order to update your workflow's records here, you need to release a new version on Github.
         </div>
+        </div>
       </div>
     </div>
-  </div>
 
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
     integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.0.1/nunjucks.min.js"
+    <script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/3.0.1/nunjucks.min.js"
     integrity="sha512-IIuR+Zp8wvP0dxNcSsRPoL7SXzP1kGmosDtcU7f6cPObZ9F5Ze/icFSRH/SqigP468jGwDm2XOE0/gSGm/cTBw=="
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js" integrity="sha512-cu2C9EssrOrVXT4thyL4gz/qWyh3Lq9XbICUXYyh3zJRCSKk1J08tBKPXnsSpdpZXOliaK/OJBygw/l0twAmwA==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" integrity="sha512-bWzyGaP/f19RLeYGN6ZhDgvkS7GM0Fq23lOI1/PB3lV6I775RIDzXLxCGR4iiDGzeMsQ3lncuXUQMFP7qO9lIQ==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-yaml.min.js" integrity="sha512-QRKKJS95wG2dOCdc7Cm0Zbu+L04xY8fTwhHG3UnqZPMiFrAN8uXrqVTx//eqvTaoYwNJ7oFN3Vej5gnJ+GAxkw==" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-bash.min.js" integrity="sha512-JvRd44DHaJAv/o3wxi/dxhz2TO/jwwX8V5/LTr3gj6QMQ6qNNGXk/psoingLDuc5yZmccOq7XhpVaelIZE4tsQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/toolbar/prism-toolbar.min.js" integrity="sha512-cu2C9EssrOrVXT4thyL4gz/qWyh3Lq9XbICUXYyh3zJRCSKk1J08tBKPXnsSpdpZXOliaK/OJBygw/l0twAmwA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js" integrity="sha512-bWzyGaP/f19RLeYGN6ZhDgvkS7GM0Fq23lOI1/PB3lV6I775RIDzXLxCGR4iiDGzeMsQ3lncuXUQMFP7qO9lIQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-yaml.min.js" integrity="sha512-QRKKJS95wG2dOCdc7Cm0Zbu+L04xY8fTwhHG3UnqZPMiFrAN8uXrqVTx//eqvTaoYwNJ7oFN3Vej5gnJ+GAxkw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-bash.min.js" integrity="sha512-JvRd44DHaJAv/o3wxi/dxhz2TO/jwwX8V5/LTr3gj6QMQ6qNNGXk/psoingLDuc5yZmccOq7XhpVaelIZE4tsQ==" crossorigin="anonymous"></script>
 
-  <script src="data.js"></script>
+    <script src="data.js"></script>
 
-  <script>
-    function get_repo_url(full_name) {
-      return `https://github.com/${full_name}`
-    }
-
-    function get_repo_raw_path_url(full_name, tag, path) {
-      return `${get_repo_url(full_name)}/raw/${tag}/${path}`
-    }
-
-    function name_formatter(full_name) {
-      return `<a href="${get_repo_url(full_name)}">${full_name}</a>`
-    }
-
-    function usage_formatter(usage, row) {
-      if(row.standardized === true) {
-        var link = $(`<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#usage-popup">Usage</a>`)
-        link.attr("data-row", JSON.stringify(row))
-        return link.prop("outerHTML")
-      } else {
-        return ""
+    <script>
+      function get_repo_url(full_name) {
+        return `https://github.com/${full_name}`
       }
-    }
 
-    function topics_formatter(topics) {
-      return topics.map(topic => `<a href="https://github.com/topics/${topic}">${topic}</a>`).join(", ")
-    }
-
-    function escapeHtml(unsafe) {
-      if (unsafe) {
-        return unsafe
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      } else {
-        return ""
+      function get_repo_raw_path_url(full_name, tag, path) {
+        return `${get_repo_url(full_name)}/raw/${tag}/${path}`
       }
-    }
 
-    function check_badge(check, msg) {
-      const passed = msg ? 'failed' : 'passed'
-      const color = msg ? 'red' : 'green'
-      return `
+      function name_formatter(full_name) {
+        return `<a href="${get_repo_url(full_name)}">${full_name}</a>`
+      }
+
+      function usage_formatter(usage, row) {
+        if (row.standardized === true) {
+          var link = $(`<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#usage-popup">Usage</a>`)
+          link.attr("data-row", JSON.stringify(row))
+          return link.prop("outerHTML")
+        } else {
+          return ""
+        }
+      }
+
+      function topics_formatter(topics) {
+        return topics
+          .map(topic => `<a href="https://github.com/topics/${topic}">${topic}</a>`)
+          .join(", ")
+      }
+
+      function escapeHtml(unsafe) {
+        if (unsafe) {
+          return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        } else {
+          return ""
+        }
+      }
+
+      function check_badge(check, msg) {
+        const passed = msg
+          ? 'failed'
+          : 'passed'
+        const color = msg
+          ? 'red'
+          : 'green'
+        return `
       <a href="#" data-msg="${escapeHtml(msg)}" data-title="${check} errors" data-toggle="modal" data-target="#detail-popup">
         <img src="https://img.shields.io/badge/${check}-${passed}-${color}" />
       </a>
       `
-    }
+      }
 
-    function qc_formatter(_, repo) {
-      return `
+      function qc_formatter(_, repo) {
+        return `
       <img src="https://img.shields.io/github/license/${repo.full_name}" /><br />
       <a href="https://github.com/${repo.full_name}/commits"><img src="https://img.shields.io/github/last-commit/${repo.full_name}" /></a><br />
       ${check_badge("linting", repo.linting)}<br />
       ${check_badge("formatting", repo.formatting)}
       `
-    }
-
-    function stargazers_formatter(_, repo) {
-      return `<a href="https://github.com/${repo.full_name}/stargazers">${repo.stargazers_count}</a>`
-    }
-
-    function watchers_formatter(_, repo) {
-      return `<a href="https://github.com/${repo.full_name}/watchers">${repo.subscribers_count}</a>`
-    }
-
-    function get_repo_row(full_name) {
-      for(row of data) {
-        if(row.full_name == full_name) {
-          return row   
-        }
-      }
-    }
-
-    function render_usage_modal(rowdata) {
-      var repo_url = get_repo_url(rowdata.full_name)
-
-      var flags = ""
-      if(rowdata.mandatory_flags) {
-        flags = rowdata.mandatory_flags.flags
       }
 
-      var modal = $("#usage-popup")
-      modal.find(".modal-title").empty().append($(`<span>Usage of <a href=${repo_url}>${rowdata.full_name}</a></span> <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
-
-      var method_flags = {
-        "conda": "--use-conda",
-        "singularity": "--use-singularity",
-        "singularity+conda": "--use-conda --use-singularity"
+      function stargazers_formatter(_, repo) {
+        return `<a href="https://github.com/${repo.full_name}/stargazers">${repo.stargazers_count}</a>`
       }
-      var deployment_methods = {}
-      for(const method in rowdata.software_stack_deployment) {
-        if(rowdata.software_stack_deployment[method]) {
-          deployment_methods[method] = `snakemake --cores all ${method_flags[method]} ${flags}`
+
+      function watchers_formatter(_, repo) {
+        return `<a href="https://github.com/${repo.full_name}/watchers">${repo.subscribers_count}</a>`
+      }
+
+      function get_repo_row(full_name) {
+        for (row of data) {
+          if (row.full_name == full_name) {
+            return row
+          }
         }
       }
 
-      modal.find("#run-workflow-content").empty().append(nunjucks.render("templates/run-instructions.html.njk", { "deployment_methods": deployment_methods}))
+      function render_usage_modal(rowdata) {
+        var repo_url = get_repo_url(rowdata.full_name)
 
-      modal.find('#snakedeploy-cmd').text(`snakedeploy deploy-workflow ${repo_url} . --tag ${rowdata.latest_release}`)
-      modal.find('#config-readme').empty().append($(rowdata.config_readme))
-    }
+        var flags = ""
+        if (rowdata.mandatory_flags) {
+          flags = rowdata.mandatory_flags.flags
+        }
 
-    $("#repos").bootstrapTable({
-      data: data
-    })
+        var modal = $("#usage-popup")
+        modal
+          .find(".modal-title")
+          .empty()
+          .append($(`<span>Usage of <a href=${repo_url}>${rowdata.full_name}</a></span> <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
 
-    // show number of workflows
-    var nrows = $("#repos").bootstrapTable('getOptions').totalRows
-    $("#workflow-count-badge").text(nrows)
+        $("#repo-info-table").bootstrapTable({data: [rowdata]})
 
-    // filter to standardized by default
-    //$("#repos").bootstrapTable("filterBy", { standardized: [true] })
+        var method_flags = {
+          "conda": "--use-conda",
+          "singularity": "--use-singularity",
+          "singularity+conda": "--use-conda --use-singularity"
+        }
+        var deployment_methods = {}
+        for (const method in rowdata.software_stack_deployment) {
+          if (rowdata.software_stack_deployment[method]) {
+            deployment_methods[method] = `snakemake --cores all ${method_flags[method]} ${flags}`
+          }
+        }
 
-    $('#detail-popup').on('show.bs.modal', function (event) {
-      var source = $(event.relatedTarget) // item that triggered the modal
-      var msg = source.data('msg')
-      var title = source.data('title')
-      var modal = $(this)
-      modal.find('.modal-title').text(title)
-      modal.find('.modal-body pre').text(msg)
-    })
+        modal
+          .find("#run-workflow-content")
+          .empty()
+          .append(nunjucks.render("templates/run-instructions.html.njk", {"deployment_methods": deployment_methods}))
 
-    $('#usage-popup').on('show.bs.modal', function (event) {
-      var source = $(event.relatedTarget) // item that triggered the modal
-      var rowdata = source.data('row')
-      if(rowdata != undefined) {
-        // rowdata is present when triggered via button
-        console.log(rowdata)
-        render_usage_modal(rowdata)
+        modal
+          .find('#snakedeploy-cmd')
+          .text(`snakedeploy deploy-workflow ${repo_url} . --tag ${rowdata.latest_release}`)
+        modal
+          .find('#config-readme')
+          .empty()
+          .append($(rowdata.config_readme))
       }
-    })
-  
-    $("#standardized-tab").on("click", function(e) {
-      e.preventDefault()
-      $("#repos").bootstrapTable("filterBy", { standardized: [true] })
-    })
-    $("#all-tab").on("click", function(e) {
-      e.preventDefault()
-      $("#repos").bootstrapTable("filterBy", { standardized: [undefined, false, true] })
-    })
 
-    // handle directly linking to usage popup
-    var search_params = new URLSearchParams(window.location.search)
-    if(search_params.has("usage")) {
-      render_usage_modal(get_repo_row(search_params.get("usage")))
-      $("#usage-popup").modal()
-    }
+      $("#repos").bootstrapTable({data: data})
 
-    // handle directly linking to rules
-    if(search_params.has("rules")) {
-      $("#rule-popup").modal()
-    }
-  </script>
-</body>
+      // show number of workflows
+      var nrows = $("#repos")
+        .bootstrapTable('getOptions')
+        .totalRows
+        $("#workflow-count-badge")
+        .text(nrows)
+
+      // filter to standardized by default
+      //$("#repos").bootstrapTable("filterBy", { standardized: [true] })
+
+      $('#detail-popup').on('show.bs.modal', function (event) {
+        var source = $(event.relatedTarget) // item that triggered the modal
+        var msg = source.data('msg')
+        var title = source.data('title')
+        var modal = $(this)
+        modal
+          .find('.modal-title')
+          .text(title)
+        modal
+          .find('.modal-body pre')
+          .text(msg)
+      })
+
+      $('#usage-popup').on('show.bs.modal', function (event) {
+        var source = $(event.relatedTarget) // item that triggered the modal
+        var rowdata = source.data('row')
+        if (rowdata != undefined) {
+          // rowdata is present when triggered via button
+          render_usage_modal(rowdata)
+        }
+      })
+
+      $("#standardized-tab").on("click", function (e) {
+        e.preventDefault()
+        $("#repos").bootstrapTable("filterBy", {standardized: [true]})
+      })
+      $("#all-tab").on("click", function (e) {
+        e.preventDefault()
+        $("#repos").bootstrapTable("filterBy", {
+          standardized: [undefined, false, true]
+        })
+      })
+
+      // handle directly linking to usage popup
+      var search_params = new URLSearchParams(window.location.search)
+      if (search_params.has("usage")) {
+        render_usage_modal(get_repo_row(search_params.get("usage")))
+        $("#usage-popup").modal()
+      }
+
+      // handle directly linking to rules
+      if (search_params.has("rules")) {
+        $("#rule-popup").modal()
+      }
+    </script>
+  </body>
 
 </html>

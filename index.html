@@ -159,7 +159,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <table class="table" id="repo-info-table">
+            <table data-classes="table" id="repo-info-table">
               <thead>
                 <tr>
                   <th data-searchable="true" data-field="description">Description</th>
@@ -467,7 +467,7 @@ usage:
         modal
           .find(".modal-title")
           .empty()
-          .append($(`<span>Usage of <a href=${repo_url}>${rowdata.full_name}</a></span> <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
+          .append($(`<span><a href=${repo_url}>${rowdata.full_name}</a></span> <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
 
         $("#repo-info-table").bootstrapTable({data: [rowdata]})
 

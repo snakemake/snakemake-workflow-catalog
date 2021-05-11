@@ -206,9 +206,7 @@ for i, repo in enumerate(repo_search):
         continue
 
     if check_file_exists(repo, rules):
-        rule_contents = call_rate_limit_aware(
-                lambda: repo.get_contents(rules)
-                )
+        rule_contents = call_rate_limit_aware(lambda: repo.get_contents(rules))
         if not any(rule_file.name.endswith(".smk") for rule_file in rule_contents):
             log_skip("rule modules are not using .smk extension")
             register_skip(repo)

@@ -117,7 +117,18 @@ def store_data():
         json.dump(skips, out, sort_keys=True, indent=2)
 
 
-repo_search = g.search_repositories("snakemake workflow in:readme archived:false")
+def check_repo_exists(g, full_name):
+    try:
+        g.get_repo(full_name)
+        return True
+    except UnknownObjectException:
+        logging.info(f"Repo {full_name} has been deleted")
+        return False
+
+
+repo_search = g.search_repositories(
+    "snakemake workflow in:readme archived:false", sort="updated"
+)
 
 for i, repo in enumerate(repo_search):
     if i % 10 == 0:
@@ -146,9 +157,17 @@ for i, repo in enumerate(repo_search):
         and prev["updated_at"] == updated_at.timestamp()
     ):
         # keep old data, it hasn't changed
-        logging.info("Repo hasn't changed, using old data.")
-        repos.append(prev)
-        continue
+        logging.info("Remaining repos haven't changed, using old data.")
+        older_repos = [
+            old_repo
+            for old_repo in previous_repos.values()
+            if (old_repo["updated_at"] <= updated_at.timestamp())
+            and call_rate_limit_aware(
+                lambda: check_repo_exists(g, old_repo["full_name"])
+            )
+        ]
+        repos += older_repos
+        break
     prev_skip = previous_skips.get(repo.full_name)
     if prev_skip is not None and prev_skip["updated_at"] == updated_at.timestamp():
         # keep old data, it hasn't changed

@@ -128,6 +128,7 @@ def store_data():
         json.dump(skips, out, sort_keys=True, indent=2)
 
 
+@call_rate_limit_aware_decorator
 def check_repo_exists(g, full_name):
     try:
         g.get_repo(full_name)
@@ -182,9 +183,7 @@ for i, repo in enumerate(repo_search):
             old_repo
             for old_repo in previous_repos.values()
             if (old_repo["updated_at"] <= updated_at.timestamp())
-            and call_rate_limit_aware(
-                lambda: check_repo_exists(g, old_repo["full_name"])
-            )
+            and check_repo_exists(g, old_repo["full_name"])
         ]
         repos += older_repos
         break

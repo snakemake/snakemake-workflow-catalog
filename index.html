@@ -225,12 +225,19 @@
                     Given that Snakemake and Snakedeploy are installed and available (see Step 1), the workflow can be
                     deployed as follows.
 
-                    First, create an appropriate directory on your system, and enter it.
+                    First, create an appropriate project working directory on your system and enter it:
+
+                    <pre><code class="language-bash">
+mkdir -p path/to/project-workdir
+cd path/to/project-workdir
+                    </code></pre>
+
+                    In all following steps, we will assume that you are inside of that directory.                    
                     Second, run
 
-                  <pre><code id="snakedeploy-cmd" class="language-bash"></code></pre>
+                    <pre><code id="snakedeploy-cmd" class="language-bash"></code></pre>
 
-                  Third, consider to put this directory under version control, e.g. by <a
+                    Third, consider to put this directory under version control, e.g. by <a
                     href="https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">managing
                     it via a (private) Github repository</a>
                     </p>
@@ -470,6 +477,7 @@ usage:
           .append($(`<span><a href=${repo_url}>${rowdata.full_name}</a></span> <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
 
         $("#repo-info-table").bootstrapTable({data: [rowdata]})
+        $("#repo-info-table").bootstrapTable("load", [rowdata])
 
         var method_flags = {
           "conda": "--use-conda",

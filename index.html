@@ -224,18 +224,26 @@
                     <p>
                     Given that Snakemake and Snakedeploy are installed and available (see Step 1), the workflow can be
                     deployed as follows.
+                    </p>
 
+                    <p>
                     First, create an appropriate project working directory on your system and enter it:
 
-                    <pre><code class="language-bash">
-mkdir -p path/to/project-workdir
-cd path/to/project-workdir
-                    </code></pre>
+                    <pre><code class="language-bash">mkdir -p path/to/project-workdir
+cd path/to/project-workdir</code></pre>
 
-                    In all following steps, we will assume that you are inside of that directory.                    
+                    In all following steps, we will assume that you are inside of that directory.
+                    </p>   
+                    <p>           
                     Second, run
 
                     <pre><code id="snakedeploy-cmd" class="language-bash"></code></pre>
+
+                    Snakedeploy will create two folders <code>workflow</code> and <code>config</code>.
+                    The former contains the deployment of the chosen workflow as a <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#using-and-combining-pre-exising-workflows">Snakemake module</a>,
+                    the latter contains configuration files which will be modified in the next step in order to configure the workflow to your needs.
+                    Later, when executing the workflow, Snakemake will automatically find the main <code>Snakefile</code> in the <code>workflow</code> subfolder.
+                    </p>
 
                     Third, consider to put this directory under version control, e.g. by <a
                     href="https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line">managing

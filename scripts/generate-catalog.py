@@ -108,6 +108,17 @@ def call_rate_limit_aware(func):
             rate_limit_wait()
 
 
+def call_rate_limit_aware_decorator(func):
+    def inner(*args, **kwargs):
+        while True:
+            try:
+                return func(*args, **kwargs)
+            except RateLimitExceededException:
+                rate_limit_wait()
+
+    return inner
+
+
 def store_data():
     repos.sort(key=lambda repo: repo["stargazers_count"])
 
@@ -117,12 +128,22 @@ def store_data():
         json.dump(skips, out, sort_keys=True, indent=2)
 
 
+@call_rate_limit_aware_decorator
 def check_repo_exists(g, full_name):
     try:
         g.get_repo(full_name)
         return True
     except UnknownObjectException:
         logging.info(f"Repo {full_name} has been deleted")
+        return False
+
+
+@call_rate_limit_aware_decorator
+def check_file_exists(repo, file_name):
+    try:
+        repo.get_contents(file_name)
+        return True
+    except UnknownObjectException:
         return False
 
 
@@ -162,9 +183,7 @@ for i, repo in enumerate(repo_search):
             old_repo
             for old_repo in previous_repos.values()
             if (old_repo["updated_at"] <= updated_at.timestamp())
-            and call_rate_limit_aware(
-                lambda: check_repo_exists(g, old_repo["full_name"])
-            )
+            and check_repo_exists(g, old_repo["full_name"])
         ]
         repos += older_repos
         break
@@ -174,6 +193,24 @@ for i, repo in enumerate(repo_search):
         logging.info("Repo hasn't changed, skipping again based on old data.")
         skips.append(prev_skip)
         continue
+
+    snakefile = "Snakefile"
+    rules = "rules"
+    if check_file_exists(repo, "workflow"):
+        snakefile = "workflow/" + snakefile
+        rules = "workflow/" + rules
+
+    if not check_file_exists(repo, snakefile):
+        log_skip("of missing Snakefile")
+        register_skip(repo)
+        continue
+
+    if check_file_exists(repo, rules):
+        rule_contents = call_rate_limit_aware(lambda: repo.get_contents(rules))
+        if not any(rule_file.name.endswith(".smk") for rule_file in rule_contents):
+            log_skip("rule modules are not using .smk extension")
+            register_skip(repo)
+            continue
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
@@ -199,20 +236,7 @@ for i, repo in enumerate(repo_search):
         if not workflow.exists():
             workflow = tmp
 
-        if not (workflow / "Snakefile").exists():
-            log_skip("of missing Snakefile")
-            register_skip(repo)
-            continue
-
         rules = workflow / "rules"
-
-        rule_modules = (
-            [] if not rules.exists() else [rules / f for f in rules.glob("*.smk")]
-        )
-        if rule_modules and not any(f.suffix == ".smk" for f in rule_modules):
-            log_skip("rule modules are not using .smk extension")
-            register_skip(repo)
-            continue
 
         # catalog settings
         settings = None

@@ -179,11 +179,13 @@ for i, repo in enumerate(repo_search):
     ):
         # keep old data, it hasn't changed
         logging.info("Remaining repos haven't changed, using old data.")
+        visited = set(repo["full_name"] for repo in repos)
         older_repos = [
             old_repo
             for old_repo in previous_repos.values()
             if (old_repo["updated_at"] <= updated_at.timestamp())
             and check_repo_exists(g, old_repo["full_name"])
+            and old_repo["full_name"] not in visited
         ]
         repos += older_repos
         break

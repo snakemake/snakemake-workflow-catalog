@@ -250,7 +250,6 @@ for i, repo in enumerate(repo_search):
                 except yaml.scanner.ScannerError:
                     logging.info(f"{repo.full_name} has bad yaml formatting.")
 
-
         linting = None
         formatting = None
 

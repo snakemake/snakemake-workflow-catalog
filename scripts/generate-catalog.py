@@ -245,7 +245,11 @@ for i, repo in enumerate(repo_search):
         settings_file = tmp / ".snakemake-workflow-catalog.yml"
         if settings_file.exists():
             with open(settings_file) as settings_file:
-                settings = yaml.load(settings_file, yaml.SafeLoader)
+                try:
+                    settings = yaml.load(settings_file, yaml.SafeLoader)
+                except yaml.scanner.ScannerError:
+                    logging.info(f"{repo.full_name} has bad yaml formatting.")
+
 
         linting = None
         formatting = None

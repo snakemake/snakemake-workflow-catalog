@@ -245,7 +245,14 @@ for i, repo in enumerate(repo_search):
         settings_file = tmp / ".snakemake-workflow-catalog.yml"
         if settings_file.exists():
             with open(settings_file) as settings_file:
-                settings = yaml.load(settings_file, yaml.SafeLoader)
+                try:
+                    settings = yaml.load(settings_file, yaml.SafeLoader)
+                except yaml.scanner.ScannerError as e:
+                    logging.info(
+                        "No standardized usage possible because "
+                        "there was an error parsing "
+                        ".snakemake-workflow-catalog.yml:\n{}".format(e)
+                    )
 
         linting = None
         formatting = None

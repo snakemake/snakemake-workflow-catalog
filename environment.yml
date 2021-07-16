@@ -1,10 +1,11 @@
 name: snakemake-workflow-catalog
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
 dependencies:
   - jinja2
   - pygithub
   - gitpython
   - snakemake
   - snakefmt
+  - python >=3.9

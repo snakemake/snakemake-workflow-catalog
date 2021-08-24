@@ -218,9 +218,11 @@ for i, repo in enumerate(repo_search):
         tmp = Path(tmp)
 
         if release is not None:
-            # download release tag
+            # download release tag (use hardcoded url, because repo.tarball_url can sometimes
+            # cause ambiguity errors if a branch is called the same as the release).
+            tarball_url = f"https://github.com/{repo.full_name}/tarball/refs/tags/{release.tag_name}"
             get_tarfile = lambda: tarfile.open(
-                fileobj=urllib.request.urlopen(release.tarball_url), mode="r|gz"
+                fileobj=urllib.request.urlopen(tarball_url), mode="r|gz"
             )
             root_dir = get_tarfile().getmembers()[0].name
             get_tarfile().extractall(path=tmp)

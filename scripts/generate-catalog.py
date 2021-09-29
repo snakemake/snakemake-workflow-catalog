@@ -36,6 +36,13 @@ with open("skips.json", "r") as f:
 
 blacklist = set(l.strip() for l in open("blacklist.txt", "r"))
 
+snakefmt_version = (
+    sp.run(["snakefmt", "--version"], capture_output=True, check=True)
+    .stdout.decode()
+    .strip()
+    .split()[-1]
+)
+
 repos = []
 skips = []
 
@@ -49,7 +56,14 @@ def register_skip(repo):
 class Repo:
     data_format = 2
 
-    def __init__(self, github_repo, linting, formatting, config_readme, settings: dict):
+    def __init__(
+        self,
+        github_repo,
+        linting,
+        formatting,
+        config_readme,
+        settings: dict,
+    ):
         for attr in [
             "full_name",
             "description",
@@ -62,7 +76,7 @@ class Repo:
         self.updated_at = github_repo.updated_at.timestamp()
 
         self.linting = linting
-        self.formatting = formatting
+        self.formatting = f"{formatting}\nsnakefmt version: {snakefmt_version}"
 
         try:
             self.latest_release = github_repo.get_latest_release().tag_name

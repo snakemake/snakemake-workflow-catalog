@@ -76,7 +76,10 @@ class Repo:
         self.updated_at = github_repo.updated_at.timestamp()
 
         self.linting = linting
-        self.formatting = f"{formatting}\nsnakefmt version: {snakefmt_version}"
+
+        self.formatting = formatting
+        if formatting is not None:
+            self.formatting += f"\nsnakefmt version: {snakefmt_version}"
 
         try:
             self.latest_release = github_repo.get_latest_release().tag_name
@@ -296,9 +299,11 @@ for i, repo in enumerate(repo_search):
                 capture_output=True,
                 cwd=tmp,
                 check=True,
+                stderr=sp.STDERR,
+                stdout=sp.PIPE,
             )
         except sp.CalledProcessError as e:
-            formatting = e.stderr.decode()
+            formatting = e.stdout.decode()
 
     call_rate_limit_aware(
         lambda: repos.append(

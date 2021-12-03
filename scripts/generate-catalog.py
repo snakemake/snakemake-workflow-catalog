@@ -294,9 +294,8 @@ for i, repo in enumerate(repo_search):
         # formatting
         snakefiles = [workflow / "Snakefile"] + list(rules.glob("*.smk"))
         try:
-            out = sp.run(
+            sp.run(
                 ["snakefmt", "--check"] + snakefiles,
-                capture_output=True,
                 cwd=tmp,
                 check=True,
                 stderr=sp.STDOUT,

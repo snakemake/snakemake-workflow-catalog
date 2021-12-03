@@ -299,7 +299,7 @@ for i, repo in enumerate(repo_search):
                 capture_output=True,
                 cwd=tmp,
                 check=True,
-                stderr=sp.STDERR,
+                stderr=sp.STDOUT,
                 stdout=sp.PIPE,
             )
         except sp.CalledProcessError as e:

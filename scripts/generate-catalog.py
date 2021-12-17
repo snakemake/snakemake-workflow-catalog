@@ -320,7 +320,7 @@ while True:
             #     break
     except RateLimitExceededException:
         store_data()
-        print("Waiting 2 minutes before starting over with repo search because rate limit was exceeded", file=sys.stderr)
+        logging.info("Waiting 2 minutes before starting over with repo search because rate limit was exceeded")
         time.sleep(120)
     break # done
 

@@ -1,242 +1,46 @@
 [
   {
-    "full_name": "snakemake/snakemake-workflow-catalog",
-    "updated_at": 1639771418.0
-  },
-  {
-    "full_name": "BeeCSI-Microbiome/R_analyses",
-    "updated_at": 1639770073.0
-  },
-  {
-    "full_name": "dieterich-lab/Baltica",
-    "updated_at": 1639759913.0
-  },
-  {
-    "full_name": "langmead-lab/monorail-external",
-    "updated_at": 1639756318.0
-  },
-  {
-    "full_name": "lauralwd/Azolla_genus_metagenome",
-    "updated_at": 1639754411.0
-  },
-  {
-    "full_name": "megalinter/megalinter",
-    "updated_at": 1639757896.0
-  },
-  {
-    "full_name": "AndreaMariani-AM/Docker",
-    "updated_at": 1639752894.0
-  },
-  {
-    "full_name": "It4innovations/hyperqueue",
-    "updated_at": 1639750241.0
-  },
-  {
-    "full_name": "chanzuckerberg/swipe",
-    "updated_at": 1639749793.0
-  },
-  {
-    "full_name": "reanahub/reana",
-    "updated_at": 1639749070.0
-  },
-  {
-    "full_name": "CompGenomeLab/replicationRepair",
-    "updated_at": 1639746699.0
-  },
-  {
-    "full_name": "mdsung/2021_DHLAB_workshop",
-    "updated_at": 1639736838.0
-  },
-  {
-    "full_name": "jubbon/my-awesome-stars",
-    "updated_at": 1639732340.0
-  },
-  {
-    "full_name": "spack/spack-stack-catalog",
-    "updated_at": 1639723991.0
-  },
-  {
-    "full_name": "mrvollger/rustybam",
-    "updated_at": 1639720971.0
-  },
-  {
-    "full_name": "astrogewgaw/stars",
-    "updated_at": 1639719392.0
-  },
-  {
-    "full_name": "charlesfoster/ont-analysis-toolkit",
-    "updated_at": 1639732464.0
-  },
-  {
-    "full_name": "pvandyken/snakeboost",
-    "updated_at": 1639706157.0
+    "full_name": "mdozmorov/HiC_tools",
+    "updated_at": 1639793165.0
   },
   {
     "full_name": "nurgasemetey/github-stars",
-    "updated_at": 1639705238.0
-  },
-  {
-    "full_name": "mdozmorov/Programming_notes",
-    "updated_at": 1639703095.0
-  },
-  {
-    "full_name": "jimbrig/jimsghstars",
-    "updated_at": 1639702312.0
-  },
-  {
-    "full_name": "arbal/awesome-stars",
-    "updated_at": 1639702256.0
-  },
-  {
-    "full_name": "covid19-data/covid19-data",
-    "updated_at": 1639700337.0
-  },
-  {
-    "full_name": "bioinform/somaticseq",
-    "updated_at": 1639694442.0
-  },
-  {
-    "full_name": "matt-sd-watson/outbreaker",
-    "updated_at": 1639689529.0
-  },
-  {
-    "full_name": "MiDataInt/mdi-pipelines-suite-template",
-    "updated_at": 1639689421.0
-  },
-  {
-    "full_name": "swajid/review_and_read_ahead",
-    "updated_at": 1639688499.0
-  },
-  {
-    "full_name": "umich-brcf-bioinf/Watermelon",
-    "updated_at": 1639685036.0
-  },
-  {
-    "full_name": "kentsisresearchgroup/ProteomeGenerator2",
-    "updated_at": 1639684996.0
-  },
-  {
-    "full_name": "Clinical-Genomics/BALSAMIC",
-    "updated_at": 1639684250.0
-  },
-  {
-    "full_name": "mdozmorov/ChIP-seq_notes",
-    "updated_at": 1639673902.0
-  },
-  {
-    "full_name": "frattalab/splicing",
-    "updated_at": 1639671863.0
-  },
-  {
-    "full_name": "smith-chem-wisc/LncRNA-Snakemake",
-    "updated_at": 1639671529.0
-  },
-  {
-    "full_name": "MOMA-AUH/genomedk-tutorial",
-    "updated_at": 1639669055.0
-  },
-  {
-    "full_name": "sirno/misosoup",
-    "updated_at": 1639668947.0
-  },
-  {
-    "full_name": "ndwarshuis/.emacs.d",
-    "updated_at": 1639664060.0
-  },
-  {
-    "full_name": "a-h-b/binny",
-    "updated_at": 1639660588.0
-  },
-  {
-    "full_name": "sandragodinhosilva/MeLanGE",
-    "updated_at": 1639654739.0
-  },
-  {
-    "full_name": "City-of-Helsinki/ml_project_template",
-    "updated_at": 1639659418.0
-  },
-  {
-    "full_name": "rebsaa/NMR",
-    "updated_at": 1639650309.0
-  },
-  {
-    "full_name": "pblumenkamp/Curare",
-    "updated_at": 1639648992.0
-  },
-  {
-    "full_name": "dfporter/easyclip-snakemake",
-    "updated_at": 1639623916.0
+    "updated_at": 1639791649.0
   },
   {
     "full_name": "Aurametrix/Alg",
-    "updated_at": 1639618978.0
+    "updated_at": 1639790112.0
   },
   {
-    "full_name": "nhihin/nhihin",
-    "updated_at": 1639613234.0
+    "full_name": "BeeCSI-Microbiome/R_analyses",
+    "updated_at": 1639789950.0
   },
   {
-    "full_name": "amunzur/Bioinfo_pipeline",
-    "updated_at": 1639610834.0
+    "full_name": "jimbrig/jimsghstars",
+    "updated_at": 1639788694.0
   },
   {
-    "full_name": "corneliusroemer/awesome-snakemake",
-    "updated_at": 1639601938.0
+    "full_name": "arbal/awesome-stars",
+    "updated_at": 1639788656.0
   },
   {
-    "full_name": "ianrgraham/topolymer",
-    "updated_at": 1639599003.0
+    "full_name": "mdozmorov/ChIP-seq_notes",
+    "updated_at": 1639788131.0
   },
   {
-    "full_name": "nextstrain/zika-tutorial-nextflow",
-    "updated_at": 1639591967.0
+    "full_name": "mdozmorov/Microbiome_notes",
+    "updated_at": 1639787100.0
   },
   {
-    "full_name": "OSeMOSYS/osemosys_global",
-    "updated_at": 1639590603.0
+    "full_name": "covid19-data/covid19-data",
+    "updated_at": 1639786639.0
   },
   {
-    "full_name": "vector-engineering/covidcg",
-    "updated_at": 1639590697.0
+    "full_name": "EthanHolleman/VR-verify",
+    "updated_at": 1639777941.0
   },
   {
-    "full_name": "marcomeola/biomagician",
-    "updated_at": 1639586343.0
-  },
-  {
-    "full_name": "akhanf/snakebids",
-    "updated_at": 1639598804.0
-  },
-  {
-    "full_name": "mdjaffardjy/reprohackaton_2021",
-    "updated_at": 1639568250.0
-  },
-  {
-    "full_name": "RasmussenLab/vamb",
-    "updated_at": 1639559757.0
-  },
-  {
-    "full_name": "sib-swiss/training-collection",
-    "updated_at": 1639555310.0
-  },
-  {
-    "full_name": "xuanblo/NGSPipeDb",
-    "updated_at": 1639553873.0
-  },
-  {
-    "full_name": "ekherman/SAGPlacer",
-    "updated_at": 1639548545.0
-  },
-  {
-    "full_name": "terrimporter/MetaWorks",
-    "updated_at": 1639538418.0
-  },
-  {
-    "full_name": "SvetlanaUP/Microbiome-conferences-c",
-    "updated_at": 1639538210.0
-  },
-  {
-    "full_name": "mdozmorov/HiC_tools",
-    "updated_at": 1639535996.0
+    "full_name": "snakemake/snakemake-workflow-catalog",
+    "updated_at": 1639775176.0
   }
 ]

@@ -319,9 +319,8 @@ while True:
             # if len(repos) >= 2:
             #     break
     except RateLimitExceededException:
-        store_data()
-        logging.info("Waiting 2 minutes before starting over with repo search because rate limit was exceeded")
-        time.sleep(120)
+        logging.info("Waiting 5 minutes before starting over with repo search because rate limit was exceeded")
+        time.sleep(300)
     break # done
 
 store_data()

@@ -25,7 +25,7 @@ env = Environment(
 # do not clone LFS files
 os.environ["GIT_LFS_SKIP_SMUDGE"] = "1"
 g = Github(os.environ["GITHUB_TOKEN"])
-core_rate_limit = g.get_rate_limit().core
+core_rate_limit = lambda: g.get_rate_limit().core
 
 with open("data.js", "r") as f:
     next(f)
@@ -110,10 +110,10 @@ class Repo:
 
 def rate_limit_wait():
     curr_timestamp = calendar.timegm(time.gmtime())
-    reset_timestamp = calendar.timegm(core_rate_limit.reset.timetuple())
+    reset_timestamp = calendar.timegm(core_rate_limit().reset.timetuple())
     # add 5 seconds to be sure the rate limit has been reset
     sleep_time = max(0, reset_timestamp - curr_timestamp) + 5
-    logging.warning(f"Rate limit exceeded, waiting {sleep_time}")
+    logging.warning(f"Rate limit exceeded, waiting {sleep_time} seconds")
     time.sleep(sleep_time)
 
 

@@ -164,13 +164,14 @@ def check_file_exists(repo, file_name):
         return False
 
 
-repo_search = enumerate(g.search_repositories(
+repo_search = g.search_repositories(
     "snakemake workflow in:readme archived:false", sort="updated"
-))
+)
+repo_search_iter = enumerate(repo_search)
 
 while True:
     try:
-        i, repo = call_rate_limit_aware(lambda: next(repo_search))
+        i, repo = call_rate_limit_aware(lambda: next(repo_search_iter))
     except StopIteration:
         # no further repos to check, exit loop
         break

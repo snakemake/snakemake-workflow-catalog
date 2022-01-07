@@ -191,23 +191,24 @@ while True:
                 release = None
 
             prev = previous_repos.get(repo.full_name)
-            if (
-                prev is not None
-                and Repo.data_format == prev["data_format"]
-                and prev["updated_at"] == updated_at.timestamp()
-            ):
-                # keep old data, it hasn't changed
-                logging.info("Remaining repos haven't changed, using old data.")
-                visited = set(repo["full_name"] for repo in repos)
-                older_repos = [
-                    old_repo
-                    for old_repo in previous_repos.values()
-                    if (old_repo["updated_at"] <= updated_at.timestamp())
-                    and check_repo_exists(g, old_repo["full_name"])
-                    and old_repo["full_name"] not in visited
-                ]
-                repos += older_repos
-                break
+            # TODO check if this can be enabled again, it currently seems to lead to delisting of repos
+            # if (
+            #     prev is not None
+            #     and Repo.data_format == prev["data_format"]
+            #     and prev["updated_at"] == updated_at.timestamp()
+            # ):
+            #     # keep old data, it hasn't changed
+            #     logging.info("Remaining repos haven't changed, using old data.")
+            #     visited = set(repo["full_name"] for repo in repos)
+            #     older_repos = [
+            #         old_repo
+            #         for old_repo in previous_repos.values()
+            #         if (old_repo["updated_at"] <= updated_at.timestamp())
+            #         and check_repo_exists(g, old_repo["full_name"])
+            #         and old_repo["full_name"] not in visited
+            #     ]
+            #     repos += older_repos
+            #     break
             prev_skip = previous_skips.get(repo.full_name)
             if prev_skip is not None and prev_skip["updated_at"] == updated_at.timestamp():
                 # keep old data, it hasn't changed

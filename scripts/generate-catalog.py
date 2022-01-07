@@ -164,164 +164,163 @@ def check_file_exists(repo, file_name):
         return False
 
 
-repo_search = g.search_repositories(
+repo_search = enumerate(g.search_repositories(
     "snakemake workflow in:readme archived:false", sort="updated"
-)
+))
 
 while True:
     try:
-        for i, repo in enumerate(repo_search):
-            if i % 10 == 0:
-                logging.info(f"{i} of {repo_search.totalCount} repos done")
+        i, repo = call_rate_limit_aware(lambda: next(repo_search))
+    except StopIteration:
+        # no further repos to check, exit loop
+        break
 
-            log_skip = lambda reason: logging.info(
-                f"Skipped {repo.full_name} because {reason}."
+    if i % 10 == 0:
+        logging.info(f"{i} of {repo_search.totalCount} repos done")
+
+    log_skip = lambda reason: logging.info(
+        f"Skipped {repo.full_name} because {reason}."
+    )
+
+    logging.info(f"Processing {repo.full_name}.")
+    if repo.full_name in blacklist:
+        log_skip("it is blacklisted")
+        continue
+
+    updated_at = repo.updated_at
+    try:
+        release = call_rate_limit_aware(repo.get_latest_release)
+        updated_at = max(updated_at, release.created_at)
+    except UnknownObjectException:
+        release = None
+
+    prev = previous_repos.get(repo.full_name)
+    if (
+        prev is not None
+        and Repo.data_format == prev["data_format"]
+        and prev["updated_at"] == updated_at.timestamp()
+    ):
+        # keep old data, it hasn't changed
+        logging.info("Remaining repos haven't changed, using old data.")
+        visited = set(repo["full_name"] for repo in repos)
+        older_repos = [
+            old_repo
+            for old_repo in previous_repos.values()
+            if (old_repo["updated_at"] <= updated_at.timestamp())
+            and check_repo_exists(g, old_repo["full_name"])
+            and old_repo["full_name"] not in visited
+        ]
+        repos += older_repos
+        break
+    prev_skip = previous_skips.get(repo.full_name)
+    if prev_skip is not None and prev_skip["updated_at"] == updated_at.timestamp():
+        # keep old data, it hasn't changed
+        logging.info("Repo hasn't changed, skipping again based on old data.")
+        skips.append(prev_skip)
+        continue
+
+    snakefile = "Snakefile"
+    rules = "rules"
+    if check_file_exists(repo, "workflow"):
+        snakefile = "workflow/" + snakefile
+        rules = "workflow/" + rules
+
+    if not check_file_exists(repo, snakefile):
+        log_skip("of missing Snakefile")
+        register_skip(repo)
+        continue
+
+    if check_file_exists(repo, rules):
+        rule_contents = call_rate_limit_aware(lambda: repo.get_contents(rules))
+        if not any(rule_file.name.endswith(".smk") for rule_file in rule_contents):
+            log_skip("rule modules are not using .smk extension")
+            register_skip(repo)
+            continue
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+
+        if release is not None:
+            # download release tag (use hardcoded url, because repo.tarball_url can sometimes
+            # cause ambiguity errors if a branch is called the same as the release).
+            tarball_url = f"https://github.com/{repo.full_name}/tarball/refs/tags/{release.tag_name}"
+            get_tarfile = lambda: tarfile.open(
+                fileobj=urllib.request.urlopen(tarball_url), mode="r|gz"
             )
-
-            logging.info(f"Processing {repo.full_name}.")
-            if repo.full_name in blacklist:
-                log_skip("it is blacklisted")
-                continue
-
-            updated_at = repo.updated_at
+            root_dir = get_tarfile().getmembers()[0].name
+            get_tarfile().extractall(path=tmp)
+            tmp /= root_dir
+        else:
+            # no latest release, clone main branch
             try:
-                release = call_rate_limit_aware(repo.get_latest_release)
-                updated_at = max(updated_at, release.created_at)
-            except UnknownObjectException:
-                release = None
-
-            prev = previous_repos.get(repo.full_name)
-            # TODO check if this can be enabled again, it currently seems to lead to delisting of repos
-            # if (
-            #     prev is not None
-            #     and Repo.data_format == prev["data_format"]
-            #     and prev["updated_at"] == updated_at.timestamp()
-            # ):
-            #     # keep old data, it hasn't changed
-            #     logging.info("Remaining repos haven't changed, using old data.")
-            #     visited = set(repo["full_name"] for repo in repos)
-            #     older_repos = [
-            #         old_repo
-            #         for old_repo in previous_repos.values()
-            #         if (old_repo["updated_at"] <= updated_at.timestamp())
-            #         and check_repo_exists(g, old_repo["full_name"])
-            #         and old_repo["full_name"] not in visited
-            #     ]
-            #     repos += older_repos
-            #     break
-            prev_skip = previous_skips.get(repo.full_name)
-            if prev_skip is not None and prev_skip["updated_at"] == updated_at.timestamp():
-                # keep old data, it hasn't changed
-                logging.info("Repo hasn't changed, skipping again based on old data.")
-                skips.append(prev_skip)
-                continue
-
-            snakefile = "Snakefile"
-            rules = "rules"
-            if check_file_exists(repo, "workflow"):
-                snakefile = "workflow/" + snakefile
-                rules = "workflow/" + rules
-
-            if not check_file_exists(repo, snakefile):
-                log_skip("of missing Snakefile")
+                gitrepo = git.Repo.clone_from(repo.clone_url, str(tmp), depth=1)
+            except git.GitCommandError:
+                log_skip("error cloning repository")
                 register_skip(repo)
                 continue
 
-            if check_file_exists(repo, rules):
-                rule_contents = call_rate_limit_aware(lambda: repo.get_contents(rules))
-                if not any(rule_file.name.endswith(".smk") for rule_file in rule_contents):
-                    log_skip("rule modules are not using .smk extension")
-                    register_skip(repo)
-                    continue
+        workflow = tmp / "workflow"
+        if not workflow.exists():
+            workflow = tmp
 
-            with tempfile.TemporaryDirectory() as tmp:
-                tmp = Path(tmp)
+        rules = workflow / "rules"
 
-                if release is not None:
-                    # download release tag (use hardcoded url, because repo.tarball_url can sometimes
-                    # cause ambiguity errors if a branch is called the same as the release).
-                    tarball_url = f"https://github.com/{repo.full_name}/tarball/refs/tags/{release.tag_name}"
-                    get_tarfile = lambda: tarfile.open(
-                        fileobj=urllib.request.urlopen(tarball_url), mode="r|gz"
-                    )
-                    root_dir = get_tarfile().getmembers()[0].name
-                    get_tarfile().extractall(path=tmp)
-                    tmp /= root_dir
-                else:
-                    # no latest release, clone main branch
-                    try:
-                        gitrepo = git.Repo.clone_from(repo.clone_url, str(tmp), depth=1)
-                    except git.GitCommandError:
-                        log_skip("error cloning repository")
-                        register_skip(repo)
-                        continue
-
-                workflow = tmp / "workflow"
-                if not workflow.exists():
-                    workflow = tmp
-
-                rules = workflow / "rules"
-
-                # catalog settings
-                settings = None
-                settings_file = tmp / ".snakemake-workflow-catalog.yml"
-                if settings_file.exists():
-                    with open(settings_file) as settings_file:
-                        try:
-                            settings = yaml.load(settings_file, yaml.SafeLoader)
-                        except yaml.scanner.ScannerError as e:
-                            logging.info(
-                                "No standardized usage possible because "
-                                "there was an error parsing "
-                                ".snakemake-workflow-catalog.yml:\n{}".format(e)
-                            )
-
-                linting = None
-                formatting = None
-
-                # config readme
-                config_readme = None
-                config_readme_path = tmp / "config" / "README.md"
-                if config_readme_path.exists():
-                    with open(config_readme_path, "r") as f:
-                        config_readme = f.read()
-
-                # linting
+        # catalog settings
+        settings = None
+        settings_file = tmp / ".snakemake-workflow-catalog.yml"
+        if settings_file.exists():
+            with open(settings_file) as settings_file:
                 try:
-                    out = sp.run(
-                        ["snakemake", "--lint"], capture_output=True, cwd=tmp, check=True
+                    settings = yaml.load(settings_file, yaml.SafeLoader)
+                except yaml.scanner.ScannerError as e:
+                    logging.info(
+                        "No standardized usage possible because "
+                        "there was an error parsing "
+                        ".snakemake-workflow-catalog.yml:\n{}".format(e)
                     )
-                except sp.CalledProcessError as e:
-                    linting = e.stderr.decode()
 
-                # formatting
-                snakefiles = [workflow / "Snakefile"] + list(rules.glob("*.smk"))
-                try:
-                    sp.run(
-                        ["snakefmt", "--check", "-v"] + snakefiles,
-                        cwd=tmp,
-                        check=True,
-                        stderr=sp.STDOUT,
-                        stdout=sp.PIPE,
-                    )
-                except sp.CalledProcessError as e:
-                    formatting = e.stdout.decode()
+        linting = None
+        formatting = None
 
-            call_rate_limit_aware(
-                lambda: repos.append(
-                    Repo(repo, linting, formatting, config_readme, settings).__dict__
-                )
+        # config readme
+        config_readme = None
+        config_readme_path = tmp / "config" / "README.md"
+        if config_readme_path.exists():
+            with open(config_readme_path, "r") as f:
+                config_readme = f.read()
+
+        # linting
+        try:
+            out = sp.run(
+                ["snakemake", "--lint"], capture_output=True, cwd=tmp, check=True
             )
+        except sp.CalledProcessError as e:
+            linting = e.stderr.decode()
 
-            if len(repos) % 20 == 0:
-                logging.info("Storing intermediate results.")
-                store_data()
+        # formatting
+        snakefiles = [workflow / "Snakefile"] + list(rules.glob("*.smk"))
+        try:
+            sp.run(
+                ["snakefmt", "--check", "-v"] + snakefiles,
+                cwd=tmp,
+                check=True,
+                stderr=sp.STDOUT,
+                stdout=sp.PIPE,
+            )
+        except sp.CalledProcessError as e:
+            formatting = e.stdout.decode()
 
-            # if len(repos) >= 2:
-            #     break
-    except RateLimitExceededException:
-        logging.info("Waiting 5 minutes before starting over with repo search because rate limit was exceeded")
-        time.sleep(300)
-    break # done
+    call_rate_limit_aware(
+        lambda: repos.append(
+            Repo(repo, linting, formatting, config_readme, settings).__dict__
+        )
+    )
+
+    if len(repos) % 20 == 0:
+        logging.info("Storing intermediate results.")
+        store_data()
+
+    # if len(repos) >= 2:
+    #     break
 
 store_data()

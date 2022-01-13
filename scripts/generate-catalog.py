@@ -174,6 +174,12 @@ while True:
         i, repo = call_rate_limit_aware(lambda: next(repo_search_iter))
     except StopIteration:
         # no further repos to check, exit loop
+        logging.info("Processed all available repositories.")
+        if len(repos) < (len(previous_repos) / 2.0):
+            raise RuntimeError(
+                "Previous repos have been twice as big, "
+                "likely something went wrong in the github search, aborting."
+            )
         break
 
     if i % 10 == 0:
@@ -316,10 +322,6 @@ while True:
             Repo(repo, linting, formatting, config_readme, settings).__dict__
         )
     )
-
-    if len(repos) % 20 == 0:
-        logging.info("Storing intermediate results.")
-        store_data()
 
     # if len(repos) >= 2:
     #     break

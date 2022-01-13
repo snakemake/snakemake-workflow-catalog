@@ -25,7 +25,7 @@ env = Environment(
 # do not clone LFS files
 os.environ["GIT_LFS_SKIP_SMUDGE"] = "1"
 g = Github(os.environ["GITHUB_TOKEN"])
-core_rate_limit = lambda: g.get_rate_limit().core
+get_rate_limit = lambda api_type: getattr(g.get_rate_limit(), api_type)
 
 with open("data.js", "r") as f:
     next(f)
@@ -108,21 +108,21 @@ class Repo:
         self.data_format = Repo.data_format
 
 
-def rate_limit_wait():
+def rate_limit_wait(api_type):
     curr_timestamp = calendar.timegm(time.gmtime())
-    reset_timestamp = calendar.timegm(core_rate_limit().reset.timetuple())
+    reset_timestamp = calendar.timegm(get_rate_limit(api_type).reset.timetuple())
     # add 5 seconds to be sure the rate limit has been reset
     sleep_time = max(0, reset_timestamp - curr_timestamp) + 5
     logging.warning(f"Rate limit exceeded, waiting {sleep_time} seconds")
     time.sleep(sleep_time)
 
 
-def call_rate_limit_aware(func):
+def call_rate_limit_aware(func, api_type="core"):
     while True:
         try:
             return func()
         except RateLimitExceededException:
-            rate_limit_wait()
+            rate_limit_wait(api_type)
 
 
 def call_rate_limit_aware_decorator(func):
@@ -131,7 +131,7 @@ def call_rate_limit_aware_decorator(func):
             try:
                 return func(*args, **kwargs)
             except RateLimitExceededException:
-                rate_limit_wait()
+                rate_limit_wait("core")
 
     return inner
 
@@ -171,7 +171,9 @@ repo_search_iter = enumerate(repo_search)
 
 while True:
     try:
-        i, repo = call_rate_limit_aware(lambda: next(repo_search_iter))
+        i, repo = call_rate_limit_aware(
+            lambda: next(repo_search_iter), api_type="search"
+        )
     except StopIteration:
         # no further repos to check, exit loop
         logging.info("Processed all available repositories.")

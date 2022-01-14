@@ -168,7 +168,7 @@ repo_search = g.search_repositories(
     "snakemake workflow in:readme archived:false", sort="updated"
 )
 
-for i in range(repo_search.total_count):
+for i in range(repo_search.totalCount):
     # We access each repo by index instead of using an iterator
     # in order to be able to retry the access in case we reach the search
     # rate limit.

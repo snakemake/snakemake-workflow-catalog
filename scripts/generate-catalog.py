@@ -167,22 +167,12 @@ def check_file_exists(repo, file_name):
 repo_search = g.search_repositories(
     "snakemake workflow in:readme archived:false", sort="updated"
 )
-repo_search_iter = enumerate(repo_search)
 
-while True:
-    try:
-        i, repo = call_rate_limit_aware(
-            lambda: next(repo_search_iter), api_type="search"
-        )
-    except StopIteration:
-        # no further repos to check, exit loop
-        logging.info("Processed all available repositories.")
-        if len(repos) < (len(previous_repos) / 2.0):
-            raise RuntimeError(
-                "Previous repos have been twice as big, "
-                "likely something went wrong in the github search, aborting."
-            )
-        break
+for i in range(repo_search.total_count):
+    # We access each repo by index instead of using an iterator
+    # in order to be able to retry the access in case we reach the search
+    # rate limit.
+    repo = call_rate_limit_aware(lambda: repo_search[i], api_type="search")
 
     if i % 10 == 0:
         logging.info(f"{i} of {repo_search.totalCount} repos done")
@@ -327,5 +317,12 @@ while True:
 
     # if len(repos) >= 2:
     #     break
+
+logging.info("Processed all available repositories.")
+if len(repos) < (len(previous_repos) / 2.0):
+    raise RuntimeError(
+        "Previous repos have been twice as big, "
+        "likely something went wrong in the github search, aborting."
+    )
 
 store_data()

@@ -167,7 +167,7 @@ def check_file_exists(repo, file_name):
 repo_search = g.search_repositories(
     "snakemake workflow in:readme archived:false", sort="updated"
 )
-total_count = call_rate_limit_aware(lambda: repo_search.totalCount)
+total_count = call_rate_limit_aware(lambda: repo_search.totalCount, api_type="search")
 
 for i in range(total_count):
     # We access each repo by index instead of using an iterator

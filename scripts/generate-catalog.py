@@ -206,8 +206,7 @@ for i in range(total_count):
         older_repos = [
             old_repo
             for old_repo in previous_repos.values()
-            if (old_repo["updated_at"] <= updated_at.timestamp())
-            and check_repo_exists(g, old_repo["full_name"])
+            if check_repo_exists(g, old_repo["full_name"])
             and old_repo["full_name"] not in visited
         ]
         repos += older_repos

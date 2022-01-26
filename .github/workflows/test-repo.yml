@@ -1,0 +1,43 @@
+name: Generate catalog
+
+on:
+  issue_comment:
+    types:
+      - created
+      - edited
+
+jobs:
+  generate-catalog:
+    runs-on: ubuntu-latest
+    if: >-
+      startsWith(github.event.comment.body, "@catalog test repo")
+    steps:
+      - uses: actions/github.script@v5
+        id: info
+        env:
+          BODY: ${{ github.event.comment.body }}
+        with:
+          script: |
+            const process = require("process")
+            return {
+              test_repo: process.env.BODY.match(/@catalog test repo ([^\/]+\/[^\/]+)/)[1],
+              action_link: `https://github.com/snakemake/snakemake/runs/${context.runId}`
+            }
+      - uses: actions/checkout@v1
+      - name: deployment
+        uses: mamba-org/provision-with-micromamba@main
+      - name: generate-catalog
+        shell: bash -l {0}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TEST_REPO: ${{ steps.info.outputs.result.test_repo }}
+        run: |
+          python scripts/generate-catalog.py
+      - name: Post action link
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.id }}
+          body: |
+            Tested catalog parsing for repository ${{ steps.info.outputs.result.test_repo }}.
+            Results: ${{ steps.info.outputs.result.action_link }}
+

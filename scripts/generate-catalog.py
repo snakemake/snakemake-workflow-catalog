@@ -163,10 +163,14 @@ def check_file_exists(repo, file_name):
     except UnknownObjectException:
         return False
 
-
-repo_search = g.search_repositories(
-    "snakemake workflow in:readme archived:false", sort="updated"
-)
+test_repo = os.environ.get("TEST_REPO")
+if test_repo is not None:
+    # only search for the single repo to be tested
+    repo_search = g.search_repositories(test_repo, sort="updated")
+else:
+    repo_search = g.search_repositories(
+        "snakemake workflow in:readme archived:false", sort="updated"
+    )
 total_count = call_rate_limit_aware(lambda: repo_search.totalCount, api_type="search")
 
 for i in range(total_count):
@@ -325,4 +329,5 @@ if len(repos) < (len(previous_repos) / 2.0):
         "likely something went wrong in the github search, aborting."
     )
 
-store_data()
+if test_repo is None:
+    store_data()

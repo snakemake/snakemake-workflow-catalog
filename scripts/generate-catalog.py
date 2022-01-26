@@ -166,16 +166,13 @@ def check_file_exists(repo, file_name):
 
 test_repo = os.environ.get("TEST_REPO")
 if test_repo is not None:
-    owner, repo = test_repo.split("/")
-    # only search for the single repo to be tested
-    repo_search = g.search_repositories(
-        f"snakemake workflow in:readme archived:false repo:{repo} (user:{owner} OR org:{owner})", sort="updated"
-    )
+    repo_search = [g.get_repo(test_repo)]
+    total_count = 1
 else:
     repo_search = g.search_repositories(
         "snakemake workflow in:readme archived:false", sort="updated"
     )
-total_count = call_rate_limit_aware(lambda: repo_search.totalCount, api_type="search")
+    total_count = call_rate_limit_aware(lambda: repo_search.totalCount, api_type="search")
 
 logging.info(f"Checking {total_count} repos.")
 
@@ -186,7 +183,7 @@ for i in range(total_count):
     repo = call_rate_limit_aware(lambda: repo_search[i], api_type="search")
 
     if i % 10 == 0:
-        logging.info(f"{i} of {repo_search.totalCount} repos done.")
+        logging.info(f"{i} of {total_count} repos done.")
 
     log_skip = lambda reason: logging.info(
         f"Skipped {repo.full_name} because {reason}."

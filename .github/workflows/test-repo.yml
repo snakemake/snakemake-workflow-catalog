@@ -29,7 +29,7 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body: |
             Testing catalog parsing for repository https://github.com/${{ fromJSON(steps.info.outputs.result).test_repo }}.
-            Results: ${{ fromJSON(steps.info.outputs.result).action_link }}
+            Results: https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/test-repo.yml
       - uses: actions/checkout@v1
       - name: deployment
         uses: mamba-org/provision-with-micromamba@main
@@ -37,7 +37,7 @@ jobs:
         shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TEST_REPO: ${{ steps.info.outputs.result.test_repo }}
+          TEST_REPO: ${{ fromJSON(steps.info.outputs.result.test_repo) }}
         run: |
           python scripts/generate-catalog.py
 

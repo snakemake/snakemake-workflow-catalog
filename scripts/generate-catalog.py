@@ -186,12 +186,13 @@ for i in range(total_count):
     # rate limit.
     repo = call_rate_limit_aware(lambda: repo_search[i], api_type="search")
 
-    if repo.full_name in visited:
-        # repo was handled by adding old data because it has not changed
-        continue
-
     if i % 10 == 0:
         logging.info(f"{i} of {total_count} repos done.")
+
+    if repo.full_name in visited:
+        # repo was handled by adding old data because it has not changed
+        logging.info(f"Using unchanged old data for {repo.full_name}.")
+        continue
 
     log_skip = lambda reason: logging.info(
         f"Skipped {repo.full_name} because {reason}."

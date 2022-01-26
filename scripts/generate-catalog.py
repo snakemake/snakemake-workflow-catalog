@@ -163,10 +163,14 @@ def check_file_exists(repo, file_name):
     except UnknownObjectException:
         return False
 
+
 test_repo = os.environ.get("TEST_REPO")
 if test_repo is not None:
+    owner, repo = test_repo.split("/")
     # only search for the single repo to be tested
-    repo_search = g.search_repositories(test_repo, sort="updated")
+    repo_search = g.search_repositories(
+        f"repo:{repo} (user:{owner} OR org:{owner})", sort="updated"
+    )
 else:
     repo_search = g.search_repositories(
         "snakemake workflow in:readme archived:false", sort="updated"

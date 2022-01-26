@@ -177,6 +177,8 @@ else:
     )
 total_count = call_rate_limit_aware(lambda: repo_search.totalCount, api_type="search")
 
+logging.info(f"Checking {total_count} repos.")
+
 for i in range(total_count):
     # We access each repo by index instead of using an iterator
     # in order to be able to retry the access in case we reach the search
@@ -184,7 +186,7 @@ for i in range(total_count):
     repo = call_rate_limit_aware(lambda: repo_search[i], api_type="search")
 
     if i % 10 == 0:
-        logging.info(f"{i} of {repo_search.totalCount} repos done")
+        logging.info(f"{i} of {repo_search.totalCount} repos done.")
 
     log_skip = lambda reason: logging.info(
         f"Skipped {repo.full_name} because {reason}."
@@ -323,15 +325,11 @@ for i in range(total_count):
         )
     )
 
-    # if len(repos) >= 2:
-    #     break
-
-logging.info("Processed all available repositories.")
-if len(repos) < (len(previous_repos) / 2.0):
-    raise RuntimeError(
-        "Previous repos have been twice as big, "
-        "likely something went wrong in the github search, aborting."
-    )
-
 if test_repo is None:
+    logging.info("Processed all available repositories.")
+    if len(repos) < (len(previous_repos) / 2.0):
+        raise RuntimeError(
+            "Previous repos have been twice as big, "
+            "likely something went wrong in the github search, aborting."
+        )
     store_data()

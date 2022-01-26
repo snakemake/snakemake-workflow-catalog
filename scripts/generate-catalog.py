@@ -169,7 +169,7 @@ if test_repo is not None:
     owner, repo = test_repo.split("/")
     # only search for the single repo to be tested
     repo_search = g.search_repositories(
-        f"repo:{repo} (user:{owner} OR org:{owner})", sort="updated"
+        f"snakemake workflow in:readme archived:false repo:{repo} (user:{owner} OR org:{owner})", sort="updated"
     )
 else:
     repo_search = g.search_repositories(

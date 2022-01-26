@@ -37,7 +37,7 @@ jobs:
         shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TEST_REPO: ${{ fromJSON(steps.info.outputs.result.test_repo) }}
+          TEST_REPO: ${{ fromJSON(steps.info.outputs.result).test_repo }}
         run: |
           python scripts/generate-catalog.py
 

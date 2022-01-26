@@ -10,7 +10,7 @@ jobs:
   generate-catalog:
     runs-on: ubuntu-latest
     if: >-
-      startsWith(github.event.comment.body, "/catalog test repo")
+      startsWith(github.event.comment.body, '/catalog test repo')
     steps:
       - uses: actions/github.script@v5
         id: info

@@ -28,6 +28,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
+            ${{ steps.info.outputs.result }}
             Testing catalog parsing for repository https://github.com/${{ steps.info.outputs.result.test_repo }}.
             Results: ${{ steps.info.outputs.result.action_link }}
       - uses: actions/checkout@v1

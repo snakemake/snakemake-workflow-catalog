@@ -10,7 +10,7 @@ jobs:
   generate-catalog:
     runs-on: ubuntu-latest
     if: >-
-      startsWith(github.event.comment.body, "@catalog test repo")
+      startsWith(github.event.comment.body, "/catalog test repo")
     steps:
       - uses: actions/github.script@v5
         id: info
@@ -20,7 +20,7 @@ jobs:
           script: |
             const process = require("process")
             return {
-              test_repo: process.env.BODY.match(/@catalog test repo ([^\/]+\/[^\/]+)/)[1],
+              test_repo: process.env.BODY.match(/\/catalog test repo ([^\/]+\/[^\/]+)/)[1],
               action_link: `https://github.com/snakemake/snakemake/runs/${context.runId}`
             }
       - uses: actions/checkout@v1

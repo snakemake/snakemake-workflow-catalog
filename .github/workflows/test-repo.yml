@@ -7,7 +7,7 @@ on:
       - edited
 
 jobs:
-  generate-catalog:
+  test-repo:
     runs-on: ubuntu-latest
     if: >-
       startsWith(github.event.comment.body, '/catalog test repo')

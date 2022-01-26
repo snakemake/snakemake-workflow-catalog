@@ -172,15 +172,23 @@ else:
     repo_search = g.search_repositories(
         "snakemake workflow in:readme archived:false", sort="updated"
     )
-    total_count = call_rate_limit_aware(lambda: repo_search.totalCount, api_type="search")
+    total_count = call_rate_limit_aware(
+        lambda: repo_search.totalCount, api_type="search"
+    )
 
 logging.info(f"Checking {total_count} repos.")
+
+visited = set()
 
 for i in range(total_count):
     # We access each repo by index instead of using an iterator
     # in order to be able to retry the access in case we reach the search
     # rate limit.
     repo = call_rate_limit_aware(lambda: repo_search[i], api_type="search")
+
+    if repo.full_name in visited:
+        # repo was handled by adding old data because it has not changed
+        continue
 
     if i % 10 == 0:
         logging.info(f"{i} of {total_count} repos done.")
@@ -216,8 +224,10 @@ for i in range(total_count):
             if check_repo_exists(g, old_repo["full_name"])
             and old_repo["full_name"] not in visited
         ]
+        visited.update(old_repo["full_name"] for old_repo in older_repos)
         repos += older_repos
-        break
+        continue
+
     prev_skip = previous_skips.get(repo.full_name)
     if prev_skip is not None and prev_skip["updated_at"] == updated_at.timestamp():
         # keep old data, it hasn't changed

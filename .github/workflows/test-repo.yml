@@ -12,7 +12,7 @@ jobs:
     if: >-
       startsWith(github.event.comment.body, '/catalog test repo')
     steps:
-      - uses: actions/github.script@v5
+      - uses: actions/github-script@v5
         id: info
         env:
           BODY: ${{ github.event.comment.body }}

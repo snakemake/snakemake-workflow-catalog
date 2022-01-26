@@ -26,7 +26,7 @@ jobs:
       - name: Post action link
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{ github.event.issue.id }}
+          issue-number: ${{ github.event.issue.number }}
           body: |
             Testing catalog parsing for repository https://github.com/${{ steps.info.outputs.result.test_repo }}.
             Results: ${{ steps.info.outputs.result.action_link }}

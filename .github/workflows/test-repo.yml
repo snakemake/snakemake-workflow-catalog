@@ -21,7 +21,7 @@ jobs:
             const process = require("process")
             return {
               test_repo: process.env.BODY.match(/\/catalog test repo ([^\/]+\/[^\/]+)/)[1],
-              action_link: `https://github.com/snakemake/snakemake/runs/${context.runId}`
+              action_link: `https://github.com/snakemake/snakemake/actions/runs/${context.runId}`
             }
       - name: Post action link
         uses: peter-evans/create-or-update-comment@v1

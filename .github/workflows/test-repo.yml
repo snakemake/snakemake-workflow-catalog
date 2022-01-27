@@ -23,8 +23,8 @@ jobs:
 
             const test_repo = process.env.BODY.match(/\/catalog test repo ([^\/]+\/[^\/]+)/)[1]
 
-            if (core.rate_limit.remaining <= 0) {
-              const tosleep = core.rate_limit.reset - Date.now() + 5
+            if (github.rest.rate_limit.resources.core.remaining <= 0) {
+              const tosleep = github.rest.rate_limit.resources.core.reset - Date.now() + 5
               console.log(`Rate limit exceeded, waiting for ${tosleep} seconds.`)
               sleep(tosleep)
             }

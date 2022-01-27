@@ -334,7 +334,7 @@ if test_repo is None:
         visited = set(repo["full_name"] for repo in current_repos)
         old_repos = [
             repo
-            for repo_name, repo in old_repos
+            for repo_name, repo in old_repos.items()
             if (not check_existence or check_repo_exists(g, repo_name))
             and repo_name not in visited
         ]

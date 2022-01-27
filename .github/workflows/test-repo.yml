@@ -19,9 +19,17 @@ jobs:
         with:
           script: |
             const process = require("process")
+            const test_repo = process.env.BODY.match(/\/catalog test repo ([^\/]+\/[^\/]+)/)[1]
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Testing catalog parsing for repository https://github.com/${test_repo}.\nResults: https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/test-repo.yml`
+            })
+
             return {
-              test_repo: process.env.BODY.match(/\/catalog test repo ([^\/]+\/[^\/]+)/)[1],
-              action_link: `https://github.com/snakemake/snakemake/actions/runs/${process.env.GITHUB_RUN_ID}`
+              test_repo: test_repo
             }
       - name: Post action link
         uses: peter-evans/create-or-update-comment@v1

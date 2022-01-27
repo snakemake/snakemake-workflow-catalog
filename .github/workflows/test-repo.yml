@@ -23,13 +23,12 @@ jobs:
 
             const test_repo = process.env.BODY.match(/\/catalog test repo ([^\/]+\/[^\/]+)/)[1]
 
-            const rate_limit = github.rest.rateLimit.get()
-            console.log(rate_limit)
+            const rate_limit = await github.rest.rateLimit.get()
 
             if (rate_limit.core.remaining <= 0) {
               const tosleep = rate_limit.core.reset - Date.now() + 5
               console.log(`Rate limit exceeded, waiting for ${tosleep} seconds.`)
-              sleep(tosleep)
+              await sleep(tosleep)
             }
 
             github.rest.issues.createComment({

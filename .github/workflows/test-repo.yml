@@ -31,7 +31,7 @@ jobs:
                 console.log(Date.now() / 1000)
                 const tosleep = rate_limit.reset - (Date.now() / 1000) + 5
                 console.log(`Rate limit exceeded, waiting for ${tosleep} seconds.`)
-                await sleep(tosleep)
+                await sleep(tosleep * 1000)
               }
 
               github.rest.issues.createComment({

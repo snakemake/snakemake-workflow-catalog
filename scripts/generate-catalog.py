@@ -18,6 +18,8 @@ import yaml
 
 logging.basicConfig(level=logging.INFO)
 
+test_repo = os.environ.get("TEST_REPO")
+
 env = Environment(
     autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
 )
@@ -164,7 +166,6 @@ def check_file_exists(repo, file_name):
         return False
 
 
-test_repo = os.environ.get("TEST_REPO")
 if test_repo is not None:
     repo_search = [g.get_repo(test_repo)]
     total_count = 1
@@ -178,8 +179,6 @@ else:
 
 logging.info(f"Checking {total_count} repos.")
 
-visited = set()
-
 for i in range(total_count):
     # We access each repo by index instead of using an iterator
     # in order to be able to retry the access in case we reach the search
@@ -188,11 +187,6 @@ for i in range(total_count):
 
     if i % 10 == 0:
         logging.info(f"{i} of {total_count} repos done.")
-
-    if repo.full_name in visited:
-        # repo was handled by adding old data because it has not changed
-        logging.info(f"Using unchanged old data for {repo.full_name}.")
-        continue
 
     log_skip = lambda reason: logging.info(
         f"Skipped {repo.full_name} because {reason}."
@@ -218,15 +212,8 @@ for i in range(total_count):
     ):
         # keep old data, it hasn't changed
         logging.info("Remaining repos haven't changed, using old data.")
-        visited = set(repo["full_name"] for repo in repos)
-        older_repos = [
-            old_repo
-            for old_repo in previous_repos.values()
-            if check_repo_exists(g, old_repo["full_name"])
-            and old_repo["full_name"] not in visited
-        ]
-        visited.update(old_repo["full_name"] for old_repo in older_repos)
-        repos += older_repos
+        logging.info("Repo hasn't changed, keeping old data.")
+        repos.append(prev)
         continue
 
     prev_skip = previous_skips.get(repo.full_name)
@@ -313,12 +300,15 @@ for i in range(total_count):
             )
         except sp.CalledProcessError as e:
             linting = e.stderr.decode()
+            if test_repo is not None:
+                logging.error(linting)
 
         # formatting
         snakefiles = [workflow / "Snakefile"] + list(rules.glob("*.smk"))
+        fmt_mode = "--check" if test_repo is None else "--diff"
         try:
             sp.run(
-                ["snakefmt", "--check", "-v"] + snakefiles,
+                ["snakefmt", fmt_mode, "-v"] + snakefiles,
                 cwd=tmp,
                 check=True,
                 stderr=sp.STDOUT,
@@ -326,6 +316,8 @@ for i in range(total_count):
             )
         except sp.CalledProcessError as e:
             formatting = e.stdout.decode()
+            if test_repo is not None:
+                logging.error(formatting)
 
     call_rate_limit_aware(
         lambda: repos.append(
@@ -334,6 +326,25 @@ for i in range(total_count):
     )
 
 if test_repo is None:
+    # Now add all old repos that haven't been covered by the current search.
+    # This is necessary because Github limits search queries to 1000 items,
+    # and we always use the 1000 with the most recent changes.
+
+    def add_old(old_repos, current_repos, check_existence=True):
+        visited = set(repo["full_name"] for repo in current_repos)
+        old_repos = [
+            repo
+            for repo_name, repo in old_repos
+            if (not check_existence or check_repo_exists(g, repo_name))
+            and repo_name not in visited
+        ]
+        current_repos.extend(old_repos)
+
+    logging.info("Adding all old repos not covered by the current query.")
+    add_old(previous_repos, repos)
+    logging.info("Adding all old skipped repos not covered by the current query.")
+    add_old(previous_skips, skips)
+
     logging.info("Processed all available repositories.")
     if len(repos) < (len(previous_repos) / 2.0):
         raise RuntimeError(

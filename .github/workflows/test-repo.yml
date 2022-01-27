@@ -19,12 +19,12 @@ jobs:
         with:
           script: |
             const process = require("process")
-            const sleep = require('util').promisify(setTimeout);
+            const sleep = require('util').promisify(setTimeout)
 
             const test_repo = process.env.BODY.match(/\/catalog test repo ([^\/]+\/[^\/]+)/)[1]
 
-            if (const core.rate_limit.remaining <= 0) {
-              tosleep = core.rate_limit.reset - Date.now() + 5
+            if (core.rate_limit.remaining <= 0) {
+              const tosleep = core.rate_limit.reset - Date.now() + 5
               console.log(`Rate limit exceeded, waiting for ${tosleep} seconds.`)
               sleep(tosleep)
             }

@@ -23,23 +23,25 @@ jobs:
 
             const test_repo = process.env.BODY.match(/\/catalog test repo ([^\/]+\/[^\/]+)/)[1]
 
-            const rate_limit = (await github.rest.rateLimit.get()).data.rate
+            while (true) {
+              const rate_limit = (await github.rest.rateLimit.get()).data.rate
 
-            if (rate_limit.remaining <= 0) {
-              const tosleep = rate_limit.reset - Date.now() + 5
-              console.log(`Rate limit exceeded, waiting for ${tosleep} seconds.`)
-              await sleep(tosleep)
-            }
+              if (rate_limit.remaining <= 0) {
+                const tosleep = rate_limit.reset - Date.now() + 5
+                console.log(`Rate limit exceeded, waiting for ${tosleep} seconds.`)
+                await sleep(tosleep)
+              }
 
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `Testing catalog parsing for repository https://github.com/${test_repo}.\nResults: https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/test-repo.yml`
-            })
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `Testing catalog parsing for repository https://github.com/${test_repo}.\nResults: https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/test-repo.yml`
+              })
 
-            return {
-              test_repo: test_repo
+              return {
+                test_repo: test_repo
+              }
             }
       - name: Post action link
         uses: peter-evans/create-or-update-comment@v1

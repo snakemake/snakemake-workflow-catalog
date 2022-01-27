@@ -27,7 +27,9 @@ jobs:
               const rate_limit = (await github.rest.rateLimit.get()).data.rate
 
               if (rate_limit.remaining <= 0) {
-                const tosleep = rate_limit.reset - Date.now() + 5
+                console.log(rate_limit.reset)
+                console.log(Date.now() / 1000)
+                const tosleep = rate_limit.reset - (Date.now() / 1000) + 5
                 console.log(`Rate limit exceeded, waiting for ${tosleep} seconds.`)
                 await sleep(tosleep)
               }

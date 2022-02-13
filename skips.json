@@ -1,7 +1,15 @@
 [
   {
+    "full_name": "yenon118/AlleleCatalog",
+    "updated_at": 1639904436.0
+  },
+  {
     "full_name": "arbal/awesome-stars",
     "updated_at": 1642948158.0
+  },
+  {
+    "full_name": "liuzhenqi77/awesome-stars",
+    "updated_at": 1643306115.0
   },
   {
     "full_name": "nurgasemetey/github-stars",
@@ -14,6 +22,38 @@
   {
     "full_name": "covid19-data/covid19-data",
     "updated_at": 1641860363.0
+  },
+  {
+    "full_name": "mrmattuschka/DeePiCt",
+    "updated_at": 1644346993.0
+  },
+  {
+    "full_name": "cbg-ethz/pareg",
+    "updated_at": 1643385853.0
+  },
+  {
+    "full_name": "EthicalML/awesome-production-machine-learning",
+    "updated_at": 1644723583.0
+  },
+  {
+    "full_name": "mdozmorov/HiC_tools",
+    "updated_at": 1644551074.0
+  },
+  {
+    "full_name": "jubbon/my-awesome-stars",
+    "updated_at": 1641806014.0
+  },
+  {
+    "full_name": "snakemake/snakemake-workflow-catalog",
+    "updated_at": 1643230966.0
+  },
+  {
+    "full_name": "spack/spack-stack-catalog",
+    "updated_at": 1641798865.0
+  },
+  {
+    "full_name": "astrogewgaw/stars",
+    "updated_at": 1641793129.0
   },
   {
     "full_name": "qpmnguyen/infant_metabolome_microbiome",
@@ -38,10 +78,6 @@
   {
     "full_name": "truwl/capanno",
     "updated_at": 1637704067.0
-  },
-  {
-    "full_name": "cbg-ethz/pareg",
-    "updated_at": 1643385853.0
   },
   {
     "full_name": "USGS-R/river-dl",
@@ -73,7 +109,7 @@
   },
   {
     "full_name": "megalinter/megalinter",
-    "updated_at": 1644637345.0
+    "updated_at": 1644727651.0
   },
   {
     "full_name": "seandavi/awesome-single-cell",
@@ -108,28 +144,12 @@
     "updated_at": 1641826182.0
   },
   {
-    "full_name": "jubbon/my-awesome-stars",
-    "updated_at": 1641806014.0
-  },
-  {
     "full_name": "Nucleomics-VIB/InSilico_PCR",
     "updated_at": 1644327330.0
   },
   {
-    "full_name": "snakemake/snakemake-workflow-catalog",
-    "updated_at": 1643230966.0
-  },
-  {
     "full_name": "iRNA-COSI/APAeval",
     "updated_at": 1644617265.0
-  },
-  {
-    "full_name": "spack/spack-stack-catalog",
-    "updated_at": 1641798865.0
-  },
-  {
-    "full_name": "astrogewgaw/stars",
-    "updated_at": 1641793129.0
   },
   {
     "full_name": "charlesfoster/covid-illumina-snakemake",
@@ -209,7 +229,7 @@
   },
   {
     "full_name": "github/super-linter",
-    "updated_at": 1644636484.0
+    "updated_at": 1644727300.0
   },
   {
     "full_name": "charlesfoster/ont-analysis-toolkit",
@@ -324,10 +344,6 @@
     "updated_at": 1638912967.0
   },
   {
-    "full_name": "EthicalML/awesome-production-machine-learning",
-    "updated_at": 1644629564.0
-  },
-  {
     "full_name": "njdbickhart/Themis-ASM",
     "updated_at": 1640210053.0
   },
@@ -380,10 +396,6 @@
     "updated_at": 1644378364.0
   },
   {
-    "full_name": "liuzhenqi77/awesome-stars",
-    "updated_at": 1643306115.0
-  },
-  {
     "full_name": "straightlab/charseq-pipelines",
     "updated_at": 1644103774.0
   },
@@ -432,6 +444,54 @@
     "updated_at": 1641477481.0
   },
   {
+    "full_name": "cran/mikropml",
+    "updated_at": 1643945268.0
+  },
+  {
+    "full_name": "vector-engineering/covidcg",
+    "updated_at": 1641555266.0
+  },
+  {
+    "full_name": "ravinpoudel/ravinpoudel",
+    "updated_at": 1643927278.0
+  },
+  {
+    "full_name": "NordicESMhub/RELIANCE",
+    "updated_at": 1640177479.0
+  },
+  {
+    "full_name": "OSeMOSYS/osemosys_global",
+    "updated_at": 1641487694.0
+  },
+  {
+    "full_name": "bioforensics/yeat",
+    "updated_at": 1638922607.0
+  },
+  {
+    "full_name": "frattalab/rna_seq_snakemake",
+    "updated_at": 1643885690.0
+  },
+  {
+    "full_name": "dieterich-lab/MiMB_JACUSA2_chapter",
+    "updated_at": 1643641163.0
+  },
+  {
+    "full_name": "dohlee/chromoformer",
+    "updated_at": 1641392443.0
+  },
+  {
+    "full_name": "snakemake-workflows/cookiecutter-snakemake-workflow",
+    "updated_at": 1643826149.0
+  },
+  {
+    "full_name": "snakemake-workflows/docs",
+    "updated_at": 1644208578.0
+  },
+  {
+    "full_name": "j23414/usingnextstrain",
+    "updated_at": 1639442636.0
+  },
+  {
     "full_name": "kircherlab/TF_enrichment_workflow",
     "updated_at": 1637835288.0
   },
@@ -454,46 +514,6 @@
   {
     "full_name": "rl-institut/workshop",
     "updated_at": 1643797967.0
-  },
-  {
-    "full_name": "EthanHolleman/VR-Cas9",
-    "updated_at": 1643739262.0
-  },
-  {
-    "full_name": "RajLabMSSM/RNA-pipelines",
-    "updated_at": 1641486064.0
-  },
-  {
-    "full_name": "medema-group/BiG-MAP",
-    "updated_at": 1642670915.0
-  },
-  {
-    "full_name": "frattalab/splicing",
-    "updated_at": 1640610938.0
-  },
-  {
-    "full_name": "mrvollger/assembly_workflows",
-    "updated_at": 1637289973.0
-  },
-  {
-    "full_name": "Bioinfo-skills-2022-CLIMB-VM/Getting-things-done-with-Conda-and-Snakemake",
-    "updated_at": 1643638602.0
-  },
-  {
-    "full_name": "LUMC/pytest-workflow",
-    "updated_at": 1644266980.0
-  },
-  {
-    "full_name": "mathewhorne/industry_analysis",
-    "updated_at": 1643589270.0
-  },
-  {
-    "full_name": "TeamMacLean/split_and_count",
-    "updated_at": 1642067010.0
-  },
-  {
-    "full_name": "opentargets/genetics-v2g-data",
-    "updated_at": 1643576126.0
   },
   {
     "full_name": "EthanHolleman/VR-Cas9",
@@ -614,10 +634,6 @@
   {
     "full_name": "akhanf/snakedwi",
     "updated_at": 1634158277.0
-  },
-  {
-    "full_name": "yenon118/AlleleCatalog",
-    "updated_at": 1639904436.0
   },
   {
     "full_name": "epifluidlab/finaledb_workflow",
@@ -794,10 +810,6 @@
   {
     "full_name": "populationgenomics/fewgenomes",
     "updated_at": 1641857976.0
-  },
-  {
-    "full_name": "mdozmorov/HiC_tools",
-    "updated_at": 1644551074.0
   },
   {
     "full_name": "dabble-of-devops-bioanalyze/terraform-aws-eks-eksctl",
@@ -1505,7 +1517,7 @@
   },
   {
     "full_name": "pditommaso/awesome-pipeline",
-    "updated_at": 1644640979.0
+    "updated_at": 1644717721.0
   },
   {
     "full_name": "RasmussenLab/phamb",
@@ -1661,7 +1673,7 @@
   },
   {
     "full_name": "usnistgov/cmrg-benchmarkset-manuscript",
-    "updated_at": 1644330160.0
+    "updated_at": 1644660001.0
   },
   {
     "full_name": "zqfang/snakeflow",
@@ -2042,54 +2054,6 @@
   {
     "full_name": "mardzix/single-cell-CUT-Tag-standard",
     "updated_at": 1632138913.0
-  },
-  {
-    "full_name": "cran/mikropml",
-    "updated_at": 1643945268.0
-  },
-  {
-    "full_name": "vector-engineering/covidcg",
-    "updated_at": 1641555266.0
-  },
-  {
-    "full_name": "ravinpoudel/ravinpoudel",
-    "updated_at": 1643927278.0
-  },
-  {
-    "full_name": "NordicESMhub/RELIANCE",
-    "updated_at": 1640177479.0
-  },
-  {
-    "full_name": "OSeMOSYS/osemosys_global",
-    "updated_at": 1641487694.0
-  },
-  {
-    "full_name": "bioforensics/yeat",
-    "updated_at": 1638922607.0
-  },
-  {
-    "full_name": "frattalab/rna_seq_snakemake",
-    "updated_at": 1643885690.0
-  },
-  {
-    "full_name": "dieterich-lab/MiMB_JACUSA2_chapter",
-    "updated_at": 1643641163.0
-  },
-  {
-    "full_name": "dohlee/chromoformer",
-    "updated_at": 1641392443.0
-  },
-  {
-    "full_name": "snakemake-workflows/cookiecutter-snakemake-workflow",
-    "updated_at": 1643826149.0
-  },
-  {
-    "full_name": "snakemake-workflows/docs",
-    "updated_at": 1644208578.0
-  },
-  {
-    "full_name": "j23414/usingnextstrain",
-    "updated_at": 1639442636.0
   },
   {
     "full_name": "shaunchuah/shaunchuah",

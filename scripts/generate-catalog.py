@@ -11,6 +11,7 @@ import tarfile
 
 from jinja2 import Environment
 from github import Github
+from github.ContentFile import ContentFile
 from github.GithubException import UnknownObjectException, RateLimitExceededException
 import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -235,8 +236,36 @@ for i in range(total_count):
         continue
 
     if check_file_exists(repo, rules):
-        rule_contents = call_rate_limit_aware(lambda: repo.get_contents(rules))
-        if not any(rule_file.name.endswith(".smk") for rule_file in rule_contents):
+        skip_rules = False
+        skip_repo = False
+        while True:
+            rule_contents = call_rate_limit_aware(lambda: repo.get_contents(rules))
+            if isinstance(rule_contents, ContentFile):
+                # not a directory
+                if rule_contents.type == "symlink":
+                    rules = os.path.normpath(
+                        rules + "/" + rule_contents.raw_data["target"]
+                    )
+                    if check_file_exists(repo, rules):
+                        logging.info("following symlink to %s", rules)
+                    else:
+                        log_skip(
+                            "of invalid symlink encountered while searching for rules folder"
+                        )
+                        skip_repo = True
+                        break
+                else:
+                    # rules folder is neither a dir nor a symlink, ignore
+                    skip_rules = True
+                    break
+            else:
+                break
+        if skip_repo:
+            register_skip(repo)
+            continue
+        if not skip_rules and not any(
+            rule_file.name.endswith(".smk") for rule_file in rule_contents
+        ):
             log_skip("rule modules are not using .smk extension")
             register_skip(repo)
             continue

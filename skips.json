@@ -1,15 +1,59 @@
 [
   {
+    "full_name": "snakemake/snakemake-workflow-catalog",
+    "updated_at": 1646104201.0
+  },
+  {
+    "full_name": "akhanf/snakebids",
+    "updated_at": 1658159253.0
+  },
+  {
+    "full_name": "mccoy-devs/mccoy",
+    "updated_at": 1658883256.0
+  },
+  {
+    "full_name": "RasmussenLab/vamb",
+    "updated_at": 1659955306.0
+  },
+  {
+    "full_name": "sapporo-wes/sapporo-service",
+    "updated_at": 1657084388.0
+  },
+  {
+    "full_name": "cvn001/transflow",
+    "updated_at": 1651816371.0
+  },
+  {
     "full_name": "yoshihikosuzuki/snakeproc",
     "updated_at": 1659957645.0
   },
   {
-    "full_name": "beardymcjohnface/Snaketool-lite",
-    "updated_at": 1658922448.0
+    "full_name": "a-h-b/binny",
+    "updated_at": 1654696002.0
+  },
+  {
+    "full_name": "lfdelzam/Euka_RNA_Input_POGENOM",
+    "updated_at": 1655369114.0
   },
   {
     "full_name": "gbouras13/plassembler",
     "updated_at": 1659663596.0
+  },
+  {
+    "full_name": "spack/spack-stack-catalog",
+    "updated_at": 1641798865.0
+  },
+  {
+    "full_name": "astrogewgaw/stars",
+    "updated_at": 1648059909.0
+  },
+  {
+    "full_name": "oxsecurity/megalinter",
+    "updated_at": 1659969473.0
+  },
+  {
+    "full_name": "beardymcjohnface/Snaketool-lite",
+    "updated_at": 1658922448.0
   },
   {
     "full_name": "nurgasemetey/github-stars",
@@ -73,15 +117,11 @@
   },
   {
     "full_name": "github/super-linter",
-    "updated_at": 1659999344.0
+    "updated_at": 1660049136.0
   },
   {
     "full_name": "metagenome-atlas/atlas",
     "updated_at": 1659965223.0
-  },
-  {
-    "full_name": "a-h-b/binny",
-    "updated_at": 1654696002.0
   },
   {
     "full_name": "nextstrain/monkeypox",
@@ -90,10 +130,6 @@
   {
     "full_name": "cmayer/MitoGeneExtractor",
     "updated_at": 1648427497.0
-  },
-  {
-    "full_name": "oxsecurity/megalinter",
-    "updated_at": 1659969473.0
   },
   {
     "full_name": "PBGLMichaelHall/Oryza_Satvia_Snakemake",
@@ -108,16 +144,8 @@
     "updated_at": 1640026630.0
   },
   {
-    "full_name": "spack/spack-stack-catalog",
-    "updated_at": 1641798865.0
-  },
-  {
     "full_name": "singularityhub/singularity-catalog",
     "updated_at": 1657420640.0
-  },
-  {
-    "full_name": "astrogewgaw/stars",
-    "updated_at": 1648059909.0
   },
   {
     "full_name": "ndwarshuis/.emacs.d",
@@ -148,10 +176,6 @@
     "updated_at": 1659939200.0
   },
   {
-    "full_name": "snakemake/snakemake-workflow-catalog",
-    "updated_at": 1646104201.0
-  },
-  {
     "full_name": "Jyyin333/DDTools",
     "updated_at": 1649818936.0
   },
@@ -169,7 +193,7 @@
   },
   {
     "full_name": "EthicalML/awesome-production-machine-learning",
-    "updated_at": 1660010270.0
+    "updated_at": 1660055727.0
   },
   {
     "full_name": "jinghuazhao/Omics-analysis",
@@ -344,12 +368,8 @@
     "updated_at": 1638910670.0
   },
   {
-    "full_name": "akhanf/snakebids",
-    "updated_at": 1658159253.0
-  },
-  {
     "full_name": "pditommaso/awesome-pipeline",
-    "updated_at": 1660013552.0
+    "updated_at": 1660051105.0
   },
   {
     "full_name": "Tuks-ICMM/Pharmacogenetic-Analysis-Pipeline",
@@ -366,10 +386,6 @@
   {
     "full_name": "seandavi/awesome-single-cell",
     "updated_at": 1659795827.0
-  },
-  {
-    "full_name": "RasmussenLab/vamb",
-    "updated_at": 1659955306.0
   },
   {
     "full_name": "hpc-workshops/carpentrycon-sprint",
@@ -508,10 +524,6 @@
     "updated_at": 1656551033.0
   },
   {
-    "full_name": "mccoy-devs/mccoy",
-    "updated_at": 1658883256.0
-  },
-  {
     "full_name": "gumi-bd/freebayes-p",
     "updated_at": 1658860922.0
   },
@@ -617,7 +629,7 @@
   },
   {
     "full_name": "danielecook/Awesome-Bioinformatics",
-    "updated_at": 1660016102.0
+    "updated_at": 1660022540.0
   },
   {
     "full_name": "jmeppley/veime_workflows",
@@ -976,16 +988,8 @@
     "updated_at": 1657119922.0
   },
   {
-    "full_name": "sapporo-wes/sapporo-service",
-    "updated_at": 1657084388.0
-  },
-  {
     "full_name": "SilasK/Krak",
     "updated_at": 1657010033.0
-  },
-  {
-    "full_name": "lfdelzam/Euka_RNA_Input_POGENOM",
-    "updated_at": 1655369114.0
   },
   {
     "full_name": "dib-lab/2022-dominating-set-differential-abundance-example",
@@ -1077,7 +1081,7 @@
   },
   {
     "full_name": "sequana/mapper",
-    "updated_at": 1656435504.0
+    "updated_at": 1660050205.0
   },
   {
     "full_name": "metagenlab/diag_pipelines",
@@ -1089,7 +1093,7 @@
   },
   {
     "full_name": "dohlee/chromoformer",
-    "updated_at": 1660021305.0
+    "updated_at": 1660024064.0
   },
   {
     "full_name": "scbaca/chip_imputation",
@@ -1481,7 +1485,7 @@
   },
   {
     "full_name": "4dn-dcic/tibanna",
-    "updated_at": 1659800011.0
+    "updated_at": 1660030835.0
   },
   {
     "full_name": "elixir-cloud-aai/demo-workflows",
@@ -2190,10 +2194,6 @@
   {
     "full_name": "julienlag/LyRic",
     "updated_at": 1641408316.0
-  },
-  {
-    "full_name": "cvn001/transflow",
-    "updated_at": 1651816371.0
   },
   {
     "full_name": "DMH-dutte/transcriptomic_pipeline",

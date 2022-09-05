@@ -1,7 +1,7 @@
 [
   {
-    "full_name": "liuzhenqi77/awesome-stars",
-    "updated_at": 1643306115.0
+    "full_name": "ncc-ccat-gap/nanopore_workflow_scripts",
+    "updated_at": 1640065983.0
   },
   {
     "full_name": "saforem2/awesome-stars",
@@ -12,8 +12,64 @@
     "updated_at": 1641865356.0
   },
   {
+    "full_name": "Kmanjor/GNRS",
+    "updated_at": 1662341237.0
+  },
+  {
+    "full_name": "hjoliver/cylc-filedriven-example",
+    "updated_at": 1662008884.0
+  },
+  {
     "full_name": "covid19-data/covid19-data",
     "updated_at": 1641860363.0
+  },
+  {
+    "full_name": "Aurametrix/Alg",
+    "updated_at": 1641869405.0
+  },
+  {
+    "full_name": "linsalrob/atavide",
+    "updated_at": 1655773927.0
+  },
+  {
+    "full_name": "oxsecurity/megalinter",
+    "updated_at": 1662314907.0
+  },
+  {
+    "full_name": "lirepo/MLIA",
+    "updated_at": 1662316578.0
+  },
+  {
+    "full_name": "ndwarshuis/.emacs.d",
+    "updated_at": 1655859022.0
+  },
+  {
+    "full_name": "github/super-linter",
+    "updated_at": 1662336805.0
+  },
+  {
+    "full_name": "paulstothard/helpful_links",
+    "updated_at": 1657828051.0
+  },
+  {
+    "full_name": "INM-6/cobrawap",
+    "updated_at": 1655737884.0
+  },
+  {
+    "full_name": "ccwang002/2022Talk-snakemake",
+    "updated_at": 1660494346.0
+  },
+  {
+    "full_name": "snakemake/snakemake-workflow-catalog",
+    "updated_at": 1661942707.0
+  },
+  {
+    "full_name": "spack/spack-stack-catalog",
+    "updated_at": 1641798865.0
+  },
+  {
+    "full_name": "liuzhenqi77/awesome-stars",
+    "updated_at": 1643306115.0
   },
   {
     "full_name": "cpalmer718/snakemake_unit_tests",
@@ -36,40 +92,16 @@
     "updated_at": 1651104530.0
   },
   {
-    "full_name": "oxsecurity/megalinter",
-    "updated_at": 1662225942.0
-  },
-  {
-    "full_name": "github/super-linter",
-    "updated_at": 1662266885.0
-  },
-  {
     "full_name": "EthicalML/awesome-production-machine-learning",
-    "updated_at": 1662239823.0
-  },
-  {
-    "full_name": "snakemake/snakemake-workflow-catalog",
-    "updated_at": 1661942707.0
-  },
-  {
-    "full_name": "spack/spack-stack-catalog",
-    "updated_at": 1641798865.0
+    "updated_at": 1662345554.0
   },
   {
     "full_name": "adoebley/Griffin",
     "updated_at": 1646321923.0
   },
   {
-    "full_name": "Aurametrix/Alg",
-    "updated_at": 1641869405.0
-  },
-  {
     "full_name": "Yixf-Education/killer_tools",
     "updated_at": 1662093854.0
-  },
-  {
-    "full_name": "linsalrob/atavide",
-    "updated_at": 1655773927.0
   },
   {
     "full_name": "fryerlab/LPS_pigs",
@@ -120,14 +152,6 @@
     "updated_at": 1660030835.0
   },
   {
-    "full_name": "hjoliver/cylc-filedriven-example",
-    "updated_at": 1662008884.0
-  },
-  {
-    "full_name": "ccwang002/2022Talk-snakemake",
-    "updated_at": 1660494346.0
-  },
-  {
     "full_name": "mckellardw/DWM_utils",
     "updated_at": 1662048024.0
   },
@@ -142,10 +166,6 @@
   {
     "full_name": "JimmyNkaiwuatei/snakemake",
     "updated_at": 1662098105.0
-  },
-  {
-    "full_name": "ncc-ccat-gap/nanopore_workflow_scripts",
-    "updated_at": 1640065983.0
   },
   {
     "full_name": "carpentries-incubator/hpc-workflows",
@@ -252,10 +272,6 @@
     "updated_at": 1658791047.0
   },
   {
-    "full_name": "Kmanjor/GNRS",
-    "updated_at": 1659080398.0
-  },
-  {
     "full_name": "thdurand4/PodiumASM",
     "updated_at": 1656936628.0
   },
@@ -360,10 +376,6 @@
     "updated_at": 1660924228.0
   },
   {
-    "full_name": "ndwarshuis/.emacs.d",
-    "updated_at": 1655859022.0
-  },
-  {
     "full_name": "yanhui09/Kamp",
     "updated_at": 1661266307.0
   },
@@ -382,10 +394,6 @@
   {
     "full_name": "Virginiaxu/DeepMosaic",
     "updated_at": 1656058935.0
-  },
-  {
-    "full_name": "INM-6/cobrawap",
-    "updated_at": 1655737884.0
   },
   {
     "full_name": "UPHL-BioNGS/Nextstrain_Build",
@@ -453,7 +461,7 @@
   },
   {
     "full_name": "pditommaso/awesome-pipeline",
-    "updated_at": 1662222902.0
+    "updated_at": 1662353704.0
   },
   {
     "full_name": "jinghuazhao/Caprion",
@@ -533,7 +541,7 @@
   },
   {
     "full_name": "crazyhottommy/getting-started-with-genomics-tools-and-resources",
-    "updated_at": 1661875450.0
+    "updated_at": 1662277650.0
   },
   {
     "full_name": "sib-swiss/training-collection",
@@ -653,15 +661,11 @@
   },
   {
     "full_name": "seandavi/awesome-single-cell",
-    "updated_at": 1662209859.0
+    "updated_at": 1662347433.0
   },
   {
     "full_name": "nextstrain/rsv-2",
     "updated_at": 1658321143.0
-  },
-  {
-    "full_name": "paulstothard/helpful_links",
-    "updated_at": 1657828051.0
   },
   {
     "full_name": "pvandyken/snakeboost",
@@ -1093,7 +1097,7 @@
   },
   {
     "full_name": "danielecook/Awesome-Bioinformatics",
-    "updated_at": 1662239342.0
+    "updated_at": 1662354527.0
   },
   {
     "full_name": "ruppinlab/CSI-Microbes-identification",
@@ -1177,7 +1181,7 @@
   },
   {
     "full_name": "tufts-ml/time_series_prediction",
-    "updated_at": 1662138661.0
+    "updated_at": 1662277258.0
   },
   {
     "full_name": "nrminor/iWES-genotyper",
@@ -1346,6 +1350,10 @@
   {
     "full_name": "cbg-ethz/pareg",
     "updated_at": 1657549122.0
+  },
+  {
+    "full_name": "BeeCSI-Microbiome/R_analyses",
+    "updated_at": 1654087219.0
   },
   {
     "full_name": "BeeCSI-Microbiome/R_analyses",
@@ -1693,7 +1701,7 @@
   },
   {
     "full_name": "gabywald/BioSilico",
-    "updated_at": 1646686484.0
+    "updated_at": 1662347670.0
   },
   {
     "full_name": "ZarulHanifah/snakemake_nanopore_bacteria_WGS",
@@ -1816,10 +1824,6 @@
     "updated_at": 1661985449.0
   },
   {
-    "full_name": "omicscodeathon/gNBS_explore",
-    "updated_at": 1647806530.0
-  },
-  {
     "full_name": "USGS-R/river-dl",
     "updated_at": 1656765263.0
   },
@@ -1849,7 +1853,7 @@
   },
   {
     "full_name": "loosolab/TOBIAS",
-    "updated_at": 1660930179.0
+    "updated_at": 1662347526.0
   },
   {
     "full_name": "PollockLaboratory/AnVir",

@@ -1,5 +1,117 @@
 [
   {
+    "full_name": "daiuc/SpliFi",
+    "updated_at": 1662995562.0
+  },
+  {
+    "full_name": "vector-engineering/covidcg",
+    "updated_at": 1666287569.0
+  },
+  {
+    "full_name": "Vini2/phables",
+    "updated_at": 1668039425.0
+  },
+  {
+    "full_name": "saforem2/awesome-stars",
+    "updated_at": 1661635348.0
+  },
+  {
+    "full_name": "nurgasemetey/github-stars",
+    "updated_at": 1641865356.0
+  },
+  {
+    "full_name": "Aurametrix/Alg",
+    "updated_at": 1641869405.0
+  },
+  {
+    "full_name": "oxsecurity/megalinter",
+    "updated_at": 1668128189.0
+  },
+  {
+    "full_name": "covid19-data/covid19-data",
+    "updated_at": 1667608766.0
+  },
+  {
+    "full_name": "akhanf/snakebids",
+    "updated_at": 1663069986.0
+  },
+  {
+    "full_name": "charmoniumQ/wf-reg-test",
+    "updated_at": 1664573525.0
+  },
+  {
+    "full_name": "anwala/general-language-behavior",
+    "updated_at": 1667925061.0
+  },
+  {
+    "full_name": "simonlabcode/bakR",
+    "updated_at": 1665500811.0
+  },
+  {
+    "full_name": "vhaghani26/rocketchip",
+    "updated_at": 1667857644.0
+  },
+  {
+    "full_name": "USGS-R/river-dl",
+    "updated_at": 1667909567.0
+  },
+  {
+    "full_name": "nismod/infra-risk-vis",
+    "updated_at": 1667847345.0
+  },
+  {
+    "full_name": "vdblab/vdblab-pipelines",
+    "updated_at": 1665700999.0
+  },
+  {
+    "full_name": "Microbial-Ecology-Group/AMRplusplus",
+    "updated_at": 1662832375.0
+  },
+  {
+    "full_name": "c-scale-community/use-case-hisea",
+    "updated_at": 1663161019.0
+  },
+  {
+    "full_name": "metagenome-atlas/atlas",
+    "updated_at": 1668003258.0
+  },
+  {
+    "full_name": "genxnetwork/grape",
+    "updated_at": 1665619189.0
+  },
+  {
+    "full_name": "johnpatramanis/Proteomic_Pipeline",
+    "updated_at": 1641826001.0
+  },
+  {
+    "full_name": "simonmoulds/uk-decadal-flood-prediction",
+    "updated_at": 1663171170.0
+  },
+  {
+    "full_name": "snek5000/snek5000",
+    "updated_at": 1668000264.0
+  },
+  {
+    "full_name": "github/super-linter",
+    "updated_at": 1668105825.0
+  },
+  {
+    "full_name": "snakemake/snakemake-workflow-catalog",
+    "updated_at": 1667466752.0
+  },
+  {
+    "full_name": "EthicalML/awesome-production-machine-learning",
+    "updated_at": 1668130874.0
+  },
+  {
+    "full_name": "spack/spack-stack-catalog",
+    "updated_at": 1641798865.0
+  },
+  {
+    "full_name": "mbbu/Bioinformatics-Unit-Training",
+    "updated_at": 1663240942.0
+  },
+  {
     "full_name": "lawrence-ip/cheatsheet",
     "updated_at": 1668051514.0
   },
@@ -8,24 +120,12 @@
     "updated_at": 1667551379.0
   },
   {
-    "full_name": "nurgasemetey/github-stars",
-    "updated_at": 1641865356.0
-  },
-  {
     "full_name": "mckellardw/DWM_utils",
     "updated_at": 1665686971.0
   },
   {
-    "full_name": "vector-engineering/covidcg",
-    "updated_at": 1666287569.0
-  },
-  {
-    "full_name": "covid19-data/covid19-data",
-    "updated_at": 1667608766.0
-  },
-  {
     "full_name": "danielecook/Awesome-Bioinformatics",
-    "updated_at": 1668041654.0
+    "updated_at": 1668088175.0
   },
   {
     "full_name": "MikeLippincott/LRCAST",
@@ -38,18 +138,6 @@
   {
     "full_name": "vjcitn/Rcollectl",
     "updated_at": 1665481678.0
-  },
-  {
-    "full_name": "snek5000/snek5000",
-    "updated_at": 1668000264.0
-  },
-  {
-    "full_name": "oxsecurity/megalinter",
-    "updated_at": 1668037097.0
-  },
-  {
-    "full_name": "vdblab/vdblab-pipelines",
-    "updated_at": 1665700999.0
   },
   {
     "full_name": "ncbi/sars2variantcalling",
@@ -68,16 +156,8 @@
     "updated_at": 1666872479.0
   },
   {
-    "full_name": "EthicalML/awesome-production-machine-learning",
-    "updated_at": 1668041937.0
-  },
-  {
     "full_name": "carpentries-incubator/snakemake-novice-bioinformatics",
     "updated_at": 1665850690.0
-  },
-  {
-    "full_name": "simonmoulds/uk-decadal-flood-prediction",
-    "updated_at": 1663171170.0
   },
   {
     "full_name": "pvandyken/kslurm",
@@ -100,20 +180,8 @@
     "updated_at": 1668005084.0
   },
   {
-    "full_name": "Microbial-Ecology-Group/AMRplusplus",
-    "updated_at": 1662832375.0
-  },
-  {
-    "full_name": "metagenome-atlas/atlas",
-    "updated_at": 1668003258.0
-  },
-  {
     "full_name": "TAGC-NetworkBiology/mimicINT",
     "updated_at": 1667607336.0
-  },
-  {
-    "full_name": "nismod/infra-risk-vis",
-    "updated_at": 1667847345.0
   },
   {
     "full_name": "mirand863/hiclass",
@@ -136,10 +204,6 @@
     "updated_at": 1636063252.0
   },
   {
-    "full_name": "snakemake/snakemake-workflow-catalog",
-    "updated_at": 1667466752.0
-  },
-  {
     "full_name": "KMA-Aarhus/AssembleQC",
     "updated_at": 1657618072.0
   },
@@ -148,24 +212,12 @@
     "updated_at": 1667916208.0
   },
   {
-    "full_name": "spack/spack-stack-catalog",
-    "updated_at": 1641798865.0
-  },
-  {
     "full_name": "jahaltom/RIA",
     "updated_at": 1645029635.0
   },
   {
-    "full_name": "saforem2/awesome-stars",
-    "updated_at": 1661635348.0
-  },
-  {
     "full_name": "nextstrain/ncov-ingest",
     "updated_at": 1667521748.0
-  },
-  {
-    "full_name": "vhaghani26/rocketchip",
-    "updated_at": 1667857644.0
   },
   {
     "full_name": "dholab/Mecklenburg-et-al-2022",
@@ -264,16 +316,8 @@
     "updated_at": 1667477910.0
   },
   {
-    "full_name": "github/super-linter",
-    "updated_at": 1668035116.0
-  },
-  {
-    "full_name": "c-scale-community/use-case-hisea",
-    "updated_at": 1663161019.0
-  },
-  {
     "full_name": "hippolyte456/Hackathon_NGS_2022",
-    "updated_at": 1667554278.0
+    "updated_at": 1668091666.0
   },
   {
     "full_name": "sapporo-wes/sapporo",
@@ -336,16 +380,8 @@
     "updated_at": 1665297052.0
   },
   {
-    "full_name": "Aurametrix/Alg",
-    "updated_at": 1641869405.0
-  },
-  {
     "full_name": "sequana/rnaseq",
     "updated_at": 1667595442.0
-  },
-  {
-    "full_name": "USGS-R/river-dl",
-    "updated_at": 1667909567.0
   },
   {
     "full_name": "SchlossLab/mikropml",
@@ -381,7 +417,7 @@
   },
   {
     "full_name": "nextstrain/monkeypox",
-    "updated_at": 1667884563.0
+    "updated_at": 1668104104.0
   },
   {
     "full_name": "lzholl/coverage_seqcontent_pipeline",
@@ -390,10 +426,6 @@
   {
     "full_name": "mckellardw/STRS",
     "updated_at": 1667843975.0
-  },
-  {
-    "full_name": "charmoniumQ/wf-reg-test",
-    "updated_at": 1664573525.0
   },
   {
     "full_name": "shubham1637/DIAlignR",
@@ -418,10 +450,6 @@
   {
     "full_name": "STRIDES/NIHCloudLabAWS",
     "updated_at": 1656050796.0
-  },
-  {
-    "full_name": "johnpatramanis/Proteomic_Pipeline",
-    "updated_at": 1641826001.0
   },
   {
     "full_name": "timyers/r-learning-resources-for-genomics",
@@ -452,10 +480,6 @@
     "updated_at": 1666924656.0
   },
   {
-    "full_name": "daiuc/SpliFi",
-    "updated_at": 1662995562.0
-  },
-  {
     "full_name": "Wolfffff/exp_var",
     "updated_at": 1667227722.0
   },
@@ -478,10 +502,6 @@
   {
     "full_name": "rhysnewell/aviary",
     "updated_at": 1667225127.0
-  },
-  {
-    "full_name": "anwala/general-language-behavior",
-    "updated_at": 1667925061.0
   },
   {
     "full_name": "neherlab/nextclade_data_workflows",
@@ -529,7 +549,7 @@
   },
   {
     "full_name": "marbl/verkko",
-    "updated_at": 1667997851.0
+    "updated_at": 1668118152.0
   },
   {
     "full_name": "ETH-NEXUS/scAmpi_single_cell_RNA",
@@ -537,7 +557,7 @@
   },
   {
     "full_name": "Clinical-Genomics/BALSAMIC",
-    "updated_at": 1667406761.0
+    "updated_at": 1668136715.0
   },
   {
     "full_name": "BDI-pathogens/ShiverCovid",
@@ -612,20 +632,16 @@
     "updated_at": 1665737593.0
   },
   {
-    "full_name": "akhanf/snakebids",
-    "updated_at": 1663069986.0
-  },
-  {
     "full_name": "CGI-stLFR/CGI_WGS_Pipeline",
     "updated_at": 1666895985.0
   },
   {
     "full_name": "nextflow-io/awesome-nextflow",
-    "updated_at": 1667757551.0
+    "updated_at": 1668112720.0
   },
   {
     "full_name": "pditommaso/awesome-pipeline",
-    "updated_at": 1668057153.0
+    "updated_at": 1668092131.0
   },
   {
     "full_name": "countdigi/ref",
@@ -832,10 +848,6 @@
     "updated_at": 1667709841.0
   },
   {
-    "full_name": "simonlabcode/bakR",
-    "updated_at": 1665500811.0
-  },
-  {
     "full_name": "Wang-Cankun/Wang-Cankun",
     "updated_at": 1633504247.0
   },
@@ -949,7 +961,7 @@
   },
   {
     "full_name": "scipipe/scipipe",
-    "updated_at": 1667986628.0
+    "updated_at": 1668119420.0
   },
   {
     "full_name": "NRLBM/assembly",
@@ -1588,10 +1600,6 @@
     "updated_at": 1662543947.0
   },
   {
-    "full_name": "mbbu/Bioinformatics-Unit-Training",
-    "updated_at": 1663240942.0
-  },
-  {
     "full_name": "wlchin/pycdr",
     "updated_at": 1641895627.0
   },
@@ -2142,10 +2150,6 @@
   {
     "full_name": "dark-tulip/docker-course-stepik",
     "updated_at": 1657809008.0
-  },
-  {
-    "full_name": "genxnetwork/grape",
-    "updated_at": 1665619189.0
   },
   {
     "full_name": "dvespasiani/atac-seq-preprocessing",

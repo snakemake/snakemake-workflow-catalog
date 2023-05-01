@@ -1,51 +1,91 @@
 [
   {
+    "full_name": "RvSpectML/RISE_NEID_pipeline",
+    "updated_at": 1681876123.0
+  },
+  {
+    "full_name": "vector-engineering/covidcg",
+    "updated_at": 1671743066.0
+  },
+  {
     "full_name": "sunlei/awesome-stars",
     "updated_at": 1678892884.0
   },
   {
-    "full_name": "liuzhenqi77/awesome-stars",
-    "updated_at": 1677900532.0
-  },
-  {
     "full_name": "saforem2/awesome-stars",
-    "updated_at": 1681322153.0
+    "updated_at": 1682907912.0
   },
   {
-    "full_name": "jimbrig/jimsghstars",
-    "updated_at": 1682335753.0
+    "full_name": "EthicalML/awesome-production-machine-learning",
+    "updated_at": 1682915737.0
   },
   {
-    "full_name": "Aurametrix/Alg",
-    "updated_at": 1675182725.0
+    "full_name": "emmaewade/pangenome-workflow",
+    "updated_at": 1682893504.0
+  },
+  {
+    "full_name": "hatrang22/pipeline_qtlSeq",
+    "updated_at": 1682889446.0
+  },
+  {
+    "full_name": "oxsecurity/megalinter",
+    "updated_at": 1682889542.0
+  },
+  {
+    "full_name": "idf-io/bioinformatics-at-the-dkfz",
+    "updated_at": 1682882375.0
+  },
+  {
+    "full_name": "super-linter/super-linter",
+    "updated_at": 1682890850.0
+  },
+  {
+    "full_name": "mckellardw/DWM_utils",
+    "updated_at": 1665686971.0
   },
   {
     "full_name": "jfallmann/MONSDA",
     "updated_at": 1663185214.0
   },
   {
-    "full_name": "bakerccm/amplicon-template",
-    "updated_at": 1679558993.0
+    "full_name": "snakemake/snakemake-workflow-catalog",
+    "updated_at": 1682586396.0
   },
   {
-    "full_name": "oxsecurity/megalinter",
-    "updated_at": 1682715439.0
+    "full_name": "jimbrig/jimsghstars",
+    "updated_at": 1682335753.0
+  },
+  {
+    "full_name": "chooliu/snmCTseq_Pipeline",
+    "updated_at": 1682204134.0
+  },
+  {
+    "full_name": "danielecook/Awesome-Bioinformatics",
+    "updated_at": 1682863837.0
+  },
+  {
+    "full_name": "spack/spack-stack-catalog",
+    "updated_at": 1671061310.0
+  },
+  {
+    "full_name": "liuzhenqi77/awesome-stars",
+    "updated_at": 1677900532.0
+  },
+  {
+    "full_name": "Aurametrix/Alg",
+    "updated_at": 1675182725.0
+  },
+  {
+    "full_name": "bakerccm/amplicon-template",
+    "updated_at": 1679558993.0
   },
   {
     "full_name": "jsbrittain/phyloflow",
     "updated_at": 1679308960.0
   },
   {
-    "full_name": "snakemake/snakemake-workflow-catalog",
-    "updated_at": 1682586396.0
-  },
-  {
     "full_name": "Waschina/gapsnake",
     "updated_at": 1674494088.0
-  },
-  {
-    "full_name": "spack/spack-stack-catalog",
-    "updated_at": 1671061310.0
   },
   {
     "full_name": "eboileau/iCell8tools",
@@ -66,10 +106,6 @@
   {
     "full_name": "MgssGroup/snRNASeq",
     "updated_at": 1682604121.0
-  },
-  {
-    "full_name": "super-linter/super-linter",
-    "updated_at": 1682829663.0
   },
   {
     "full_name": "statdivlab/happi",
@@ -113,7 +149,7 @@
   },
   {
     "full_name": "reanahub/reana",
-    "updated_at": 1682711330.0
+    "updated_at": 1682839432.0
   },
   {
     "full_name": "RasmussenLab/vamb",
@@ -134,10 +170,6 @@
   {
     "full_name": "panxiaoguang/Circle-Map-Cpp_Pipeline",
     "updated_at": 1682417028.0
-  },
-  {
-    "full_name": "chooliu/snmCTseq_Pipeline",
-    "updated_at": 1682204134.0
   },
   {
     "full_name": "akhanf/snakebids",
@@ -206,10 +238,6 @@
   {
     "full_name": "vinibleik/snakemake_workflow",
     "updated_at": 1682548258.0
-  },
-  {
-    "full_name": "EthicalML/awesome-production-machine-learning",
-    "updated_at": 1682801626.0
   },
   {
     "full_name": "liebermanlab/WideVariant",
@@ -412,10 +440,6 @@
     "updated_at": 1669056196.0
   },
   {
-    "full_name": "RvSpectML/RISE_NEID_pipeline",
-    "updated_at": 1681876123.0
-  },
-  {
     "full_name": "langmead-lab/recount-pump",
     "updated_at": 1679867152.0
   },
@@ -509,7 +533,7 @@
   },
   {
     "full_name": "meirwah/awesome-workflow-engines",
-    "updated_at": 1682796952.0
+    "updated_at": 1682914503.0
   },
   {
     "full_name": "naturalis/galaxy-pipeline-hybseq",
@@ -550,10 +574,6 @@
   {
     "full_name": "aswathyseb/workflows",
     "updated_at": 1681140158.0
-  },
-  {
-    "full_name": "vector-engineering/covidcg",
-    "updated_at": 1671743066.0
   },
   {
     "full_name": "LaetitiaRacine/Git_Differentiation_Metabolism",
@@ -610,10 +630,6 @@
   {
     "full_name": "nismod/infra-risk-vis",
     "updated_at": 1681685973.0
-  },
-  {
-    "full_name": "danielecook/Awesome-Bioinformatics",
-    "updated_at": 1682825242.0
   },
   {
     "full_name": "sequana/nanomerge",
@@ -742,10 +758,6 @@
   {
     "full_name": "bedapub/microbiome10XVisium",
     "updated_at": 1681889473.0
-  },
-  {
-    "full_name": "idf-io/bioinformatics-at-the-dkfz",
-    "updated_at": 1681327721.0
   },
   {
     "full_name": "skojaku/residual2vec",
@@ -1252,6 +1264,14 @@
     "updated_at": 1677808165.0
   },
   {
+    "full_name": "retmas-dv/workflows",
+    "updated_at": 1677529397.0
+  },
+  {
+    "full_name": "sequana/multicov",
+    "updated_at": 1677808165.0
+  },
+  {
     "full_name": "sequana/variant_calling",
     "updated_at": 1646920385.0
   },
@@ -1273,7 +1293,7 @@
   },
   {
     "full_name": "seandavi/awesome-single-cell",
-    "updated_at": 1682805497.0
+    "updated_at": 1682877498.0
   },
   {
     "full_name": "radio1988/OneStopRNAseq",
@@ -1393,7 +1413,7 @@
   },
   {
     "full_name": "crazyhottommy/getting-started-with-genomics-tools-and-resources",
-    "updated_at": 1682685235.0
+    "updated_at": 1682856951.0
   },
   {
     "full_name": "markusritschel/cookiecutter-pysci-project",
@@ -1414,10 +1434,6 @@
   {
     "full_name": "smith-chem-wisc/Spritz",
     "updated_at": 1646233521.0
-  },
-  {
-    "full_name": "mckellardw/DWM_utils",
-    "updated_at": 1665686971.0
   },
   {
     "full_name": "DMBS-BIH/hybrid-cloud-snakemake-demo",
@@ -1481,7 +1497,7 @@
   },
   {
     "full_name": "pditommaso/awesome-pipeline",
-    "updated_at": 1682831420.0
+    "updated_at": 1682866589.0
   },
   {
     "full_name": "beliveau-lab/TigerFISH",
@@ -1861,7 +1877,7 @@
   },
   {
     "full_name": "freebayes/freebayes",
-    "updated_at": 1682108641.0
+    "updated_at": 1682857676.0
   },
   {
     "full_name": "LeonieKuechenhoff/wgs_variant_analysis_RBM20",

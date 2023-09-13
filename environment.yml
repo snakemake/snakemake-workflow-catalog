@@ -9,3 +9,4 @@ dependencies:
   - snakemake
   - snakefmt
   - python >=3.9
+  - ratelimit

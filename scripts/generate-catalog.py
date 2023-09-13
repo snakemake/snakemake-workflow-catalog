@@ -9,6 +9,7 @@ import time
 import urllib
 import tarfile
 
+from ratelimit import limits
 from jinja2 import Environment
 from github import Github
 from github.ContentFile import ContentFile
@@ -120,6 +121,7 @@ def rate_limit_wait(api_type):
     time.sleep(sleep_time)
 
 
+@limits(calls=990, period=3600)
 def call_rate_limit_aware(func, api_type="core"):
     while True:
         try:

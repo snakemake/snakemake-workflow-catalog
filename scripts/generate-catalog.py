@@ -168,8 +168,11 @@ else:
     repo_search = g.search_repositories(
         "snakemake workflow in:readme archived:false", sort="updated"
     )
-    total_count = call_rate_limit_aware(
-        lambda: repo_search.totalCount, api_type="search"
+    total_count = min(
+        call_rate_limit_aware(
+            lambda: repo_search.totalCount, api_type="search"
+        ),
+        100,
     )
 
 logging.info(f"Checking {total_count} repos.")

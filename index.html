@@ -448,7 +448,7 @@ usage:
             modal
                 .find(".modal-title")
                 .empty()
-                .append($(`<span><a href=${repo_url}>${rowdata.full_name}</a></span> <a data-toggle="tooltip" data-placement="top" title="URL to display this dialog" href="https://snakemake.github.io/snakemake-workflow-catalog?usage=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
+                .append($(`<span><a href=${repo_url}>${rowdata.full_name}</a></span> <a data-toggle="tooltip" data-placement="top" title="URL to display this repository" href="https://snakemake.github.io/snakemake-workflow-catalog?repo=${rowdata.full_name}"><i class="bi bi-link"></i></a>`))
 
             $("#repo-info-table").bootstrapTable({
                 data: [rowdata]
@@ -546,6 +546,10 @@ usage:
         var search_params = new URLSearchParams(window.location.search)
         if (search_params.has("usage")) {
             render_usage_modal(get_repo_row(search_params.get("usage")))
+            $("#usage-popup").modal()
+        }
+        if (search_params.has("repo")) {
+            render_usage_modal(get_repo_row(search_params.get("repo")))
             $("#usage-popup").modal()
         }
 

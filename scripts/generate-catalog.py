@@ -9,7 +9,7 @@ import time
 import urllib
 import tarfile
 
-from ratelimit import limits
+from ratelimit import limits, sleep_and_retry
 from jinja2 import Environment
 from github import Github
 from github.ContentFile import ContentFile
@@ -121,6 +121,7 @@ def rate_limit_wait(api_type):
     time.sleep(sleep_time)
 
 
+@sleep_and_retry
 @limits(calls=990, period=3600)
 def call_rate_limit_aware(func, api_type="core"):
     while True:
@@ -128,17 +129,6 @@ def call_rate_limit_aware(func, api_type="core"):
             return func()
         except RateLimitExceededException:
             rate_limit_wait(api_type)
-
-
-def call_rate_limit_aware_decorator(func):
-    def inner(*args, **kwargs):
-        while True:
-            try:
-                return func(*args, **kwargs)
-            except RateLimitExceededException:
-                rate_limit_wait("core")
-
-    return inner
 
 
 def store_data():
@@ -150,23 +140,25 @@ def store_data():
         json.dump(skips, out, sort_keys=True, indent=2)
 
 
-@call_rate_limit_aware_decorator
 def check_repo_exists(g, full_name):
-    try:
-        g.get_repo(full_name)
-        return True
-    except UnknownObjectException:
-        logging.info(f"Repo {full_name} has been deleted")
-        return False
+    def inner():
+        try:
+            g.get_repo(full_name)
+            return True
+        except UnknownObjectException:
+            logging.info(f"Repo {full_name} has been deleted")
+            return False
+    return call_rate_limit_aware(inner)
 
 
-@call_rate_limit_aware_decorator
 def check_file_exists(repo, file_name):
-    try:
-        repo.get_contents(file_name)
-        return True
-    except UnknownObjectException:
-        return False
+    def inner():
+        try:
+            repo.get_contents(file_name)
+            return True
+        except UnknownObjectException:
+            return False
+    return call_rate_limit_aware(inner)
 
 
 if test_repo is not None:

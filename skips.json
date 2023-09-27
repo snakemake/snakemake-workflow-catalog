@@ -1,23 +1,131 @@
 [
   {
-    "full_name": "natmurad/seqWorkflows",
-    "updated_at": 1693869595.0
-  },
-  {
-    "full_name": "r0xsh/my-awesome-stars",
-    "updated_at": 1657113467.0
+    "full_name": "zm-git-dev/my_binder",
+    "updated_at": 1660378779.0
   },
   {
     "full_name": "saforem2/awesome-stars",
     "updated_at": 1682907912.0
   },
   {
+    "full_name": "sunlei/awesome-stars",
+    "updated_at": 1686119603.0
+  },
+  {
+    "full_name": "Aurametrix/Alg",
+    "updated_at": 1675182725.0
+  },
+  {
+    "full_name": "Yixf-Education/killer_tools",
+    "updated_at": 1690855815.0
+  },
+  {
+    "full_name": "gbouras13/hybracter",
+    "updated_at": 1694009231.0
+  },
+  {
+    "full_name": "mazzalab/fastqwiper",
+    "updated_at": 1693345448.0
+  },
+  {
+    "full_name": "sequana/rnaseq",
+    "updated_at": 1689603758.0
+  },
+  {
+    "full_name": "Princeton-LSI-ResearchComputing/PE-mRNA-seq-diffexp",
+    "updated_at": 1695152353.0
+  },
+  {
+    "full_name": "Dinesh-Adhithya-H/MethylationPrediction",
+    "updated_at": 1690999549.0
+  },
+  {
+    "full_name": "ENCCS/software-bootcamp",
+    "updated_at": 1694938799.0
+  },
+  {
+    "full_name": "cbg-ethz/pMHN",
+    "updated_at": 1693401692.0
+  },
+  {
+    "full_name": "CRC-FONDA/A2-job-granularity",
+    "updated_at": 1695154864.0
+  },
+  {
+    "full_name": "carpentries-incubator/snakemake-novice-bioinformatics",
+    "updated_at": 1695209805.0
+  },
+  {
+    "full_name": "metagenlab/assembly_finder",
+    "updated_at": 1674825507.0
+  },
+  {
+    "full_name": "slowkow/awesome-vdj",
+    "updated_at": 1695720881.0
+  },
+  {
+    "full_name": "mathilde999/selection-png",
+    "updated_at": 1688821959.0
+  },
+  {
+    "full_name": "reanahub/reana",
+    "updated_at": 1693738499.0
+  },
+  {
+    "full_name": "DessimozLab/fold_tree",
+    "updated_at": 1695748506.0
+  },
+  {
+    "full_name": "apieruzzi/TEMBA_FPV",
+    "updated_at": 1685540621.0
+  },
+  {
+    "full_name": "mdozmorov/HiC_tools",
+    "updated_at": 1695255271.0
+  },
+  {
+    "full_name": "tycho-kirchner/shournal",
+    "updated_at": 1694793371.0
+  },
+  {
+    "full_name": "reslp/dockerfiles",
+    "updated_at": 1695554168.0
+  },
+  {
+    "full_name": "oxsecurity/megalinter",
+    "updated_at": 1695723736.0
+  },
+  {
+    "full_name": "snakemake/snakemake-workflow-catalog",
+    "updated_at": 1689301198.0
+  },
+  {
+    "full_name": "pypsa-meets-earth/pypsa-kz-data",
+    "updated_at": 1695761977.0
+  },
+  {
+    "full_name": "sara-nl/picas-profile",
+    "updated_at": 1694512190.0
+  },
+  {
     "full_name": "jimbrig/jimsghstars",
     "updated_at": 1695393049.0
   },
   {
-    "full_name": "sunlei/awesome-stars",
-    "updated_at": 1686119603.0
+    "full_name": "marco-oliva/telseq",
+    "updated_at": 1657643594.0
+  },
+  {
+    "full_name": "spack/spack-stack-catalog",
+    "updated_at": 1692876588.0
+  },
+  {
+    "full_name": "natmurad/seqWorkflows",
+    "updated_at": 1693869595.0
+  },
+  {
+    "full_name": "r0xsh/my-awesome-stars",
+    "updated_at": 1657113467.0
   },
   {
     "full_name": "resheku/my-awesome",
@@ -53,7 +161,7 @@
   },
   {
     "full_name": "super-linter/super-linter",
-    "updated_at": 1695696348.0
+    "updated_at": 1695764733.0
   },
   {
     "full_name": "MetaSUB-CAMP/CAMP_Module_Template",
@@ -68,14 +176,6 @@
     "updated_at": 1686817989.0
   },
   {
-    "full_name": "metagenlab/assembly_finder",
-    "updated_at": 1674825507.0
-  },
-  {
-    "full_name": "DessimozLab/fold_tree",
-    "updated_at": 1695671419.0
-  },
-  {
     "full_name": "gruber-sciencelab/nTerminalExon",
     "updated_at": 1691842603.0
   },
@@ -88,24 +188,12 @@
     "updated_at": 1692704665.0
   },
   {
-    "full_name": "snakemake/snakemake-workflow-catalog",
-    "updated_at": 1689301198.0
-  },
-  {
     "full_name": "FlorianCHA/snakevir",
     "updated_at": 1690371886.0
   },
   {
-    "full_name": "oxsecurity/megalinter",
-    "updated_at": 1695674981.0
-  },
-  {
     "full_name": "singularityhub/singularity-catalog",
     "updated_at": 1693023196.0
-  },
-  {
-    "full_name": "spack/spack-stack-catalog",
-    "updated_at": 1692876588.0
   },
   {
     "full_name": "genomewalker/aMGSIM",
@@ -140,10 +228,6 @@
     "updated_at": 1695687010.0
   },
   {
-    "full_name": "Dinesh-Adhithya-H/MethylationPrediction",
-    "updated_at": 1690999549.0
-  },
-  {
     "full_name": "CompGenomeLab/xr-ds-seq-snakemake",
     "updated_at": 1681132856.0
   },
@@ -172,10 +256,6 @@
     "updated_at": 1695326882.0
   },
   {
-    "full_name": "carpentries-incubator/snakemake-novice-bioinformatics",
-    "updated_at": 1695209805.0
-  },
-  {
     "full_name": "mckfarm/16S_demo_2023",
     "updated_at": 1695227639.0
   },
@@ -196,20 +276,8 @@
     "updated_at": 1683108567.0
   },
   {
-    "full_name": "apieruzzi/TEMBA_FPV",
-    "updated_at": 1685540621.0
-  },
-  {
     "full_name": "kokitsuyuzaki/urchin-integration-workflow",
     "updated_at": 1664882764.0
-  },
-  {
-    "full_name": "CRC-FONDA/A2-job-granularity",
-    "updated_at": 1695154864.0
-  },
-  {
-    "full_name": "reslp/dockerfiles",
-    "updated_at": 1695554168.0
   },
   {
     "full_name": "DynamicBiosystems/DynamicEX",
@@ -250,10 +318,6 @@
   {
     "full_name": "OpenOmics/Dmux",
     "updated_at": 1694544306.0
-  },
-  {
-    "full_name": "Princeton-LSI-ResearchComputing/PE-mRNA-seq-diffexp",
-    "updated_at": 1695152353.0
   },
   {
     "full_name": "neherlab/nextclade_data_workflows",
@@ -332,10 +396,6 @@
     "updated_at": 1689626254.0
   },
   {
-    "full_name": "sara-nl/picas-profile",
-    "updated_at": 1694512190.0
-  },
-  {
     "full_name": "AbdelrahmanYahia/GUAP_toolkit",
     "updated_at": 1686819645.0
   },
@@ -354,10 +414,6 @@
   {
     "full_name": "reanahub/reana-workflow-engine-snakemake",
     "updated_at": 1675191607.0
-  },
-  {
-    "full_name": "reanahub/reana",
-    "updated_at": 1693738499.0
   },
   {
     "full_name": "sahuno/dorado_ont_wf",
@@ -456,20 +512,8 @@
     "updated_at": 1695030939.0
   },
   {
-    "full_name": "mazzalab/fastqwiper",
-    "updated_at": 1693345448.0
-  },
-  {
     "full_name": "johnpatramanis/Proteomic_Pipeline",
     "updated_at": 1689671113.0
-  },
-  {
-    "full_name": "Yixf-Education/killer_tools",
-    "updated_at": 1690855815.0
-  },
-  {
-    "full_name": "Aurametrix/Alg",
-    "updated_at": 1675182725.0
   },
   {
     "full_name": "ffertrindade/fastq2bam",
@@ -598,10 +642,6 @@
   {
     "full_name": "genxnetwork/grape",
     "updated_at": 1690558487.0
-  },
-  {
-    "full_name": "pypsa-meets-earth/pypsa-kz-data",
-    "updated_at": 1690481490.0
   },
   {
     "full_name": "jeremi1504/KZFPs_similarity_scoring",
@@ -832,10 +872,6 @@
     "updated_at": 1688646427.0
   },
   {
-    "full_name": "cbg-ethz/pMHN",
-    "updated_at": 1688473560.0
-  },
-  {
     "full_name": "ncc-gap/nanopore_workflow_scripts",
     "updated_at": 1688363863.0
   },
@@ -938,10 +974,6 @@
   {
     "full_name": "mdozmorov/Bioinformatics_notes",
     "updated_at": 1686628104.0
-  },
-  {
-    "full_name": "mdozmorov/HiC_tools",
-    "updated_at": 1688817506.0
   },
   {
     "full_name": "harvardinformatics/Mapping-simulations",
@@ -1498,10 +1530,6 @@
   {
     "full_name": "Virginiaxu/DeepMosaic",
     "updated_at": 1688373995.0
-  },
-  {
-    "full_name": "sequana/rnaseq",
-    "updated_at": 1684689104.0
   },
   {
     "full_name": "sequana/ribofinder",
@@ -2168,10 +2196,6 @@
     "updated_at": 1680689307.0
   },
   {
-    "full_name": "tycho-kirchner/shournal",
-    "updated_at": 1683910536.0
-  },
-  {
     "full_name": "Phil9S/swgs-absolutecn",
     "updated_at": 1687453468.0
   },
@@ -2522,10 +2546,6 @@
   {
     "full_name": "MPUSP/snakemake-ms-proteomics",
     "updated_at": 1672739510.0
-  },
-  {
-    "full_name": "slowkow/awesome-vdj",
-    "updated_at": 1686194210.0
   },
   {
     "full_name": "roblehmann/snakemake-tutorial",
@@ -2994,10 +3014,6 @@
   {
     "full_name": "fpozoc/trifid",
     "updated_at": 1677547446.0
-  },
-  {
-    "full_name": "marco-oliva/telseq",
-    "updated_at": 1657643594.0
   },
   {
     "full_name": "jingwora/bioinformatics-tools",

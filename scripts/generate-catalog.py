@@ -21,6 +21,7 @@ import yaml
 logging.basicConfig(level=logging.INFO)
 
 test_repo = os.environ.get("TEST_REPO")
+offset = int(os.environ.get("OFFSET", 0))
 
 env = Environment(
     autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
@@ -164,20 +165,19 @@ def check_file_exists(repo, file_name):
 if test_repo is not None:
     repo_search = [g.get_repo(test_repo)]
     total_count = 1
+    offset = 0
 else:
     repo_search = g.search_repositories(
-        "snakemake workflow in:readme archived:false", sort="updated"
+        "a in:name snakemake workflow in:readme archived:false", sort="updated"
     )
-    total_count = min(
-        call_rate_limit_aware(
-            lambda: repo_search.totalCount, api_type="search"
-        ),
-        100,
+    total_count = call_rate_limit_aware(
+        lambda: repo_search.totalCount, api_type="search"
     )
 
-logging.info(f"Checking {total_count} repos.")
+end = min(offset + 100, total_count)
+logging.info(f"Checking {total_count} repos, repo {offset}-{end-1}.")
 
-for i in range(total_count):
+for i in range(offset, end):
     # We access each repo by index instead of using an iterator
     # in order to be able to retry the access in case we reach the search
     # rate limit.

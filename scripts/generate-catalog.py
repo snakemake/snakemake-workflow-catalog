@@ -149,6 +149,7 @@ def check_repo_exists(g, full_name):
         except UnknownObjectException:
             logging.info(f"Repo {full_name} has been deleted")
             return False
+
     return call_rate_limit_aware(inner)
 
 
@@ -159,6 +160,7 @@ def check_file_exists(repo, file_name):
             return True
         except UnknownObjectException:
             return False
+
     return call_rate_limit_aware(inner)
 
 

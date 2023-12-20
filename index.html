@@ -440,7 +440,7 @@ usage:
             var repo_url = get_repo_url(rowdata.full_name)
 
             var flags = ""
-            if (rowdata.mandatory_flags) {
+            if (rowdata.mandatory_flags && rowdata.mandatory_flags.flags) {
                 flags = rowdata.mandatory_flags.flags
             }
 

@@ -15,9 +15,13 @@ jobs:
         offset: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
       max-parallel: 1
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      
       - name: deployment
         uses: mamba-org/provision-with-micromamba@main
+
       - name: generate-catalog
         shell: bash -l {0}
         env:
@@ -25,11 +29,13 @@ jobs:
           OFFSET: ${{ matrix.offset }}
         run: |
           python scripts/generate-catalog.py
+
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -m "Add changes" -a
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:

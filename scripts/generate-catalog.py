@@ -68,6 +68,9 @@ class Repo:
         formatting,
         config_readme,
         settings: dict,
+        release,
+        updated_at,
+        topics,
     ):
         for attr in [
             "full_name",
@@ -77,8 +80,8 @@ class Repo:
         ]:
             setattr(self, attr, getattr(github_repo, attr))
 
-        self.topics = github_repo.get_topics()
-        self.updated_at = github_repo.updated_at.timestamp()
+        self.topics = topics
+        self.updated_at = updated_at.timestamp()
 
         self.linting = linting
 
@@ -87,7 +90,7 @@ class Repo:
             self.formatting += f"\nsnakefmt version: {snakefmt_version}"
 
         try:
-            self.latest_release = github_repo.get_latest_release().tag_name
+            self.latest_release = release.tag_name
         except UnknownObjectException:
             # no release
             self.latest_release = None
@@ -100,7 +103,7 @@ class Repo:
             self.software_stack_deployment = settings.get("usage", {}).get(
                 "software-stack-deployment", {}
             )
-            self.config_readme = g.render_markdown(config_readme)
+            self.config_readme = config_readme
             self.standardized = True
         else:
             self.mandatory_flags = []
@@ -153,17 +156,6 @@ def check_repo_exists(g, full_name):
     return call_rate_limit_aware(inner)
 
 
-def check_file_exists(repo, file_name):
-    def inner():
-        try:
-            repo.get_contents(file_name)
-            return True
-        except UnknownObjectException:
-            return False
-
-    return call_rate_limit_aware(inner)
-
-
 if test_repo is not None:
     repo_search = [g.get_repo(test_repo)]
     total_count = 1
@@ -211,7 +203,6 @@ for i in range(offset, end):
         and prev["updated_at"] == updated_at.timestamp()
     ):
         # keep old data, it hasn't changed
-        logging.info("Remaining repos haven't changed, using old data.")
         logging.info("Repo hasn't changed, keeping old data.")
         repos.append(prev)
         continue
@@ -225,49 +216,6 @@ for i in range(offset, end):
 
     snakefile = "Snakefile"
     rules = "rules"
-    if check_file_exists(repo, "workflow"):
-        snakefile = "workflow/" + snakefile
-        rules = "workflow/" + rules
-
-    if not check_file_exists(repo, snakefile):
-        log_skip("of missing Snakefile")
-        register_skip(repo)
-        continue
-
-    if check_file_exists(repo, rules):
-        skip_rules = False
-        skip_repo = False
-        while True:
-            rule_contents = call_rate_limit_aware(lambda: repo.get_contents(rules))
-            if isinstance(rule_contents, ContentFile):
-                # not a directory
-                if rule_contents.type == "symlink":
-                    rules = os.path.normpath(
-                        rules + "/" + rule_contents.raw_data["target"]
-                    )
-                    if check_file_exists(repo, rules):
-                        logging.info("following symlink to %s", rules)
-                    else:
-                        log_skip(
-                            "of invalid symlink encountered while searching for rules folder"
-                        )
-                        skip_repo = True
-                        break
-                else:
-                    # rules folder is neither a dir nor a symlink, ignore
-                    skip_rules = True
-                    break
-            else:
-                break
-        if skip_repo:
-            register_skip(repo)
-            continue
-        if not skip_rules and not any(
-            rule_file.name.endswith(".smk") for rule_file in rule_contents
-        ):
-            log_skip("rule modules are not using .smk extension")
-            register_skip(repo)
-            continue
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
@@ -296,6 +244,21 @@ for i in range(offset, end):
             workflow = tmp
 
         rules = workflow / "rules"
+        snakefile = workflow / "Snakefile"
+
+        if not snakefile.exists():
+            log_skip("of missing Snakefile")
+            register_skip(repo)
+            continue
+
+        if rules.exists() and rules.is_dir():
+            if not any(
+                rule_file.suffix == ".smk" for rule_file in rules.iterdir()
+                if rule_file.is_file()
+            ):
+                log_skip("rule modules are not using .smk extension")
+                register_skip(repo)
+                continue
 
         # catalog settings
         settings = None
@@ -347,10 +310,15 @@ for i in range(offset, end):
             if test_repo is not None:
                 logging.error(formatting)
 
-    call_rate_limit_aware(
-        lambda: repos.append(
-            Repo(repo, linting, formatting, config_readme, settings).__dict__
-        )
+    topics = call_rate_limit_aware(
+        repo.get_topics
+    )
+
+    if config_readme is not None:
+        config_readme = call_rate_limit_aware(lambda: g.render_markdown(config_readme))
+
+    repos.append(
+        Repo(repo, linting, formatting, config_readme, settings, release, updated_at, topics).__dict__
     )
 
 if test_repo is None:

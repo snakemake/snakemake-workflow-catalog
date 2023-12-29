@@ -89,10 +89,9 @@ class Repo:
         if formatting is not None:
             self.formatting += f"\nsnakefmt version: {snakefmt_version}"
 
-        try:
+        if release is not None:
             self.latest_release = release.tag_name
-        except UnknownObjectException:
-            # no release
+        else:
             self.latest_release = None
 
         if settings is not None and config_readme is not None:

@@ -189,10 +189,11 @@ for i in range(offset, end):
         continue
 
     updated_at = repo.updated_at
-    try:
-        release = call_rate_limit_aware(repo.get_latest_release)
+    releases = call_rate_limit_aware(repo.get_releases)
+    if releases:
+        release = releases[0]
         updated_at = max(updated_at, release.created_at)
-    except UnknownObjectException:
+    else:
         release = None
 
     prev = previous_repos.get(repo.full_name)

@@ -10,7 +10,7 @@ def cleanup(repos):
     logging.info(f"Checking {n} repos for existence.")
     for i, repo_name in enumerate(list(repos.keys())[_offset:min(_offset + n, len(repos))]):
         if i != 0:
-            time.sleep(63)
+            time.sleep(5)
         
         if not check_repo_exists(g, repo_name):
             logging.info(f"Repo {repo_name} has been deleted or moved")

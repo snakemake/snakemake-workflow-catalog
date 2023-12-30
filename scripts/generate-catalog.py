@@ -163,6 +163,7 @@ else:
     repo_search = g.search_repositories(
         "a in:name snakemake workflow in:readme archived:false", sort="updated"
     )
+    time.sleep(5)
     total_count = call_rate_limit_aware(
         lambda: repo_search.totalCount, api_type="search"
     )
@@ -171,6 +172,10 @@ end = min(offset + 100, total_count)
 logging.info(f"Checking {total_count} repos, repo {offset}-{end-1}.")
 
 for i in range(offset, end):
+    if i != offset:
+        # sleep for one minute to avoid running into secondary rate limit
+        time.sleep(60)
+
     # We access each repo by index instead of using an iterator
     # in order to be able to retry the access in case we reach the search
     # rate limit.

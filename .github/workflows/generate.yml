@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        offset: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+        offset: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+        mode: ["scrape", "cleanup"]
       max-parallel: 1
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +29,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OFFSET: ${{ matrix.offset }}
         run: |
-          python scripts/generate-catalog.py
+          if [[ "${{ matrix.mode }}" == "scrape" ]]; then
+            python scripts/scrape.py
+          else
+            python scripts/cleanup.py
+          fi
 
       - name: Commit files
         run: |

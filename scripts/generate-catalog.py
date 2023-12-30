@@ -4,48 +4,24 @@ import subprocess as sp
 import os
 from pathlib import Path
 import json
-import calendar
 import time
 import urllib
 import tarfile
 
-from ratelimit import limits, sleep_and_retry
 from jinja2 import Environment
-from github import Github
-from github.ContentFile import ContentFile
-from github.GithubException import UnknownObjectException, RateLimitExceededException
 import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import yaml
 
+from common import store_data, check_repo_exists, call_rate_limit_aware, g, previous_repos, previous_skips, blacklist, snakefmt_version, offset
+
 logging.basicConfig(level=logging.INFO)
 
 test_repo = os.environ.get("TEST_REPO")
-offset = int(os.environ.get("OFFSET", 0))
+offset = int(offset / 100 * 1000)
 
 env = Environment(
     autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
-)
-
-# do not clone LFS files
-os.environ["GIT_LFS_SKIP_SMUDGE"] = "1"
-g = Github(os.environ["GITHUB_TOKEN"])
-get_rate_limit = lambda api_type: getattr(g.get_rate_limit(), api_type)
-
-with open("data.js", "r") as f:
-    next(f)
-    previous_repos = {repo["full_name"]: repo for repo in json.loads(f.read())}
-
-with open("skips.json", "r") as f:
-    previous_skips = {repo["full_name"]: repo for repo in json.load(f)}
-
-blacklist = set(l.strip() for l in open("blacklist.txt", "r"))
-
-snakefmt_version = (
-    sp.run(["snakefmt", "--version"], capture_output=True, check=True)
-    .stdout.decode()
-    .strip()
-    .split()[-1]
 )
 
 repos = []
@@ -113,46 +89,6 @@ class Repo:
 
         # increase this if fields above change
         self.data_format = Repo.data_format
-
-
-def rate_limit_wait(api_type):
-    curr_timestamp = calendar.timegm(time.gmtime())
-    reset_timestamp = calendar.timegm(get_rate_limit(api_type).reset.timetuple())
-    # add 5 seconds to be sure the rate limit has been reset
-    sleep_time = max(0, reset_timestamp - curr_timestamp) + 5
-    logging.warning(f"Rate limit exceeded, waiting {sleep_time} seconds")
-    time.sleep(sleep_time)
-
-
-@sleep_and_retry
-@limits(calls=990, period=3600)
-def call_rate_limit_aware(func, api_type="core"):
-    while True:
-        try:
-            return func()
-        except RateLimitExceededException:
-            rate_limit_wait(api_type)
-
-
-def store_data():
-    repos.sort(key=lambda repo: repo["stargazers_count"])
-
-    with open("data.js", "w") as out:
-        print(env.get_template("data.js").render(data=repos), file=out)
-    with open("skips.json", "w") as out:
-        json.dump(skips, out, sort_keys=True, indent=2)
-
-
-def check_repo_exists(g, full_name):
-    def inner():
-        try:
-            g.get_repo(full_name)
-            return True
-        except UnknownObjectException:
-            logging.info(f"Repo {full_name} has been deleted")
-            return False
-
-    return call_rate_limit_aware(inner)
 
 
 if test_repo is not None:
@@ -334,13 +270,7 @@ if test_repo is None:
 
     def add_old(old_repos, current_repos, check_existence=True):
         visited = set(repo["full_name"] for repo in current_repos)
-        old_repos = [
-            repo
-            for repo_name, repo in old_repos.items()
-            if (not check_existence or check_repo_exists(g, repo_name))
-            and repo_name not in visited
-        ]
-        current_repos.extend(old_repos)
+        current_repos.extend(repo for repo_name, repo in old_repos.items() if repo_name not in visited)
 
     logging.info("Adding all old repos not covered by the current query.")
     add_old(previous_repos, repos)
@@ -353,4 +283,5 @@ if test_repo is None:
             "Previous repos have been twice as big, "
             "likely something went wrong in the github search, aborting."
         )
-    store_data()
+
+    store_data(repos, skips)

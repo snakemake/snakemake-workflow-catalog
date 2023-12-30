@@ -173,8 +173,8 @@ logging.info(f"Checking {total_count} repos, repo {offset}-{end-1}.")
 
 for i in range(offset, end):
     if i != offset:
-        # sleep for one minute to avoid running into secondary rate limit
-        time.sleep(60)
+        # sleep for one minute +x to avoid running into secondary rate limit
+        time.sleep(63)
 
     # We access each repo by index instead of using an iterator
     # in order to be able to retry the access in case we reach the search

@@ -268,7 +268,7 @@ if test_repo is None:
     # This is necessary because Github limits search queries to 1000 items,
     # and we always use the 1000 with the most recent changes.
 
-    def add_old(old_repos, current_repos, check_existence=True):
+    def add_old(old_repos, current_repos):
         visited = set(repo["full_name"] for repo in current_repos)
         current_repos.extend(repo for repo_name, repo in old_repos.items() if repo_name not in visited)
 

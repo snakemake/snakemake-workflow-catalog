@@ -97,7 +97,7 @@ if test_repo is not None:
     offset = 0
 else:
     repo_search = g.search_repositories(
-        "a in:name snakemake workflow in:readme archived:false", sort="updated"
+        "snakemake workflow in:readme archived:false", sort="updated"
     )
     time.sleep(5)
     total_count = call_rate_limit_aware(

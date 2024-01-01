@@ -24,4 +24,4 @@ cleanup(previous_repos)
 logging.info("Remove superfluous skips.")
 cleanup(previous_skips)
 
-store_data(previous_repos, previous_skips)
+store_data(list(previous_repos.values()), list(previous_skips.values()))

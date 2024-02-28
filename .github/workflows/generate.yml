@@ -1,9 +1,8 @@
 name: Generate catalog
 
 on:
-  # TODO uncomment once we know the scraping works well again
-  #schedule:
-  #  - cron: 0 5 * * *
+  schedule:
+   - cron: 0 5 * * *
   push:
     branches:
       - main

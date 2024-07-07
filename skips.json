@@ -1,5 +1,173 @@
 [
   {
+    "full_name": "shangshanzhizhe/Work_flow_of_population_genetics",
+    "updated_at": 1719409420.0
+  },
+  {
+    "full_name": "HealthML/MFD",
+    "updated_at": 1717067984.0
+  },
+  {
+    "full_name": "crazyhottommy/crazyhottommy",
+    "updated_at": 1720320085.0
+  },
+  {
+    "full_name": "lillypi/IntroToBioinformatics",
+    "updated_at": 1717048874.0
+  },
+  {
+    "full_name": "GavinHaLab/TitanCNA_SV_WGS",
+    "updated_at": 1717022639.0
+  },
+  {
+    "full_name": "AstrobioMike/teichman-hmp",
+    "updated_at": 1717020116.0
+  },
+  {
+    "full_name": "cbg-ethz/scdna-pipe",
+    "updated_at": 1717584955.0
+  },
+  {
+    "full_name": "skojaku/degree-corrected-link-prediction-benchmark",
+    "updated_at": 1716973893.0
+  },
+  {
+    "full_name": "ctglab/isoworm",
+    "updated_at": 1718190241.0
+  },
+  {
+    "full_name": "vaizen360/vaizen360",
+    "updated_at": 1716956376.0
+  },
+  {
+    "full_name": "ETH-NEXUS/scAmpi_single_cell_RNA",
+    "updated_at": 1717602117.0
+  },
+  {
+    "full_name": "mdozmorov/scHiC_notes",
+    "updated_at": 1718267955.0
+  },
+  {
+    "full_name": "mfansler/scUTRquant-demo",
+    "updated_at": 1716872195.0
+  },
+  {
+    "full_name": "amunzur/Bioinfo_pipeline",
+    "updated_at": 1716816728.0
+  },
+  {
+    "full_name": "CompGenomeLab/xr-ds-seq-snakemake",
+    "updated_at": 1719482308.0
+  },
+  {
+    "full_name": "gagneurlab/absplice",
+    "updated_at": 1717326831.0
+  },
+  {
+    "full_name": "mazzalab/fastqwiper",
+    "updated_at": 1719165553.0
+  },
+  {
+    "full_name": "bioclick/snakemake-tutorial",
+    "updated_at": 1716699562.0
+  },
+  {
+    "full_name": "mdozmorov/ChIP-seq_notes",
+    "updated_at": 1720224362.0
+  },
+  {
+    "full_name": "mdozmorov/Programming_notes",
+    "updated_at": 1716687993.0
+  },
+  {
+    "full_name": "epigen/mr.pareto",
+    "updated_at": 1718493467.0
+  },
+  {
+    "full_name": "alhenry/wf-ukbpheno",
+    "updated_at": 1717418625.0
+  },
+  {
+    "full_name": "tomarovsky/BuscoClade",
+    "updated_at": 1716628440.0
+  },
+  {
+    "full_name": "dxsbiocc/Workflow",
+    "updated_at": 1718171344.0
+  },
+  {
+    "full_name": "STRIDES/NIHCloudLabAWS",
+    "updated_at": 1718053430.0
+  },
+  {
+    "full_name": "schrins/dissertation-pipelines",
+    "updated_at": 1716491499.0
+  },
+  {
+    "full_name": "MiqG/publication_viper_splicing",
+    "updated_at": 1719480664.0
+  },
+  {
+    "full_name": "OkosunLab/SnakemakePipelines",
+    "updated_at": 1716460887.0
+  },
+  {
+    "full_name": "panoptes-organization/panoptes",
+    "updated_at": 1717037307.0
+  },
+  {
+    "full_name": "amulya-saini/RNA-sequencing-differential-GE-and-Pathway-analysis",
+    "updated_at": 1716424971.0
+  },
+  {
+    "full_name": "molonc/leap_deconvolution",
+    "updated_at": 1716416805.0
+  },
+  {
+    "full_name": "mikewolfe/Bacterial_reseq",
+    "updated_at": 1716414663.0
+  },
+  {
+    "full_name": "DuronioLab/transgenic_longread_map_snakemake",
+    "updated_at": 1718738608.0
+  },
+  {
+    "full_name": "Bishop-Laboratory/RLPipes",
+    "updated_at": 1716391310.0
+  },
+  {
+    "full_name": "Phil9S/swgs-absolutecn",
+    "updated_at": 1716388981.0
+  },
+  {
+    "full_name": "hannahluscombe/OSeMOSYS-UI",
+    "updated_at": 1716387428.0
+  },
+  {
+    "full_name": "shahcompbio/signals",
+    "updated_at": 1718286189.0
+  },
+  {
+    "full_name": "SouthGreenPlatform/PanExplorer_workflow",
+    "updated_at": 1716380724.0
+  },
+  {
+    "full_name": "bioinf-mcb/MANIAC",
+    "updated_at": 1720197144.0
+  },
+  {
+    "full_name": "bcgsc/ntEdit",
+    "updated_at": 1717327201.0
+  },
+  {
+    "full_name": "wcfunk/rapr-ddrad-smk-ovis",
+    "updated_at": 1716323008.0
+  },
+  {
+    "full_name": "tischulz1/plast",
+    "updated_at": 1716295541.0
+  },
+  {
     "full_name": "tholtzem/daphnia_snakemake_pbs",
     "updated_at": 1717678201.0
   },
@@ -174,10 +342,6 @@
   {
     "full_name": "kylegontjes/ISScreener",
     "updated_at": 1718028079.0
-  },
-  {
-    "full_name": "KatSteinke/magician",
-    "updated_at": 1717151977.0
   },
   {
     "full_name": "KatSteinke/magician",
@@ -1948,176 +2112,8 @@
     "updated_at": 1715377566.0
   },
   {
-    "full_name": "crazyhottommy/crazyhottommy",
-    "updated_at": 1717638158.0
-  },
-  {
-    "full_name": "lillypi/IntroToBioinformatics",
-    "updated_at": 1717048874.0
-  },
-  {
-    "full_name": "GavinHaLab/TitanCNA_SV_WGS",
-    "updated_at": 1717022639.0
-  },
-  {
-    "full_name": "AstrobioMike/teichman-hmp",
-    "updated_at": 1717020116.0
-  },
-  {
-    "full_name": "cbg-ethz/scdna-pipe",
-    "updated_at": 1717584955.0
-  },
-  {
-    "full_name": "skojaku/degree-corrected-link-prediction-benchmark",
-    "updated_at": 1716973893.0
-  },
-  {
-    "full_name": "ctglab/isoworm",
-    "updated_at": 1718190241.0
-  },
-  {
-    "full_name": "vaizen360/vaizen360",
-    "updated_at": 1716956376.0
-  },
-  {
-    "full_name": "ETH-NEXUS/scAmpi_single_cell_RNA",
-    "updated_at": 1717602117.0
-  },
-  {
-    "full_name": "mdozmorov/scHiC_notes",
-    "updated_at": 1718267955.0
-  },
-  {
-    "full_name": "mfansler/scUTRquant-demo",
-    "updated_at": 1716872195.0
-  },
-  {
-    "full_name": "amunzur/Bioinfo_pipeline",
-    "updated_at": 1716816728.0
-  },
-  {
-    "full_name": "CompGenomeLab/xr-ds-seq-snakemake",
-    "updated_at": 1719482308.0
-  },
-  {
-    "full_name": "gagneurlab/absplice",
-    "updated_at": 1717326831.0
-  },
-  {
-    "full_name": "mazzalab/fastqwiper",
-    "updated_at": 1719165553.0
-  },
-  {
-    "full_name": "bioclick/snakemake-tutorial",
-    "updated_at": 1716699562.0
-  },
-  {
-    "full_name": "mdozmorov/ChIP-seq_notes",
-    "updated_at": 1720224362.0
-  },
-  {
-    "full_name": "mdozmorov/Programming_notes",
-    "updated_at": 1716687993.0
-  },
-  {
-    "full_name": "epigen/mr.pareto",
-    "updated_at": 1718493467.0
-  },
-  {
-    "full_name": "alhenry/wf-ukbpheno",
-    "updated_at": 1717418625.0
-  },
-  {
-    "full_name": "tomarovsky/BuscoClade",
-    "updated_at": 1716628440.0
-  },
-  {
-    "full_name": "dxsbiocc/Workflow",
-    "updated_at": 1718171344.0
-  },
-  {
-    "full_name": "STRIDES/NIHCloudLabAWS",
-    "updated_at": 1718053430.0
-  },
-  {
-    "full_name": "schrins/dissertation-pipelines",
-    "updated_at": 1716491499.0
-  },
-  {
-    "full_name": "MiqG/publication_viper_splicing",
-    "updated_at": 1719480664.0
-  },
-  {
-    "full_name": "OkosunLab/SnakemakePipelines",
-    "updated_at": 1716460887.0
-  },
-  {
-    "full_name": "panoptes-organization/panoptes",
-    "updated_at": 1717037307.0
-  },
-  {
-    "full_name": "amulya-saini/RNA-sequencing-differential-GE-and-Pathway-analysis",
-    "updated_at": 1716424971.0
-  },
-  {
-    "full_name": "molonc/leap_deconvolution",
-    "updated_at": 1716416805.0
-  },
-  {
-    "full_name": "mikewolfe/Bacterial_reseq",
-    "updated_at": 1716414663.0
-  },
-  {
-    "full_name": "DuronioLab/transgenic_longread_map_snakemake",
-    "updated_at": 1718738608.0
-  },
-  {
-    "full_name": "Bishop-Laboratory/RLPipes",
-    "updated_at": 1716391310.0
-  },
-  {
-    "full_name": "Phil9S/swgs-absolutecn",
-    "updated_at": 1716388981.0
-  },
-  {
-    "full_name": "hannahluscombe/OSeMOSYS-UI",
-    "updated_at": 1716387428.0
-  },
-  {
-    "full_name": "shahcompbio/signals",
-    "updated_at": 1718286189.0
-  },
-  {
-    "full_name": "SouthGreenPlatform/PanExplorer_workflow",
-    "updated_at": 1716380724.0
-  },
-  {
-    "full_name": "bioinf-mcb/MANIAC",
-    "updated_at": 1720197144.0
-  },
-  {
-    "full_name": "bcgsc/ntEdit",
-    "updated_at": 1717327201.0
-  },
-  {
-    "full_name": "wcfunk/rapr-ddrad-smk-ovis",
-    "updated_at": 1716323008.0
-  },
-  {
-    "full_name": "tischulz1/plast",
-    "updated_at": 1716295541.0
-  },
-  {
     "full_name": "energyLS/aldehyde",
     "updated_at": 1716281934.0
-  },
-  {
-    "full_name": "shangshanzhizhe/Work_flow_of_population_genetics",
-    "updated_at": 1719409420.0
-  },
-  {
-    "full_name": "HealthML/MFD",
-    "updated_at": 1717067984.0
   },
   {
     "full_name": "mcejp/goeieDAG",

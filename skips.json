@@ -1,5 +1,217 @@
 [
   {
+    "full_name": "epruesse/ymp",
+    "updated_at": 1721421767.0
+  },
+  {
+    "full_name": "rotary-genomics/rotary",
+    "updated_at": 1721422941.0
+  },
+  {
+    "full_name": "fshepherd13/shepherd_et_al_deer_mouse",
+    "updated_at": 1721416945.0
+  },
+  {
+    "full_name": "lgrcia/paper-nuance",
+    "updated_at": 1721414378.0
+  },
+  {
+    "full_name": "thechenlab/Slide-tags",
+    "updated_at": 1721413287.0
+  },
+  {
+    "full_name": "JakeLehle/cli_template",
+    "updated_at": 1721401750.0
+  },
+  {
+    "full_name": "HaoZeke/bless",
+    "updated_at": 1721648117.0
+  },
+  {
+    "full_name": "scholl-lab/sm-vcf-annotation",
+    "updated_at": 1721375571.0
+  },
+  {
+    "full_name": "AGImkeller/SingleCellAlleleExperiment",
+    "updated_at": 1721389727.0
+  },
+  {
+    "full_name": "langmead-lab/monorail-external",
+    "updated_at": 1725292460.0
+  },
+  {
+    "full_name": "nextstrain/rsv",
+    "updated_at": 1721334490.0
+  },
+  {
+    "full_name": "maxwendler/masters_thesis",
+    "updated_at": 1721332373.0
+  },
+  {
+    "full_name": "marcsingleton/workflow_tutorial",
+    "updated_at": 1721328674.0
+  },
+  {
+    "full_name": "ryanjob42/snakemake-scratchpad",
+    "updated_at": 1721321190.0
+  },
+  {
+    "full_name": "MetExplore/dexom-python",
+    "updated_at": 1721306743.0
+  },
+  {
+    "full_name": "MaximilianSti/dexom_python",
+    "updated_at": 1721306740.0
+  },
+  {
+    "full_name": "Meenu-Bhati/SV-STR",
+    "updated_at": 1721299997.0
+  },
+  {
+    "full_name": "scholl-lab/sm-calling",
+    "updated_at": 1721298000.0
+  },
+  {
+    "full_name": "equipeGST/RiboDoc",
+    "updated_at": 1724665406.0
+  },
+  {
+    "full_name": "liddic/compound_potential",
+    "updated_at": 1721266618.0
+  },
+  {
+    "full_name": "yenon118/HAPPI_GWAS_2",
+    "updated_at": 1721257432.0
+  },
+  {
+    "full_name": "lesleymaraina/cnv_variant_calling_workflow",
+    "updated_at": 1721247540.0
+  },
+  {
+    "full_name": "sapporo-wes/sapporo-service",
+    "updated_at": 1724746801.0
+  },
+  {
+    "full_name": "shelbirussell/Mirchandani_et_al_2024",
+    "updated_at": 1721235503.0
+  },
+  {
+    "full_name": "osome-iu/SimSoM",
+    "updated_at": 1724536480.0
+  },
+  {
+    "full_name": "shishenyxx/DeepMosaic",
+    "updated_at": 1725588600.0
+  },
+  {
+    "full_name": "NBISweden/nf-core-aMeta",
+    "updated_at": 1721218620.0
+  },
+  {
+    "full_name": "Louis-XIV-bis/varcall_snakemake",
+    "updated_at": 1721206350.0
+  },
+  {
+    "full_name": "pablorr24/metagenomics_snakemake",
+    "updated_at": 1721204074.0
+  },
+  {
+    "full_name": "DavidTadres/snake_brainsss",
+    "updated_at": 1721166104.0
+  },
+  {
+    "full_name": "quadram-institute-bioscience/QuaTradis",
+    "updated_at": 1721139022.0
+  },
+  {
+    "full_name": "ljw20180420/sx_lcy",
+    "updated_at": 1721133898.0
+  },
+  {
+    "full_name": "gabefoley/asr_curation",
+    "updated_at": 1721110228.0
+  },
+  {
+    "full_name": "xaviertintin/Thesis",
+    "updated_at": 1721105586.0
+  },
+  {
+    "full_name": "manaakiwhenua/human-footprint-nz",
+    "updated_at": 1721123659.0
+  },
+  {
+    "full_name": "carpentries-incubator/hpc-workflows",
+    "updated_at": 1721313535.0
+  },
+  {
+    "full_name": "ranwez/GeneModelTransfer",
+    "updated_at": 1721079589.0
+  },
+  {
+    "full_name": "SViswanathanLab/WGS-TRCC",
+    "updated_at": 1724454359.0
+  },
+  {
+    "full_name": "Nachida08/SnakeMAGs",
+    "updated_at": 1721053839.0
+  },
+  {
+    "full_name": "loosolab/TOBIAS",
+    "updated_at": 1725466112.0
+  },
+  {
+    "full_name": "Clinical-Genomics/BALSAMIC",
+    "updated_at": 1721280272.0
+  },
+  {
+    "full_name": "BDI-pathogens/ShiverCovid",
+    "updated_at": 1721038912.0
+  },
+  {
+    "full_name": "rhhao/csMR",
+    "updated_at": 1726473970.0
+  },
+  {
+    "full_name": "griegner/med-pain-sig",
+    "updated_at": 1720916736.0
+  },
+  {
+    "full_name": "dib-lab/TheGreatGenotyper",
+    "updated_at": 1721118177.0
+  },
+  {
+    "full_name": "dib-lab/TheGreatGenotyper_benchmark",
+    "updated_at": 1720901634.0
+  },
+  {
+    "full_name": "martinezvbs/CRISPR",
+    "updated_at": 1720900206.0
+  },
+  {
+    "full_name": "mdozmorov/Bioinformatics_notes",
+    "updated_at": 1726147617.0
+  },
+  {
+    "full_name": "BIMSBbioinfo/flexynesis-benchmarks",
+    "updated_at": 1721495528.0
+  },
+  {
+    "full_name": "MrHedmad/kerblam",
+    "updated_at": 1720798068.0
+  },
+  {
+    "full_name": "bioinf-mcb/MANIAC",
+    "updated_at": 1722636515.0
+  },
+  {
+    "full_name": "MGI-EU/assembly_workflow",
+    "updated_at": 1720750688.0
+  },
+  {
+    "full_name": "mckfarm/cando_meta",
+    "updated_at": 1720747940.0
+  },
+  {
     "full_name": "arpitsingh19/best_ml",
     "updated_at": 1722529872.0
   },
@@ -154,10 +366,6 @@
   {
     "full_name": "Arcadia-Science/capsids",
     "updated_at": 1721842698.0
-  },
-  {
-    "full_name": "biosustain/Alleleome",
-    "updated_at": 1721821755.0
   },
   {
     "full_name": "biosustain/Alleleome",
@@ -1748,164 +1956,8 @@
     "updated_at": 1726299111.0
   },
   {
-    "full_name": "MetExplore/dexom-python",
-    "updated_at": 1721306743.0
-  },
-  {
-    "full_name": "MaximilianSti/dexom_python",
-    "updated_at": 1721306740.0
-  },
-  {
-    "full_name": "Meenu-Bhati/SV-STR",
-    "updated_at": 1721299997.0
-  },
-  {
-    "full_name": "scholl-lab/sm-calling",
-    "updated_at": 1721298000.0
-  },
-  {
-    "full_name": "equipeGST/RiboDoc",
-    "updated_at": 1724665406.0
-  },
-  {
-    "full_name": "liddic/compound_potential",
-    "updated_at": 1721266618.0
-  },
-  {
-    "full_name": "yenon118/HAPPI_GWAS_2",
-    "updated_at": 1721257432.0
-  },
-  {
-    "full_name": "lesleymaraina/cnv_variant_calling_workflow",
-    "updated_at": 1721247540.0
-  },
-  {
-    "full_name": "sapporo-wes/sapporo-service",
-    "updated_at": 1724746801.0
-  },
-  {
-    "full_name": "shelbirussell/Mirchandani_et_al_2024",
-    "updated_at": 1721235503.0
-  },
-  {
-    "full_name": "osome-iu/SimSoM",
-    "updated_at": 1724536480.0
-  },
-  {
-    "full_name": "shishenyxx/DeepMosaic",
-    "updated_at": 1725588600.0
-  },
-  {
-    "full_name": "NBISweden/nf-core-aMeta",
-    "updated_at": 1721218620.0
-  },
-  {
-    "full_name": "Louis-XIV-bis/varcall_snakemake",
-    "updated_at": 1721206350.0
-  },
-  {
-    "full_name": "pablorr24/metagenomics_snakemake",
-    "updated_at": 1721204074.0
-  },
-  {
-    "full_name": "DavidTadres/snake_brainsss",
-    "updated_at": 1721166104.0
-  },
-  {
-    "full_name": "quadram-institute-bioscience/QuaTradis",
-    "updated_at": 1721139022.0
-  },
-  {
-    "full_name": "ljw20180420/sx_lcy",
-    "updated_at": 1721133898.0
-  },
-  {
-    "full_name": "gabefoley/asr_curation",
-    "updated_at": 1721110228.0
-  },
-  {
-    "full_name": "xaviertintin/Thesis",
-    "updated_at": 1721105586.0
-  },
-  {
-    "full_name": "manaakiwhenua/human-footprint-nz",
-    "updated_at": 1721123659.0
-  },
-  {
-    "full_name": "carpentries-incubator/hpc-workflows",
-    "updated_at": 1721313535.0
-  },
-  {
-    "full_name": "ranwez/GeneModelTransfer",
-    "updated_at": 1721079589.0
-  },
-  {
-    "full_name": "SViswanathanLab/WGS-TRCC",
-    "updated_at": 1724454359.0
-  },
-  {
-    "full_name": "Nachida08/SnakeMAGs",
-    "updated_at": 1721053839.0
-  },
-  {
-    "full_name": "loosolab/TOBIAS",
-    "updated_at": 1725466112.0
-  },
-  {
-    "full_name": "Clinical-Genomics/BALSAMIC",
-    "updated_at": 1721280272.0
-  },
-  {
-    "full_name": "BDI-pathogens/ShiverCovid",
-    "updated_at": 1721038912.0
-  },
-  {
-    "full_name": "rhhao/csMR",
-    "updated_at": 1725869751.0
-  },
-  {
-    "full_name": "griegner/med-pain-sig",
-    "updated_at": 1720916736.0
-  },
-  {
     "full_name": "Kanomble/celery_blast",
     "updated_at": 1720910999.0
-  },
-  {
-    "full_name": "dib-lab/TheGreatGenotyper",
-    "updated_at": 1721118177.0
-  },
-  {
-    "full_name": "dib-lab/TheGreatGenotyper_benchmark",
-    "updated_at": 1720901634.0
-  },
-  {
-    "full_name": "martinezvbs/CRISPR",
-    "updated_at": 1720900206.0
-  },
-  {
-    "full_name": "mdozmorov/Bioinformatics_notes",
-    "updated_at": 1726147617.0
-  },
-  {
-    "full_name": "BIMSBbioinfo/flexynesis-benchmarks",
-    "updated_at": 1721495528.0
-  },
-  {
-    "full_name": "MrHedmad/kerblam",
-    "updated_at": 1720798068.0
-  },
-  {
-    "full_name": "bioinf-mcb/MANIAC",
-    "updated_at": 1722636515.0
-  },
-  {
-    "full_name": "MGI-EU/assembly_workflow",
-    "updated_at": 1720750688.0
-  },
-  {
-    "full_name": "mckfarm/cando_meta",
-    "updated_at": 1720747940.0
   },
   {
     "full_name": "cLweinrich/demux",
@@ -1946,62 +1998,6 @@
   {
     "full_name": "skojaku/community-detection-via-neural-embedding",
     "updated_at": 1720636027.0
-  },
-  {
-    "full_name": "epruesse/ymp",
-    "updated_at": 1721421767.0
-  },
-  {
-    "full_name": "rotary-genomics/rotary",
-    "updated_at": 1721422941.0
-  },
-  {
-    "full_name": "fshepherd13/shepherd_et_al_deer_mouse",
-    "updated_at": 1721416945.0
-  },
-  {
-    "full_name": "lgrcia/paper-nuance",
-    "updated_at": 1721414378.0
-  },
-  {
-    "full_name": "thechenlab/Slide-tags",
-    "updated_at": 1721413287.0
-  },
-  {
-    "full_name": "JakeLehle/cli_template",
-    "updated_at": 1721401750.0
-  },
-  {
-    "full_name": "HaoZeke/bless",
-    "updated_at": 1721648117.0
-  },
-  {
-    "full_name": "scholl-lab/sm-vcf-annotation",
-    "updated_at": 1721375571.0
-  },
-  {
-    "full_name": "AGImkeller/SingleCellAlleleExperiment",
-    "updated_at": 1721389727.0
-  },
-  {
-    "full_name": "langmead-lab/monorail-external",
-    "updated_at": 1725292460.0
-  },
-  {
-    "full_name": "nextstrain/rsv",
-    "updated_at": 1721334490.0
-  },
-  {
-    "full_name": "maxwendler/masters_thesis",
-    "updated_at": 1721332373.0
-  },
-  {
-    "full_name": "marcsingleton/workflow_tutorial",
-    "updated_at": 1721328674.0
-  },
-  {
-    "full_name": "ryanjob42/snakemake-scratchpad",
-    "updated_at": 1721321190.0
   },
   {
     "full_name": "inab/WfExS-backend",

@@ -1,22 +1,16 @@
 import logging
-import tempfile
 import subprocess as sp
 import os
-from pathlib import Path
 import json
 import calendar
 import time
-import urllib
-import tarfile
 
 from ratelimit import limits, sleep_and_retry
 from jinja2 import Environment
 from github import Github
 from github.ContentFile import ContentFile
 from github.GithubException import UnknownObjectException, RateLimitExceededException
-import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-import yaml
 
 logging.basicConfig(level=logging.INFO)
 
@@ -47,6 +41,7 @@ snakefmt_version = (
     .strip()
     .split()[-1]
 )
+
 
 def rate_limit_wait(api_type):
     curr_timestamp = calendar.timegm(time.gmtime())

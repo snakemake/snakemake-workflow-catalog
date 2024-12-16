@@ -2,17 +2,18 @@ name: Generate catalog
 
 on:
   schedule:
-   - cron: 0 5 * * *
+   - cron: 0 5 * * 1
   push:
     branches:
       - main
+      - dev
 
 jobs:
   generate-catalog:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        offset: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+        offset: [0]
       max-parallel: 1
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +21,7 @@ jobs:
           ref: main
       
       - name: deployment
-        uses: mamba-org/provision-with-micromamba@main
+        uses: mamba-org/setup-micromamba@v2
 
       - name: generate-catalog
         shell: bash -l {0}
@@ -55,7 +56,7 @@ jobs:
           ref: main
       
       - name: deployment
-        uses: mamba-org/provision-with-micromamba@main
+        uses: mamba-org/setup-micromamba@v2
 
       - name: generate-catalog
         shell: bash -l {0}

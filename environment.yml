@@ -3,10 +3,10 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - jinja2
-  - pygithub
-  - gitpython
-  - snakemake
-  - snakefmt
-  - python >=3.9
-  - ratelimit
+  - jinja2=3.1.4
+  - pygithub=2.5.0
+  - gitpython=3.1.43
+  - snakemake=8.25.5
+  - snakefmt=0.10.2
+  - python=3.12.8
+  - ratelimit=2.2.1

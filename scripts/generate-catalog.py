@@ -3,7 +3,6 @@ import tempfile
 import subprocess as sp
 import os
 from pathlib import Path
-import json
 import time
 import urllib
 import tarfile
@@ -13,12 +12,22 @@ import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import yaml
 
-from common import store_data, check_repo_exists, call_rate_limit_aware, g, previous_repos, previous_skips, blacklist, snakefmt_version, offset
+from common import (
+    store_data,
+    check_repo_exists,
+    call_rate_limit_aware,
+    g,
+    previous_repos,
+    previous_skips,
+    blacklist,
+    snakefmt_version,
+    offset,
+)
 
 logging.basicConfig(level=logging.INFO)
 
 test_repo = os.environ.get("TEST_REPO")
-offset = int(offset / 100 * 1000)
+offset = int(offset * 10)
 
 env = Environment(
     autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
@@ -195,7 +204,8 @@ for i in range(offset, end):
 
         if rules.exists() and rules.is_dir():
             if not any(
-                rule_file.suffix == ".smk" for rule_file in rules.iterdir()
+                rule_file.suffix == ".smk"
+                for rule_file in rules.iterdir()
                 if rule_file.is_file()
             ):
                 log_skip("rule modules are not using .smk extension")
@@ -252,15 +262,22 @@ for i in range(offset, end):
             if test_repo is not None:
                 logging.error(formatting)
 
-    topics = call_rate_limit_aware(
-        repo.get_topics
-    )
+    topics = call_rate_limit_aware(repo.get_topics)
 
     if config_readme is not None:
         config_readme = call_rate_limit_aware(lambda: g.render_markdown(config_readme))
 
     repos.append(
-        Repo(repo, linting, formatting, config_readme, settings, release, updated_at, topics).__dict__
+        Repo(
+            repo,
+            linting,
+            formatting,
+            config_readme,
+            settings,
+            release,
+            updated_at,
+            topics,
+        ).__dict__
     )
 
 if test_repo is None:
@@ -270,7 +287,9 @@ if test_repo is None:
 
     def add_old(old_repos, current_repos):
         visited = set(repo["full_name"] for repo in current_repos)
-        current_repos.extend(repo for repo_name, repo in old_repos.items() if repo_name not in visited)
+        current_repos.extend(
+            repo for repo_name, repo in old_repos.items() if repo_name not in visited
+        )
 
     logging.info("Adding all old repos not covered by the current query.")
     add_old(previous_repos, repos)

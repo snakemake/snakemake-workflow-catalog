@@ -2,7 +2,7 @@ name: Generate catalog
 
 on:
   schedule:
-   - cron: 0 5 * * 1
+    - cron: 0 5 * * 1
   push:
     branches:
       - main
@@ -17,11 +17,11 @@ jobs:
       max-parallel: 1
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
-      
+
       - name: deployment
         uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
 
       - name: generate-catalog
         shell: bash -l {0}
@@ -52,11 +52,11 @@ jobs:
       max-parallel: 1
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
-      
+
       - name: deployment
         uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
 
       - name: generate-catalog
         shell: bash -l {0}

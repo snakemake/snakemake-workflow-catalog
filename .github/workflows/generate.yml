@@ -48,7 +48,7 @@ jobs:
     needs: generate-catalog
     strategy:
       matrix:
-        offset: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+        offset: [0]
       max-parallel: 1
     steps:
       - uses: actions/checkout@v4
@@ -58,7 +58,7 @@ jobs:
         with:
           environment-file: environment.yml
 
-      - name: generate-catalog
+      - name: cleanup-catalog
         shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

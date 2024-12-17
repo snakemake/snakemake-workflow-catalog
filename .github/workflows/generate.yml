@@ -33,7 +33,7 @@ jobs:
 
       - name: Pull latest changes
         run: |
-          git pull --rebase origin ${{ github.ref }}
+          git pull --rebase --autostash origin ${{ github.ref }}
 
       - name: Commit files
         run: |
@@ -72,7 +72,7 @@ jobs:
 
       - name: Pull latest changes
         run: |
-          git pull --rebase origin ${{ github.ref }}
+          git pull --rebase --autostash origin ${{ github.ref }}
 
       - name: Commit files
         run: |

@@ -1,16 +1,21 @@
 # snakemake-workflow-catalog
 
+[![Generate catalog](https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/generate.yml/badge.svg)](https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/generate.yml)
+[![pages-build-deployment](https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/pages/pages-build-deployment)
+![GitHub last commit](https://img.shields.io/github/last-commit/snakemake/snakemake-workflow-catalog?label=latest%20update)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/snakemake/snakemake-workflow-catalog)
+
 A statically generated catalog of available Snakemake workflows
 
-This repository serves as a centralized collection of workflows designed to facilitate reproducible and scalable data analyses using the Snakemake workflow management system.
+This repository serves as a centralized collection of workflows designed to facilitate reproducible and scalable data analyses using the [**Snakemake**](https://snakemake.github.io/) workflow management system.
 
 ## Purpose
 
-The Snakemake Workflow Catalog aims to provide a high-quality set of workflows that can be easily reused and adapted for various data analysis tasks. By leveraging the power of [**Snakemake**](https://snakemake.github.io/), these workflows ensure:
+The Snakemake Workflow Catalog aims to provide a regularly updated list of high-quality workflows that can be easily reused and adapted for various data analysis tasks. By leveraging the power of [**Snakemake**](https://snakemake.github.io/), these workflows promote:
 
-- Reproducibility: Each workflow is designed to produce consistent results, making it easier to share and validate scientific findings.
-- Scalability: Workflows can be executed on various computing environments, from local machines to high-performance computing clusters and cloud services.
-- Modularity: Workflows are structured to allow easy customization and extension, enabling users to adapt them to their specific needs.
+- Reproducibility: Snakemake workflows produce consistent results, making it easier to share and validate scientific findings.
+- Scalability: Snakemake workflows can be executed on various computing environments, from local machines to high-performance computing clusters and cloud services.
+- Modularity: Snakemake workflows are structured to allow easy customization and extension, enabling users to adapt them to their specific needs.
 
 ## Workflows
 
@@ -19,10 +24,10 @@ Workflows are automatically added to the Workflow Catalog. This is done by regul
 ### All workflows
 
 - The workflow is contained in a public Github repository.
-- The repository has a readme, containing the words "snakemake" and "workflow" (case insensitive).
-- The repository contains a workflow definition named either Snakefile or workflow/Snakefile.
-- If the repository contains a folder rules or workflow/rules that folder must at least contain one file ending on .smk.
-- The repository is small enough to be cloned into a Github actions job (very large files should be handled via Git LFS, so that they can be stripped out during cloning).
+- The repository has a `README.md` file, containing the words "snakemake" and "workflow" (case insensitive).
+- The repository contains a workflow definition named either `Snakefile` or `workflow/Snakefile`.
+- If the repository contains a folder `rules` or `workflow/rules`, that folder must at least contain one file ending on `.smk`.
+- The repository is small enough to be cloned into a [Github Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) job (very large files should be handled via [Git LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files), so that they can be stripped out during cloning).
 - The repository is not blacklisted here.
 
 ### Standardized usage workflows
@@ -56,15 +61,15 @@ If your workflow provides Github releases, the catalog will always just scrape t
 ## Contributing
 
 Contributions to the Snakemake Workflow Catalog are welcome!
-Ideas can be discussed on the [Catalogs Issues page](https://github.com/snakemake/snakemake-workflow-catalog/issues) first, and contributions made through Github Pull Requests.
+Ideas can be discussed on the [catalog's Issues page](https://github.com/snakemake/snakemake-workflow-catalog/issues) first, and contributions made through Github Pull Requests.
 
-## Getting Started
+## Using workflows from the catalog
 
 To get started with a workflow from the catalog:
 
 1. Clone the repository or download the specific workflow directory.
 2. Review the documentation provided with the workflow to understand its requirements and usage.
-3. Configure the workflow by editing the config files as needed.
+3. Configure the workflow by editing the `config.yml` files as needed.
 4. Execute the workflow using Snakemake.
 
 For more detailed instructions, please refer to the documentation within each workflow directory.

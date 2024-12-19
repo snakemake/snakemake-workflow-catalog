@@ -243,6 +243,7 @@ for i in range(offset, end):
             )
         except sp.CalledProcessError as e:
             linting = e.stderr.decode()
+            linting = re.sub("gh[pousr]\\_[a-zA-Z0-9_]{36}@?", "", linting)
             if test_repo is not None:
                 logging.error(linting)
 

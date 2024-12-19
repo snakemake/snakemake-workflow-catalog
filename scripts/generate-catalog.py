@@ -179,7 +179,7 @@ for i in range(offset, end):
                 fileobj=urllib.request.urlopen(tarball_url), mode="r|gz"
             )
             root_dir = get_tarfile().getmembers()[0].name
-            get_tarfile().extractall(path=tmp)
+            get_tarfile().extractall(path=tmp, filter="tar")
             tmp /= root_dir
         else:
             # no latest release, clone main branch

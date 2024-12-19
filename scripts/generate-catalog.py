@@ -6,6 +6,8 @@ from pathlib import Path
 import time
 import urllib
 import tarfile
+import re
+from datetime import timedelta, datetime
 
 from jinja2 import Environment
 import git
@@ -27,6 +29,7 @@ from common import (
 logging.basicConfig(level=logging.INFO)
 
 test_repo = os.environ.get("TEST_REPO")
+latest_commit = int(os.environ.get("LATEST_COMMIT"))
 offset = int(offset * 10)
 
 env = Environment(
@@ -105,8 +108,11 @@ if test_repo is not None:
     total_count = 1
     offset = 0
 else:
+    date_threshold = datetime.today() - timedelta(latest_commit)
+    date_threshold = datetime.strftime(date_threshold, "%Y-%m-%d")
     repo_search = g.search_repositories(
-        "snakemake workflow in:readme archived:false", sort="updated"
+        f"snakemake workflow in:readme archived:false pushed:>={date_threshold}",
+        sort="updated",
     )
     time.sleep(5)
     total_count = call_rate_limit_aware(

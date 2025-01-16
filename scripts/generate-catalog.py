@@ -16,7 +16,6 @@ import yaml
 
 from common import (
     store_data,
-    check_repo_exists,
     call_rate_limit_aware,
     g,
     previous_repos,

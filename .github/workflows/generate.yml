@@ -2,10 +2,11 @@ name: Generate catalog
 
 on:
   schedule:
-   - cron: 0 5 * * *
+    - cron: 0 5 * * 1
   push:
     branches:
       - main
+      - dev
 
 jobs:
   generate-catalog:
@@ -16,17 +17,22 @@ jobs:
       max-parallel: 1
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
-      
+
       - name: deployment
-        uses: mamba-org/provision-with-micromamba@main
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+
+      - name: Pull latest changes
+        run: |
+          git pull --rebase origin ${{ github.ref }}
 
       - name: generate-catalog
         shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OFFSET: ${{ matrix.offset }}
+          LATEST_COMMIT: 7
         run: |
           python scripts/generate-catalog.py
 
@@ -34,7 +40,7 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Add changes" -a
+          git commit -m "Add changes" -a || echo "No changes to commit"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -51,13 +57,17 @@ jobs:
       max-parallel: 1
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
-      
-      - name: deployment
-        uses: mamba-org/provision-with-micromamba@main
 
-      - name: generate-catalog
+      - name: deployment
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+
+      - name: Pull latest changes
+        run: |
+          git pull --rebase origin ${{ github.ref }}
+
+      - name: cleanup-catalog
         shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -69,7 +79,7 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Add changes" -a
+          git commit -m "Add changes" -a || echo "No changes to commit"
 
       - name: Push changes
         uses: ad-m/github-push-action@master

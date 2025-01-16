@@ -54,7 +54,7 @@ jobs:
             Results: https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/test-repo.yml
       - uses: actions/checkout@v1
       - name: deployment
-        uses: mamba-org/provision-with-micromamba@main
+        uses: mamba-org/setup-micromamba@v2
       - name: generate-catalog
         shell: bash -l {0}
         env:

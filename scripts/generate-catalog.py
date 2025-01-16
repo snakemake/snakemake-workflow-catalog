@@ -3,22 +3,32 @@ import tempfile
 import subprocess as sp
 import os
 from pathlib import Path
-import json
 import time
 import urllib
 import tarfile
+import re
+from datetime import timedelta, datetime
 
-from jinja2 import Environment
 import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import yaml
 
-from common import store_data, check_repo_exists, call_rate_limit_aware, g, previous_repos, previous_skips, blacklist, snakefmt_version, offset
+from common import (
+    store_data,
+    call_rate_limit_aware,
+    g,
+    previous_repos,
+    previous_skips,
+    blacklist,
+    snakefmt_version,
+    offset,
+)
 
 logging.basicConfig(level=logging.INFO)
 
 test_repo = os.environ.get("TEST_REPO")
-offset = int(offset / 100 * 1000)
+latest_commit = int(os.environ.get("LATEST_COMMIT"))
+offset = int(offset * 10)
 
 env = Environment(
     autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
@@ -96,8 +106,11 @@ if test_repo is not None:
     total_count = 1
     offset = 0
 else:
+    date_threshold = datetime.today() - timedelta(latest_commit)
+    date_threshold = datetime.strftime(date_threshold, "%Y-%m-%d")
     repo_search = g.search_repositories(
-        "snakemake workflow in:readme archived:false", sort="updated"
+        f"snakemake workflow in:readme archived:false pushed:>={date_threshold}",
+        sort="updated",
     )
     time.sleep(5)
     total_count = call_rate_limit_aware(
@@ -170,7 +183,7 @@ for i in range(offset, end):
                 fileobj=urllib.request.urlopen(tarball_url), mode="r|gz"
             )
             root_dir = get_tarfile().getmembers()[0].name
-            get_tarfile().extractall(path=tmp)
+            get_tarfile().extractall(path=tmp, filter="tar")
             tmp /= root_dir
         else:
             # no latest release, clone main branch
@@ -195,7 +208,8 @@ for i in range(offset, end):
 
         if rules.exists() and rules.is_dir():
             if not any(
-                rule_file.suffix == ".smk" for rule_file in rules.iterdir()
+                rule_file.suffix == ".smk"
+                for rule_file in rules.iterdir()
                 if rule_file.is_file()
             ):
                 log_skip("rule modules are not using .smk extension")
@@ -233,6 +247,7 @@ for i in range(offset, end):
             )
         except sp.CalledProcessError as e:
             linting = e.stderr.decode()
+            linting = re.sub("gh[pousr]\\_[a-zA-Z0-9_]{36}@?", "", linting)
             if test_repo is not None:
                 logging.error(linting)
 
@@ -252,15 +267,22 @@ for i in range(offset, end):
             if test_repo is not None:
                 logging.error(formatting)
 
-    topics = call_rate_limit_aware(
-        repo.get_topics
-    )
+    topics = call_rate_limit_aware(repo.get_topics)
 
     if config_readme is not None:
         config_readme = call_rate_limit_aware(lambda: g.render_markdown(config_readme))
 
     repos.append(
-        Repo(repo, linting, formatting, config_readme, settings, release, updated_at, topics).__dict__
+        Repo(
+            repo,
+            linting,
+            formatting,
+            config_readme,
+            settings,
+            release,
+            updated_at,
+            topics,
+        ).__dict__
     )
 
 if test_repo is None:
@@ -270,7 +292,9 @@ if test_repo is None:
 
     def add_old(old_repos, current_repos):
         visited = set(repo["full_name"] for repo in current_repos)
-        current_repos.extend(repo for repo_name, repo in old_repos.items() if repo_name not in visited)
+        current_repos.extend(
+            repo for repo_name, repo in old_repos.items() if repo_name not in visited
+        )
 
     logging.info("Adding all old repos not covered by the current query.")
     add_old(previous_repos, repos)

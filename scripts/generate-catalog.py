@@ -9,7 +9,6 @@ import tarfile
 import re
 from datetime import timedelta, datetime
 
-from jinja2 import Environment
 import git
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import yaml

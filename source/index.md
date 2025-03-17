@@ -45,17 +45,24 @@ Snakemake workflows allow easy customization and extension, enabling users to ad
 
 ## Short cuts
 
+::::{grid} 2
+:::{grid-item-card}
+:columns: auto
 ```{button-ref} docs/catalog
 :ref-type: myst
 :color: primary
-Read Introduction - 1 min ⏱️
+Read Introduction - 5 min ⏱️
 ```
-
+:::
+:::{grid-item-card}
+:columns: auto
 ```{button-ref} docs/all_standardized_workflows
 :ref-type: myst
 :color: primary
 Explore workflows 🔭
 ```
+:::
+::::
 
 ## Contributing
 

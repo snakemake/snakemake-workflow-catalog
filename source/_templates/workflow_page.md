@@ -10,6 +10,12 @@
 ![](https://img.shields.io/github/{{ badge }}/{{ wf["full_name"] }}?style=flat&label={{ badge }})
 :::
 {% endfor %}
+:::{grid-item}
+:columns: auto
+:margin: 0
+:padding: 1
+[![](https://img.shields.io/badge/GitHub%20page-blue?style=flat)](https://github.com/{{ wf["full_name"] }})
+:::
 ::::
 
 {{ wf["description"] }}

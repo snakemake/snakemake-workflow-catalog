@@ -29,10 +29,8 @@ cd <workflow-dir>
 snakemake --cores 2
 ```
 
-:::tip Dry-run
-
+:::{tip}
 Use the `--dry-run` option first to check if all inputs are found.
-
 :::
 
 For more detailed instructions, please refer to the individual documentation for each [workflow](<docs/all_standardized_workflows>).

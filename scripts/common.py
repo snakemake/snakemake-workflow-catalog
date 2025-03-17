@@ -6,6 +6,7 @@ import calendar
 import time
 
 from ratelimit import limits, sleep_and_retry
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 from github import Github
 from github.ContentFile import ContentFile
 from github.GithubException import UnknownObjectException, RateLimitExceededException
@@ -14,6 +15,10 @@ logging.basicConfig(level=logging.INFO)
 
 test_repo = os.environ.get("TEST_REPO")
 offset = int(os.environ.get("OFFSET", 0))
+
+env = Environment(
+    autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
+)
 
 # do not clone LFS files
 os.environ["GIT_LFS_SKIP_SMUDGE"] = "1"

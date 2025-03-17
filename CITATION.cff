@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this workflow catalog in your research, please cite it using the following metadata."
+title: "Snakemake Workflow Catalog"
+authors:
+  - family-names: "Koester"
+    given-names: "Johannes"
+    orcid: "https://orcid.org/0000-0001-9818-9320"
+  - family-names: "Jahn"
+    given-names: "Michael"
+    orcid: "https://orcid.org/0000-0002-3913-153X"
+abstract: >
+  The Snakemake Workflow Catalog is a collection of standardized workflows
+  for reproducible and scalable data analysis using Snakemake. Workflows
+  are automatically retrieved from Github and tested for compliance.
+repository-code: "https://github.com/snakemake/snakemake-workflow-catalog"
+version: "1.0.0"
+date-released: "2025-03-17"
+keywords:
+  - snakemake
+  - workflow
+  - reproducibility
+  - data Analysis
+license: "MIT"

@@ -3,6 +3,8 @@ name: Generate catalog
 on:
   schedule:
     - cron: 0 5 * * 1
+  push:
+    branches: [main, dev]
 
 jobs:
   generate-catalog:

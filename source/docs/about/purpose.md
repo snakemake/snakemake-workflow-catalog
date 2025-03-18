@@ -1,5 +1,5 @@
 
-# Purpose
+## Purpose
 
 This repository serves as a centralized collection of workflows designed to facilitate reproducible and scalable data analyses using the [**Snakemake**](https://snakemake.github.io/) workflow management system.
 

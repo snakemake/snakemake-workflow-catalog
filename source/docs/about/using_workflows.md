@@ -1,7 +1,7 @@
 
-# Using workflows
+## Using workflows
 
-## Basic usage
+### Basic usage
 
 To get started with a workflow from the catalog:
 
@@ -33,9 +33,9 @@ snakemake --cores 2
 Use the `--dry-run` option first to check if all inputs are found.
 :::
 
-For more detailed instructions, please refer to the individual documentation for each [workflow](<docs/all_standardized_workflows>).
+For more detailed instructions, please refer to the individual documentation for each [workflow](<all_standardized_workflows>).
 
-## Deployment options
+### Deployment options
 
 The deployment method is controlled using the `--software-deployment-method` (short `--sdm`) argument.
 

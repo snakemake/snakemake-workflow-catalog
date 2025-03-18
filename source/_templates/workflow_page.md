@@ -35,7 +35,7 @@
     {bdg-danger}`linting: failed`
 {%- endif -%},
 **Formatting:**
-{%- if wf["formatting"] == None -%}
+{% if wf["formatting"] == None -%}
     {bdg-success}`formatting: passed`
 {%- else -%}
     {bdg-danger}`formatting: failed`
@@ -139,12 +139,24 @@ _The following section is imported from the workflow's `config/README.md`_.
 
 ### Linting results
 
+{% if wf["linting"] == None %}
+```
+All tests passed!
+```
+{%- else -%}
 ```
 {{ wf["linting"] }}
 ```
+{% endif %}
 
 ### Formatting results
 
+{% if wf["formatting"] == None %}
+```
+All tests passed!
+```
+{%- else -%}
 ```
 {{ wf["formatting"] }}
 ```
+{% endif %}

@@ -1,6 +1,10 @@
 name: Deploy
 
 on:
+  workflow_run:
+    workflows: ["Generate catalog"]
+    types:
+      - completed
   push:
     branches: [main, dev]
 

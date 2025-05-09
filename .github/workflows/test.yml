@@ -15,12 +15,25 @@ jobs:
         with:
           environment-file: environment.yml
 
-      - name: generate-catalog
+      # Test the normal catalog generation but restrict to first repo for speed
+      - name: test-generate-catalog
         shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OFFSET: 0
+          N_REPOS: 1
           LATEST_COMMIT: 7
+        run: |
+          python scripts/generate-catalog.py
+
+      # Test specific repo, ensuring that the whole catalog generation script is
+      # executed, in case the first repo above is skipped because it contains no
+      # updates or no real snakemake workflow
+      - name: test-generate-catalog-specific-repo
+        shell: bash -l {0}
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            TEST_REPO: snakemake-workflows/dna-seq-varlociraptor
         run: |
           python scripts/generate-catalog.py
 
@@ -35,6 +48,7 @@ jobs:
         with:
           environment-file: environment.yml
 
+      # Test the cleanup script
       - name: cleanup-catalog
         shell: bash -l {0}
         env:

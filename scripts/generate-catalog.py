@@ -27,6 +27,8 @@ logging.basicConfig(level=logging.INFO)
 test_repo = os.environ.get("TEST_REPO")
 latest_commit = int(os.environ.get("LATEST_COMMIT"))
 offset = int(offset * 10)
+n_repos = int(os.environ.get("N_REPOS", 100))
+assert n_repos >= 1
 
 repos = []
 skips = []
@@ -111,7 +113,7 @@ else:
         lambda: repo_search.totalCount, api_type="search"
     )
 
-end = min(offset + 100, total_count)
+end = min(offset + n_repos, total_count)
 logging.info(f"Checking {total_count} repos, repo {offset}-{end-1}.")
 
 for i in range(offset, end):

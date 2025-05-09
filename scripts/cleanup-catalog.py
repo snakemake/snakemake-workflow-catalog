@@ -1,12 +1,13 @@
 import logging
 import math
+import os
 import time
 
 from common import store_data, check_repo_exists, g, previous_repos, previous_skips, offset
 
 def cleanup(repos):
     _offset = int(offset / 100 * len(repos))
-    n = int(math.ceil(len(repos) / 10))
+    n = int(os.environ.get("N_REPOS", math.ceil(len(repos) / 10)))
     logging.info(f"Checking {n} repos for existence.")
     for i, repo_name in enumerate(list(repos.keys())[_offset:min(_offset + n, len(repos))]):
         if i != 0:

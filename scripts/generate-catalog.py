@@ -25,7 +25,6 @@ from common import (
 logging.basicConfig(level=logging.INFO)
 
 test_repo = os.environ.get("TEST_REPO")
-latest_commit = int(os.environ.get("LATEST_COMMIT"))
 offset = int(offset * 10)
 n_repos = int(os.environ.get("N_REPOS", 100))
 assert n_repos >= 1
@@ -102,6 +101,8 @@ if test_repo is not None:
     total_count = 1
     offset = 0
 else:
+    latest_commit = int(os.environ.get("LATEST_COMMIT"))
+
     date_threshold = datetime.today() - timedelta(latest_commit)
     date_threshold = datetime.strftime(date_threshold, "%Y-%m-%d")
     repo_search = g.search_repositories(

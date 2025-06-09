@@ -22,7 +22,7 @@ description: "all standardized workflows"
         {%- if repo[qc] == None -%}
             {bdg-success}`{{qc}}: passed`
         {%- else -%}
-            {bdg-ref-danger}`{{qc}}: failed <{{qc}}-{{ repo["full_name"] }}>`
+            {bdg-ref-danger}`{{qc}}: failed <{{qc}}-{{ repo["full_name"]|slugify }}>`
         {%- endif -%}
     {% endfor %}{% raw %},{% endraw %}
     {{ repo["stargazers_count"] }}{% raw %},{% endraw %}

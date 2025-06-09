@@ -1,4 +1,5 @@
 import json
+import re
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import datetime
 from pathlib import Path
@@ -13,6 +14,13 @@ def clean_repo(repo):
     else:
         repo["description"] = "No description available."
     return repo
+
+
+def slugify(value):
+    value = value.lower()
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    value = value.strip("-")
+    return value
 
 
 # function to render markdown tables and cards
@@ -90,6 +98,7 @@ def build_wf_tables():
         trim_blocks=True,
         lstrip_blocks=True,
     )
+    env.filters["slugify"] = slugify
 
     # render tables
     for wf_type in ["standardized", "other"]:

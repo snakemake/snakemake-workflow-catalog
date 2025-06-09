@@ -32,13 +32,13 @@
 {% if wf["linting"] == None -%}
     {bdg-success}`linting: passed`
 {%- else -%}
-    {bdg-ref-danger}`linting: failed <linting-{{ wf["full_name"] }}>`
+    {bdg-ref-danger}`linting: failed <linting-{{ wf["full_name"]|slugify }}>`
 {%- endif -%},
 **Formatting:**
 {% if wf["formatting"] == None -%}
     {bdg-success}`formatting: passed`
 {%- else -%}
-    {bdg-ref-danger}`formatting: failed <formatting-{{ wf["full_name"] }}>`
+    {bdg-ref-danger}`formatting: failed <formatting-{{ wf["full_name"]|slugify }}>`
 {%- endif %}
 
 ## Deployment
@@ -136,7 +136,7 @@ _The following section is imported from the workflow's `config/README.md`_.
 
 ## Linting and formatting
 
-(linting-{{ wf["full_name"] }})=
+(linting-{{ wf["full_name"]|slugify }})=
 ### Linting results
 
 {% if wf["linting"] == None %}
@@ -156,7 +156,7 @@ All tests passed!
 
 {% endif %}
 
-(formatting-{{ wf["full_name"] }})=
+(formatting-{{ wf["full_name"]|slugify }})=
 ### Formatting results
 
 {% if wf["formatting"] == None %}

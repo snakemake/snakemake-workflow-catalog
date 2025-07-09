@@ -53,7 +53,7 @@ html_theme_options = {
         "Snakemake documentation": "https://snakemake.readthedocs.io",
     },
 }
-html_title = "Snakemake worklow catalog"
+html_title = "Snakemake workflow catalog"
 pygments_style = "sphinx"
 html_permalinks_icon = Icons.permalinks_icon
 suppress_warnings = ["myst.xref_missing", "myst.header"]

@@ -39,7 +39,7 @@ Definition of mandatory flags can happen through a list of strings (`['--a', '--
 :::
 
 :::{note}
-The content of the `.snakemake-workflow-catalog.yml` file is subject to change. Flags might change in the near future, but current versions will always stay compatible with the catalog. 
+The content of the `.snakemake-workflow-catalog.yml` file is subject to change. Flags might change in the near future, but current versions will always stay compatible with the catalog.
 :::
 
 Once included in the standardized usage area you can link directly to the workflow page using the URL `https://snakemake.github.io/snakemake-workflow-catalog/docs/workflows/<owner>/<repo>`. Do not forget to replace the `<owner>` and `<repo>` tags at the end of the URL.

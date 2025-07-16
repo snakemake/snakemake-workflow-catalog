@@ -8,7 +8,6 @@ import time
 from ratelimit import limits, sleep_and_retry
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from github import Github
-from github.ContentFile import ContentFile
 from github.GithubException import UnknownObjectException, RateLimitExceededException
 
 logging.basicConfig(level=logging.INFO)

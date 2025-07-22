@@ -5,8 +5,6 @@ import os
 from pathlib import Path
 import time
 from typing import Dict
-import urllib.request
-import tarfile
 import re
 from datetime import timedelta, datetime
 import git
@@ -15,9 +13,11 @@ import yaml
 from github.PaginatedList import PaginatedList
 
 from common import (
+    register_skip,
     store_data,
     call_rate_limit_aware,
     get_wrappers,
+    get_tarfile,
     g,
     previous_repos,
     previous_skips,
@@ -33,14 +33,8 @@ offset = int(offset * 10)
 n_repos = int(os.environ.get("N_REPOS", 100))
 assert n_repos >= 1
 
-repos = []
-skips = []
-
-
-def register_skip(repo):
-    skips.append(
-        {"full_name": repo.full_name, "updated_at": repo.updated_at.timestamp()}
-    )
+repos = {}
+skips = {}
 
 
 class Repo:
@@ -174,14 +168,14 @@ for i in range(offset, end):
     ):
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, keeping old data.")
-        repos.append(prev)
+        repos[prev["full_name"]] = prev
         continue
 
     prev_skip = previous_skips.get(repo.full_name)
     if prev_skip is not None and prev_skip["updated_at"] == updated_at.timestamp():
         # keep old data, it hasn't changed
         logging.info("Repo hasn't changed, skipping again based on old data.")
-        skips.append(prev_skip)
+        skips[prev_skip["full_name"]] = prev_skip
         continue
 
     snakefile = "Snakefile"
@@ -194,14 +188,8 @@ for i in range(offset, end):
             # download release tag (use hardcoded url, because repo.tarball_url can sometimes
             # cause ambiguity errors if a branch is called the same as the release).
             tarball_url = f"https://github.com/{repo.full_name}/tarball/refs/tags/{release.tag_name}"
-
-            def get_tarfile():
-                return tarfile.open(
-                    fileobj=urllib.request.urlopen(tarball_url), mode="r|gz"
-                )
-
-            root_dir = get_tarfile().getmembers()[0].name
-            get_tarfile().extractall(path=tmp, filter="tar")
+            root_dir = get_tarfile(tarball_url).getmembers()[0].name
+            get_tarfile(tarball_url).extractall(path=tmp, filter="tar")
             tmp /= root_dir
         else:
             # no latest release, clone main branch
@@ -209,7 +197,7 @@ for i in range(offset, end):
                 gitrepo = GitRepo.clone_from(repo.clone_url, str(tmp), depth=1)
             except git.GitCommandError:
                 log_skip("error cloning repository")
-                register_skip(repo)
+                skips = register_skip(repo, skips)
                 continue
 
         workflow = tmp / "workflow"
@@ -221,7 +209,7 @@ for i in range(offset, end):
 
         if not snakefile.exists():
             log_skip("of missing Snakefile")
-            register_skip(repo)
+            skips = register_skip(repo, skips)
             continue
 
         if rules.exists() and rules.is_dir():
@@ -231,7 +219,7 @@ for i in range(offset, end):
                 if rule_file.is_file()
             ):
                 log_skip("rule modules are not using .smk extension")
-                register_skip(repo)
+                skips = register_skip(repo, skips)
                 continue
 
         # catalog settings
@@ -323,29 +311,18 @@ for i in range(offset, end):
         f"{'standardized' if repo_obj.standardized else 'non-standardized'} workflow."
     )
 
-    repos.append(repo_obj.__dict__)
+    repos[repo_obj.__dict__["full_name"]] = repo_obj.__dict__
 
 if test_repo is None:
     # Now add all old repos that haven't been covered by the current search.
     # This is necessary because Github limits search queries to 1000 items,
-    # and we always use the 1000 with the most recent changes.
-
-    def add_old(old_repos, current_repos):
-        visited = set(repo["full_name"] for repo in current_repos)
-        current_repos.extend(
-            repo for repo_name, repo in old_repos.items() if repo_name not in visited
-        )
-
+    # and we use up to 1000 repos with the most recent changes.
     logging.info("Adding all old repos not covered by the current query.")
-    add_old(previous_repos, repos)
+    store_data(previous_repos | repos, "data.json")
+
     logging.info("Adding all old skipped repos not covered by the current query.")
-    add_old(previous_skips, skips)
+    store_data(previous_skips | skips, "skips.json")
 
-    logging.info("Processed all available repositories.")
-    if len(repos) < (len(previous_repos) / 2.0):
-        raise RuntimeError(
-            "Previous repos have been twice as big, "
-            "likely something went wrong in the github search, aborting."
-        )
-
-    store_data(repos, skips)
+    logging.info(
+        f"Processed {len(previous_repos)} existing and {len(repos)} new/updated repos."
+    )

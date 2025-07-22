@@ -90,13 +90,16 @@ conda env create -n snakemake-workflow-catalog -f environment.yml
 conda activate snakemake-workflow-catalog
 ```
 
-2. Set required environmental variables. The variable `TEST_REPO` is used fetch only data from a single workflow.
-   **Note:** Building the entire catalog from scratch will take several hours due to searching and testing thousands of Github repos.
+2. Set required environmental variables.
+The variable `N_REPOS` can be used to fetch data from a limited number of repos.
+The variable `TEST_REPO` can be used to fetch only data from a single workflow.
+**Note:** Building the entire catalog from scratch will take several hours due to searching and testing thousands of Github repos.
 
 ```bash
 export GITHUB_TOKEN="<your-github-token>"
 export OFFSET=0
 export LATEST_COMMIT=1000
+export N_REPOS=3
 export TEST_REPO="snakemake-workflows/rna-seq-star-deseq2"
 ```
 

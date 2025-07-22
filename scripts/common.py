@@ -5,9 +5,10 @@ import json
 import calendar
 import time
 import re
+import tarfile
+import urllib.request
 
 from ratelimit import limits, sleep_and_retry
-from jinja2 import Environment, FileSystemLoader, select_autoescape
 from github import Github
 from github.GithubException import UnknownObjectException, RateLimitExceededException
 
@@ -16,18 +17,13 @@ logging.basicConfig(level=logging.INFO)
 test_repo = os.environ.get("TEST_REPO")
 offset = int(os.environ.get("OFFSET", 0))
 
-env = Environment(
-    autoescape=select_autoescape(["html"]), loader=FileSystemLoader("templates")
-)
-
 # do not clone LFS files
 os.environ["GIT_LFS_SKIP_SMUDGE"] = "1"
 g = Github(os.environ["GITHUB_TOKEN"])
 get_rate_limit = lambda api_type: getattr(g.get_rate_limit(), api_type)
 
-with open("data.js", "r") as f:
-    next(f)
-    previous_repos = {repo["full_name"]: repo for repo in json.loads(f.read())}
+with open("data.json", "r") as f:
+    previous_repos = {repo["full_name"]: repo for repo in json.load(f)}
 
 with open("skips.json", "r") as f:
     previous_skips = {repo["full_name"]: repo for repo in json.load(f)}
@@ -61,13 +57,18 @@ def call_rate_limit_aware(func, api_type="core"):
             rate_limit_wait(api_type)
 
 
-def store_data(repos, skips):
-    repos.sort(key=lambda repo: repo["stargazers_count"])
+def register_skip(repo, skips):
+    skips[repo.full_name] = {
+        "full_name": repo.full_name,
+        "updated_at": repo.updated_at.timestamp(),
+    }
+    return skips
 
-    with open("data.js", "w") as out:
-        print(env.get_template("data.js").render(data=repos), file=out)
-    with open("skips.json", "w") as out:
-        json.dump(skips, out, sort_keys=True, indent=2)
+
+def store_data(input, json_output):
+    input = sorted(input.values(), key=lambda repo: repo["full_name"])
+    with open(json_output, "w") as out:
+        json.dump(input, out, sort_keys=True, indent=2)
 
 
 def check_repo_exists(g, full_name):
@@ -102,3 +103,7 @@ def get_wrappers(smkfile):
             "wrapper_url": wrapper_url,
         }
     return wrappers
+
+
+def get_tarfile(url):
+    return tarfile.open(fileobj=urllib.request.urlopen(url), mode="r|gz")

@@ -57,10 +57,9 @@ def build_wf_pages():
     template = env.get_template("workflow_page.md")
 
     # import workflow data
-    with open("../data.js", "r") as f:
-        next(f)
+    with open("../data.json", "r") as f:
         repos = {}
-        for repo in json.loads(f.read()):
+        for repo in json.load(f):
             if repo["standardized"]:
                 repos[repo["full_name"]] = repo
 

@@ -80,10 +80,9 @@ def build_wf_tables():
     ]
 
     # import workflow data
-    with open("../data.js", "r") as f:
-        next(f)
+    with open("../data.json", "r") as f:
         repos = {}
-        for repo in json.loads(f.read()):
+        for repo in json.load(f):
             repo = {k: repo[k] for k in selected_items if k in repo}
             repo["user"] = repo["full_name"].split("/")[0]
             repo["name"] = repo["full_name"].split("/")[1]

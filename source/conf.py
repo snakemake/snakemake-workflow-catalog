@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "snakemake-workflow-catalog"
-copyright = "2025, The Snakemake team. "
+copyright = "2025, The Snakemake team."
 author = "Johannes Koester, Michael Jahn"
 
 import sys
@@ -53,7 +53,7 @@ html_theme_options = {
         "Snakemake documentation": "https://snakemake.readthedocs.io",
     },
 }
-html_title = "Snakemake worklow catalog"
+html_title = "Snakemake workflow catalog"
 pygments_style = "sphinx"
 html_permalinks_icon = Icons.permalinks_icon
 suppress_warnings = ["myst.xref_missing", "myst.header"]

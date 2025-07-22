@@ -195,9 +195,9 @@ for i in range(offset, end):
             # cause ambiguity errors if a branch is called the same as the release).
             tarball_url = f"https://github.com/{repo.full_name}/tarball/refs/tags/{release.tag_name}"
 
-            def get_tarfile(url=tarball_url):
+            def get_tarfile():
                 return tarfile.open(
-                    fileobj=urllib.request.urlopen(url), mode="r|gz"
+                    fileobj=urllib.request.urlopen(tarball_url), mode="r|gz"
                 )
 
             root_dir = get_tarfile().getmembers()[0].name
@@ -320,7 +320,7 @@ for i in range(offset, end):
     )
     logging.info(
         f"Repo {repo_obj.full_name} processed successfully as "
-        f"{'standardized' if repo_obj.standardized else 'non-standardized'} workflow. "
+        f"{'standardized' if repo_obj.standardized else 'non-standardized'} workflow."
     )
 
     repos.append(repo_obj.__dict__)

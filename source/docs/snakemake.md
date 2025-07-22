@@ -19,7 +19,7 @@ The Snakemake workflow management system is a tool to create reproducible and sc
 
 The best starting point to create your own workflows is the [Snakemake workflow template](https://github.com/snakemake-workflows/snakemake-workflow-template).
 
-The template comes with a pre-configured structure that is compatible with the Snakemake catalog ['standardized usage'](<about/adding_workflows>). Just fork or clone the template, start addiong rules and push your workflow to Github. The structure of 'standardized' workflows is like this:
+The template comes with a pre-configured structure that is compatible with the Snakemake catalog ['standardized usage'](<about/adding_workflows>). Just fork or clone the template, start adding rules and push your workflow to Github. The structure of 'standardized' workflows is like this:
 
 ```
 ├── config/

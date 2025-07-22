@@ -68,6 +68,6 @@ Explore workflows 🔭
 ## Contributing
 
 - Improving PRs or issues with the workflow catalog (only the catalog, not the workflows themselves) can be made [here](http://github.com/snakemake/snakemake-workflow-catalog)
-- Improving PRs or issues with the listed workflows can be made at the respective workflow repository (see indivuidual [workflow pages](<docs/all_standardized_workflows>)).
-- Resources for creating new workflows can be found [here](<docs/snakemake>) or in more detail on the [Snakemake documnentation](https://snakemake.readthedocs.io/en/stable/index.html)
+- Improving PRs or issues with the listed workflows can be made at the respective workflow repository (see individual [workflow pages](<docs/all_standardized_workflows>)).
+- Resources for creating new workflows can be found [here](<docs/snakemake>) or in more detail on the [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/index.html)
 - New workflows will be [automatically added](<docs/catalog>) to the workflow catalog if they are contained in eligible Github repositories

@@ -89,7 +89,7 @@ def get_wrappers(smkfile):
     for match in re.finditer(r"\n\s*wrapper:\s*(.+)\n", smkfile):
         wrapper_line = match.group(1).strip().replace('"', "")
         wrp_clean = wrapper_line.split("/")
-        if len(wrp_clean) != 4:
+        if len(wrp_clean) not in [3, 4]:
             continue
         version, *rest = wrp_clean
         if not re.match(r"v\d+\.\d+\.\d+", version):

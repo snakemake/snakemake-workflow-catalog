@@ -90,7 +90,7 @@ conda env create -n snakemake-workflow-catalog -f environment.yml
 conda activate snakemake-workflow-catalog
 ```
 
-2. Set required environmental variables.
+2. Set required environment variables.
 The variable `N_REPOS` can be used to fetch data from a limited number of repos.
 The variable `TEST_REPO` can be used to fetch only data from a single workflow.
 **Note:** Building the entire catalog from scratch will take several hours due to searching and testing thousands of Github repos.

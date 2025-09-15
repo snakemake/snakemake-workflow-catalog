@@ -60,13 +60,12 @@
 
 ### Step 1: Install Snakemake and Snakedeploy
 
-Snakemake and Snakedeploy are best installed via the [Mamba package manager](https://github.com/mamba-org/mamba) (a drop-in replacement for conda). If you have neither Conda nor Mamba, it is recommended to install [Miniforge](https://github.com/conda-forge/miniforge).
-More details regarding Mamba can be found [here](https://github.com/mamba-org/mamba).
+Snakemake and Snakedeploy are best installed via the [Conda](https://conda.io). It is recommended to install conda via [Miniforge](https://github.com/conda-forge/miniforge).
 
-When using Mamba, run
+When using Conda, run
 
 ```bash
-mamba create -c conda-forge -c bioconda --name snakemake snakemake snakedeploy
+conda create -c conda-forge -c bioconda -c nodefaults --name snakemake snakemake snakedeploy
 ```
 
 to install both Snakemake and Snakedeploy in an isolated environment. For all following commands ensure that this environment is activated _via_
@@ -74,6 +73,8 @@ to install both Snakemake and Snakedeploy in an isolated environment. For all fo
 ```bash
 conda activate snakemake
 ```
+
+For other installation methods, refer to the [Snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) and [Snakedeploy](https://snakedeploy.readthedocs.io/en/stable/getting_started/installation.html) documentation.
 
 ### Step 2: Deploy workflow
 

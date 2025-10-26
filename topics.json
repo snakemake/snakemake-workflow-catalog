@@ -296,5 +296,21 @@
     "sector-coupling",
     "demand-flexibility",
     "dynamic-bayesian-network"
+  ],
+  "Pharmaceutical Research": [
+    "drug-discovery",
+    "drug-design",
+    "ligand-based-drug-design",
+    "virtual-screening",
+    "lead-optimization",
+    "pharmacokinetics",
+    "pharmacodynamics",
+    "adme",
+    "toxicology",
+    "qsar",
+    "cheminformatics",
+    "medicinal-chemistry",
+    "small-molecules",
+    "compound-libraries"
   ]
 }

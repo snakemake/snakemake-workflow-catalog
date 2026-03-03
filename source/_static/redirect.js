@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   const params = new URLSearchParams(window.location.search);
-  let workflow = params.get("wf") || params.get("usage");
+  let workflow = params.get("wf") ?? params.get("usage");
 
   if (workflow) {
+    // Allow only expected slug characters.
+    if (!/^[A-Za-z0-9_-\/]+$/.test(workflow)) {
+        console.error(`Invalid repo specification: ${workflow}`);
+        return;
+    }
     // Dynamically construct the target URL
     const targetUrl = `docs/workflows/${workflow}.html`;
 

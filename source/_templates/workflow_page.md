@@ -25,6 +25,7 @@
 
 **Latest release:** {bdg-primary}`{{ wf["release"] }}`, **Last update:** {bdg-primary}`{{ wf["last_update"] }}`
 
+**Share link:** https://snakemake.github.io/snakemake-workflow-catalog?wf={{ wf["full_name"] }}
 
 **Linting:**
 {% if wf["linting"] == None -%}

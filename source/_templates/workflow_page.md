@@ -26,7 +26,7 @@
 
 **Latest release:** {bdg-primary}`{{ wf["release"] }}`, **Last update:** {bdg-primary}`{{ wf["last_update"] }}`
 
-**Share link:** {bdg-link-secondary}`{{ wf_share_link }}<{{ wf_share_link }}>`
+**Share link:** {{ wf_share_link }}
 
 **Linting:**
 {% if wf["linting"] == None -%}

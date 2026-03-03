@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (workflow) {
     // Allow only expected slug characters.
     if (!/^[A-Za-z0-9_-\/]+$/.test(workflow)) {
-        console.error(`Invalid repo specification: ${workflow}`);
+        console.error(`Invalid workflow specification (allowed is [A-Za-z0-9_-\/]+): ${workflow}`);
         return;
     }
     // Dynamically construct the target URL

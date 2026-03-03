@@ -52,16 +52,13 @@ jobs:
           body: |
             Testing catalog parsing for repository https://github.com/${{ fromJSON(steps.info.outputs.result).test_repo }}.
             Results: https://github.com/snakemake/snakemake-workflow-catalog/actions/workflows/test-repo.yml
-      - uses: actions/checkout@v4
-      - name: deployment
-        uses: mamba-org/setup-micromamba@v2
-        with:
-          environment-file: environment.yml
+      - uses: actions/checkout@v6
+
+      - uses: prefix-dev/setup-pixi@v0
+
       - name: generate-catalog
-        shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TEST_REPO: ${{ fromJSON(steps.info.outputs.result).test_repo }}
-        run: |
-          python scripts/generate-catalog.py
-
+        # the TEST_REPO env var overwrites the default settings of the test-build task
+        run: pixi run test-generate-catalog

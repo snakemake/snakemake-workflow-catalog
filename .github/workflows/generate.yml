@@ -14,25 +14,20 @@ jobs:
         offset: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
       max-parallel: 1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: deployment
-        uses: mamba-org/setup-micromamba@v2
-        with:
-          environment-file: environment.yml
+      - uses: prefix-dev/setup-pixi@v0
 
       - name: Pull latest changes
         run: |
           git pull --rebase origin ${{ github.ref }}
 
       - name: generate-catalog
-        shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OFFSET: ${{ matrix.offset }}
           LATEST_COMMIT: 7
-        run: |
-          python scripts/generate-catalog.py
+        run: pixi run generate-catalog
 
       - name: Commit files
         run: |
@@ -54,24 +49,19 @@ jobs:
         offset: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
       max-parallel: 1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: deployment
-        uses: mamba-org/setup-micromamba@v2
-        with:
-          environment-file: environment.yml
+      - uses: prefix-dev/setup-pixi@v0
 
       - name: Pull latest changes
         run: |
           git pull --rebase origin ${{ github.ref }}
 
       - name: cleanup-catalog
-        shell: bash -l {0}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OFFSET: ${{ matrix.offset }}
-        run: |
-          python scripts/cleanup-catalog.py
+        run: pixi run cleanup-catalog
 
       - name: Commit files
         run: |

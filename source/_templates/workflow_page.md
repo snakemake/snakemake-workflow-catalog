@@ -26,15 +26,15 @@
 
 **Latest release:** {bdg-primary}`{{ wf["release"] }}`, **Last update:** {bdg-primary}`{{ wf["last_update"] }}`
 
-**Share link:** {{ wf_share_link }}
+**Share link:** [{{ wf_share_link }}]({{ wf_share_link }})
 
 **Quality control:**
-{% if wf["linting"] == None %}
+{% if wf["linting"] is None %}
         {bdg-success}`linting: passed`
 {% else %}
         {bdg-ref-danger}`linting: failed <linting-{{ wf["full_name"]|slugify }}>`
 {% endif %}
-{% if wf["formatting"] == None %}
+{% if wf["formatting"] is None %}
         {bdg-success}`formatting: passed`
 {% else %}
         {bdg-ref-danger}`formatting: failed <formatting-{{ wf["full_name"]|slugify }}>`

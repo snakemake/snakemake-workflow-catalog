@@ -4,7 +4,7 @@
 
 {% for repo in input -%}
 
-:::{grid-item-card} [{{ repo["name"] }}](<workflows/{{ repo["full_name"] }}>)
+:::{grid-item-card} [{{ repo["name"] }}](workflows/{{ repo["full_name"] }})
 
 {{ repo["user"] }}
 
@@ -17,11 +17,11 @@
 {bdg-muted}`Updated: {{ repo["last_update"] }}`
 {bdg-muted}`Release: {{ repo["latest_release"] }}`
 {%- for qc in ["formatting", "linting"] -%}
-    {%- if repo[qc] == None -%}
-        {bdg-success}`{{qc}}: passed`
-    {%- else -%}
-        {bdg-danger}`{{qc}}: failed`
-    {%- endif -%}
+{%- if repo[qc] == None -%}
+{bdg-success}`{{qc}}: passed`
+{%- else -%}
+{bdg-danger}`{{qc}}: failed`
+{%- endif -%}
 {% endfor %}
 
 +++

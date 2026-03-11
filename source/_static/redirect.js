@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Allow only expected slug characters.
     if (!/^[A-Za-z0-9\/_-]+$/.test(workflow)) {
       console.error(
-        `Invalid workflow specification (allowed is [A-Za-z0-9_-\/]+): ${workflow}`,
+        `Invalid workflow specification (allowed is ^[A-Za-z0-9\/_-]+$): ${workflow}`,
       );
       return;
     }

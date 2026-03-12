@@ -3,6 +3,8 @@ import re
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import datetime
 from pathlib import Path
+from modify_svg import modify_svg
+import subprocess as sp
 
 
 def check_readme(readme):
@@ -45,6 +47,30 @@ def slugify(value):
     return value
 
 
+def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
+    dotfile = output.with_suffix(".dot")
+    with open(dotfile, "w", encoding="utf-8") as f:
+        f.write(rg_dot)
+    styles = {
+        "light": ["label_arrow_stroke=lightgrey"],
+        "dark": ["node_stroke=black", "label_arrow_stroke=darkgrey"],
+    }
+    snakevision_cmd = [
+        "snakevision",
+        "-s",
+        "all",
+        "multiqc",
+        "-y",
+    ]
+    output_files = []
+    for style in styles:
+        svgfile = output.with_name(f"{output.name}_{style}.svg")
+        sp.run(snakevision_cmd + styles[style] + ["-o", str(svgfile)] + [str(dotfile)])
+        modify_svg(svgfile, style)
+        output_files.append(svgfile.name)
+    return output_files
+
+
 def build_wf_pages():
     # import jinja templates
     env = Environment(
@@ -68,6 +94,16 @@ def build_wf_pages():
         repo = repos[current_repo]
         wf_data = {}
         wf_data["full_name"] = current_repo
+        wf_dir, wf_name = current_repo.split("/")
+        output_dir = Path(f"docs/workflows") / wf_dir
+        if not output_dir.exists():
+            output_dir.mkdir(parents=True, exist_ok=True)
+        # plot rulegraph as SVG if available
+        rg_dot = repo.get("rulegraph", None)
+        if rg_dot is not None:
+            plots = plot_rulegraph(output_dir / wf_name, rg_dot)
+        else:
+            plots = None
         # prepare title, description, reporting, qc stats, etc.
         wf_data["description"] = repo["description"]
         wf_data["topics"] = repo["topics"]
@@ -75,6 +111,7 @@ def build_wf_pages():
         wf_data["linting"] = check_qc_output(repo["linting"])
         wf_data["formatting"] = check_qc_output(repo["formatting"])
         wf_data["release"] = repo["latest_release"]
+        wf_data["rulegraph"] = plots
         last_update = datetime.fromtimestamp(repo["updated_at"])
         wf_data["last_update"] = datetime.strftime(last_update, "%Y-%m-%d")
         # add deployment options
@@ -83,9 +120,6 @@ def build_wf_pages():
         wf_data["config_from_readme"] = check_readme(repo["config_readme"])
         # render and export
         md_rendered = template.render(wf=wf_data)
-        output_dir = Path(f"docs/workflows/{current_repo.split('/')[0]}")
-        if not output_dir.exists():
-            output_dir.mkdir(parents=True, exist_ok=True)
         output_path = output_dir / f"{current_repo.split('/')[1]}.md"
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(md_rendered)

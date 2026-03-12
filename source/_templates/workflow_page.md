@@ -53,6 +53,26 @@
 {% endfor %}
 {%- endif %}
 
+{% if wf["rulegraph"] is not none %}
+
+## Workflow Rule Graph
+
+This visualization of the workflow's rule graph was automatically generated using [Snakevision](https://github.com/OpenOmics/snakevision)
+
+```{image} {{ wf['rulegraph'][0] }}
+:alt: Rule Graph light
+:class: dark:hidden
+:align: center
+```
+
+```{image} {{ wf['rulegraph'][1] }}
+:alt: Rule Graph dark
+:class: hidden dark:block
+:align: center
+```
+
+{% endif %}
+
 ## Deployment
 
 :::{dropdown} Step 1: Install Snakemake and Snakedeploy

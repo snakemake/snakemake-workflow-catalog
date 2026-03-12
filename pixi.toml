@@ -22,6 +22,12 @@ altair = ">=5.5.0,<6.0"
 sphinxcontrib-jquery = ">=4.1.0,<5.0"
 sphinx-datatables = ">=1.0.0,<2.0"
 sphinxext-altair = ">=0.2.0,<0.3"
+graphviz = ">=14.1.2,<15"
+
+[pypi-dependencies]
+dagviz = ">=0.5.0"
+networkx = ">=3.6.1,<4"
+snakevision = { git = "https://github.com/OpenOmics/snakevision.git" } # temporary until snakevision is on PyPI
 
 [tasks]
 test-generate-catalog = { cmd = "python scripts/generate-catalog.py", env = { OFFSET = "0", N_REPOS = "3", LATEST_COMMIT = "7" } }

@@ -51,6 +51,7 @@ class Repo:
         updated_at,
         topics,
         wrappers,
+        rulegraph,
     ):
         self.full_name: str
         for attr in [
@@ -64,10 +65,9 @@ class Repo:
         self.topics = topics
         self.wrappers = wrappers
         self.updated_at = updated_at.timestamp()
-
         self.linting = linting
-
         self.formatting = formatting
+
         if formatting is not None:
             self.formatting += f"\nsnakefmt version: {snakefmt_version}"
 
@@ -87,6 +87,7 @@ class Repo:
             self.config_readme = config_readme
             self.standardized = True
             self.non_standardized_reason = None
+            self.rulegraph = rulegraph
         else:
             self.mandatory_flags = []
             self.software_stack_deployment = None
@@ -94,6 +95,7 @@ class Repo:
             self.report = False
             self.standardized = False
             self.non_standardized_reason = []
+            self.rulegraph = None
             if settings is None:
                 self.non_standardized_reason.append(
                     "no .snakemake-workflow-catalog.yml found in repo root"
@@ -293,6 +295,28 @@ for i in range(offset, end):
             if smk_wrappers:
                 wrappers = wrappers | smk_wrappers
 
+        # rulegraph
+        rulegraph = None
+        test_dir = tmp / ".test"
+        try:
+            out = sp.run(
+                [
+                    "snakemake",
+                    "--forceall",
+                    "-d",
+                    str(test_dir),
+                    "-c",
+                    str(1),
+                    "--rulegraph",
+                ],
+                capture_output=True,
+                cwd=tmp,
+                check=True,
+            )
+            rulegraph = out.stdout.decode()
+        except sp.CalledProcessError as e:
+            logging.warning(f"Could not generate rulegraph for {repo}: {e}")
+
     topics = call_rate_limit_aware(repo.get_topics)
 
     repo_obj = Repo(
@@ -305,6 +329,7 @@ for i in range(offset, end):
         updated_at,
         topics,
         wrappers,
+        rulegraph,
     )
     logging.info(
         f"Repo {repo_obj.full_name} processed successfully as "

@@ -32,3 +32,23 @@ figcaption {
   --sd-color-secondary-highlight: #5c636a;
   --sd-color-success: #3cad6e;
 }
+
+/*
+Fix for dark/light mode-toggled content: MyST rewrites classes
+dark:hidden to dark-hidden, so we need to map those to the theme's `.dark` mode.
+*/
+.dark-hidden {
+  display: block;
+}
+
+.dark-block {
+  display: none;
+}
+
+.dark .dark-hidden {
+  display: none;
+}
+
+.dark .dark-block {
+  display: block;
+}

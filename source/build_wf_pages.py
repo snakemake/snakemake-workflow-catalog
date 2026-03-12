@@ -5,6 +5,7 @@ from datetime import datetime
 from pathlib import Path
 from modify_svg import modify_svg
 import subprocess as sp
+import yaml
 
 
 def check_readme(readme):
@@ -77,6 +78,39 @@ def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
     return output_files
 
 
+def schema_to_markdown_table(data):
+    rows = []
+    properties = data.get("properties", {})
+
+    def parse_props(props, parent="", required_list=None):
+        required_list = required_list or []
+        for name, details in props.items():
+            full_name = f"{parent}.{name}" if parent else name
+            param_type = details.get("type", "")
+            description = details.get("description", "")
+            default = str(details.get("default") is True)
+            required = "yes" if name in required_list else ""
+
+            rows.append([full_name, param_type, description, required, default])
+
+            if param_type == "object":
+                parse_props(details.get("properties", {}), full_name, details.get("required", []))
+
+    parse_props(properties)
+    
+    headers = ["Parameter", "Type", "Description", "Required", "Default"]
+    col_widths = [max(len(row[i]) for row in ([headers] + rows)) for i in range(len(headers))]
+
+    md = "| " + " | ".join(headers[i].ljust(col_widths[i]) for i in range(len(headers))) + " |\n"
+    md += "| " + " | ".join("-" * col_widths[i] for i in range(len(headers))) + " |\n"
+    md += "\n".join(
+        "| " + " | ".join(row[i].ljust(col_widths[i]) for i in range(len(row))) + " |"
+        for row in rows
+    )
+
+    return md
+
+
 def build_wf_pages():
     # import jinja templates
     env = Environment(
@@ -124,6 +158,8 @@ def build_wf_pages():
         wf_data["deployment"] = check_deployment(repo["software_stack_deployment"])
         # add configuration from readme; adjust header level if necessary
         wf_data["config_from_readme"] = check_readme(repo["config_readme"])
+        if repo.get("schema_content"):
+            wf_data["schema_table"] = schema_to_markdown_table(repo["schema_content"])
         # render and export
         md_rendered = template.render(wf=wf_data)
         output_path = output_dir / f"{current_repo.split('/')[1]}.md"

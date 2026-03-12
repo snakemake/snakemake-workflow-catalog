@@ -175,6 +175,9 @@ _The following section is imported from the workflow's `config/README.md`_.
 
 {{ wf["config_from_readme"] }}
 
+## Schema table
+{{ wf["schema_table"] }}
+
 ## Linting and formatting
 
 (linting-{{ wf["full_name"]|slugify }})=

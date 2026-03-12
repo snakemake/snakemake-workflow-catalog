@@ -53,6 +53,7 @@ class Repo:
         topics,
         wrappers,
         rulegraph,
+        schema_content,
     ):
         self.full_name: str
         for attr in [
@@ -65,6 +66,7 @@ class Repo:
 
         self.topics = topics
         self.wrappers = wrappers
+        self.schema_content = schema_content
         self.updated_at = updated_at.timestamp()
         self.linting = linting
         self.formatting = formatting
@@ -86,6 +88,7 @@ class Repo:
                 "software-stack-deployment", {}
             )
             self.config_readme = config_readme
+            self.schema_content = schema_content
             self.standardized = True
             self.non_standardized_reason = None
             self.rulegraph = rulegraph
@@ -93,6 +96,7 @@ class Repo:
             self.mandatory_flags = []
             self.software_stack_deployment = None
             self.config_readme = None
+            self.schema_content = None
             self.report = False
             self.standardized = False
             self.non_standardized_reason = []
@@ -327,6 +331,18 @@ for i in range(offset, end):
                 )
             except sp.CalledProcessError as e:
                 logging.warning(f"Could not generate rulegraph for {repo}: {e}")
+        
+        # schema file path and content
+        schema_paths = [
+            tmp / "config" / "config.schema.yaml",
+            tmp / "workflow" / "schemas" / "config.schema.yaml",
+        ]
+        schema_content = None
+        for path in schema_paths:
+            if path.exists():
+                with open(path, "r") as f:
+                    schema_content = yaml.safe_load(f)
+                break
 
     topics = call_rate_limit_aware(repo.get_topics)
 
@@ -341,6 +357,7 @@ for i in range(offset, end):
         topics,
         wrappers,
         rulegraph,
+        schema_content,
     )
     logging.info(
         f"Repo {repo_obj.full_name} processed successfully as "
@@ -349,7 +366,7 @@ for i in range(offset, end):
 
     repos[repo_obj.__dict__["full_name"]] = repo_obj.__dict__
 
-if test_repo is None:
+if test_repo is not None:
     # Now add all old repos that haven't been covered by the current search.
     # This is necessary because Github limits search queries to 1000 items,
     # and we use up to 1000 repos with the most recent changes.

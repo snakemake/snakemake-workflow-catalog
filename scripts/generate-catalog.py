@@ -11,6 +11,7 @@ import git
 from git import Repo as GitRepo
 import yaml
 from github.PaginatedList import PaginatedList
+import json
 
 from common import (
     register_skip,
@@ -330,21 +331,16 @@ for i in range(offset, end):
                 )
             except sp.CalledProcessError as e:
                 logging.warning(f"Could not generate rulegraph for {repo}: {e}")
-        
-        # schema file path and content
-        schema_paths = [
-            tmp / "config" / "config.schema.yaml",
-            tmp / "workflow" / "schemas" / "config.schema.yaml",
-        ]
+              
+        # schema
         schema_content = None
         for schema_subdir in ["config", "workflow"]:
             for schema_suffix in ["yml", "yaml"]:
                 path = tmp / schema_subdir / "schemas" / f"config.schema.{schema_suffix}"
                 if path.exists():
                     with open(path, "r") as f:
-                        schema_content = str(yaml.safe_load(f))
+                        schema_content = json.dumps(yaml.safe_load(f), separators=(',', ':'))
                     break
-
 
     topics = call_rate_limit_aware(repo.get_topics)
 

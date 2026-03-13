@@ -80,37 +80,61 @@ def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
 
 def schema_to_markdown_table(data):
     rows = []
-    data = yaml.safe_load(data)
-    properties = data.get("properties", {})
+    data = json.loads(data)
+
+    def format_default(value):
+        if value is None:
+            return ""
+        if isinstance(value, bool):
+            return "true" if value else "false"
+        return str(value)
 
     def parse_props(props, parent="", required_list=None):
         required_list = required_list or []
+
         for name, details in props.items():
+            if not isinstance(details, dict):
+                continue
+
             full_name = f"{parent}.{name}" if parent else name
             param_type = details.get("type", "")
             description = details.get("description", "")
-            default_val = details.get("default")
-            default = str(default_val) if default_val is not None else ""
             required = "yes" if name in required_list else ""
+            default = format_default(details.get("default"))
 
             rows.append([full_name, param_type, description, required, default])
 
-            if param_type == "object":
-                parse_props(details.get("properties", {}), full_name, details.get("required", []))
+            if "properties" in details:
+                child_props = details.get("properties", {})
+                child_required = details.get("required", [])
+                parse_props(child_props, full_name, child_required)
 
-    parse_props(properties)
-    
-    headers = ["Parameter", "Type", "Description", "Required", "Default"]
-    col_widths = [max(len(row[i]) for row in [headers, *rows]) for i in range(len(headers))]
-
-    md = "| " + " | ".join(headers[i].ljust(col_widths[i]) for i in range(len(headers))) + " |\n"
-    md += "| " + " | ".join("-" * col_widths[i] for i in range(len(headers))) + " |\n"
-    md += "\n".join(
-        "| " + " | ".join(row[i].ljust(col_widths[i]) for i in range(len(row))) + " |"
-        for row in rows
+    parse_props(
+        data.get("properties", {}),
+        parent="",
+        required_list=data.get("required", [])
     )
 
-    return md
+    headers = ["Parameter", "Type", "Description", "Required", "Default"]
+
+    rows = [[str(cell) for cell in row] for row in rows]
+
+    col_widths = [
+        max(len(headers[i]), *(len(row[i]) for row in rows))
+        for i in range(len(headers))
+    ]
+
+    md_lines = []
+    md_lines.append("| " + " | ".join(headers[i].ljust(col_widths[i]) for i in range(len(headers))) + " |")
+    md_lines.append("| " + " | ".join("-" * col_widths[i] for i in range(len(headers))) + " |")
+
+    for row in rows:
+        md_lines.append("| " + " | ".join(row[i].ljust(col_widths[i]) for i in range(len(headers))) + " |")
+
+    markdown = "\n".join(md_lines)
+
+
+    return markdown
 
 
 def build_wf_pages():

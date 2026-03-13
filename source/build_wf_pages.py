@@ -65,7 +65,13 @@ def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
     output_files = []
     for style in styles:
         svgfile = output.with_name(f"{output.name}_{style}.svg")
-        sp.run(snakevision_cmd + styles[style] + ["-o", str(svgfile)] + [str(dotfile)])
+        try:
+            sp.run(
+                snakevision_cmd + styles[style] + ["-o", str(svgfile)] + [str(dotfile)],
+                check=True,
+            )
+        except sp.CalledProcessError:
+            break
         modify_svg(svgfile, style)
         output_files.append(svgfile.name)
     return output_files

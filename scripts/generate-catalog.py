@@ -32,6 +32,7 @@ test_repo = os.environ.get("TEST_REPO")
 offset = int(offset * 10)
 n_repos = int(os.environ.get("N_REPOS", 100))
 assert n_repos >= 1
+rulegraph_timeout_seconds = 15
 
 repos = {}
 skips = {}
@@ -298,24 +299,34 @@ for i in range(offset, end):
         # rulegraph
         rulegraph = None
         test_dir = tmp / ".test"
-        try:
-            out = sp.run(
-                [
-                    "snakemake",
-                    "--forceall",
-                    "-d",
-                    str(test_dir),
-                    "-c",
-                    str(1),
-                    "--rulegraph",
-                ],
-                capture_output=True,
-                cwd=tmp,
-                check=True,
-            )
-            rulegraph = out.stdout.decode()
-        except sp.CalledProcessError as e:
-            logging.warning(f"Could not generate rulegraph for {repo}: {e}")
+        if settings is not None and config_readme is not None and test_dir.is_dir():
+            try:
+                out = sp.run(
+                    [
+                        "snakemake",
+                        "--forceall",
+                        "-s",
+                        str(snakefile),
+                        "-d",
+                        str(test_dir),
+                        "-c",
+                        str(1),
+                        "--rulegraph",
+                    ],
+                    capture_output=True,
+                    cwd=tmp,
+                    check=True,
+                    timeout=rulegraph_timeout_seconds,
+                )
+                rulegraph = out.stdout.decode()
+            except sp.TimeoutExpired:
+                logging.warning(
+                    "Could not generate rulegraph for %s: timed out after %ss",
+                    repo,
+                    rulegraph_timeout_seconds,
+                )
+            except sp.CalledProcessError as e:
+                logging.warning(f"Could not generate rulegraph for {repo}: {e}")
 
     topics = call_rate_limit_aware(repo.get_topics)
 

@@ -175,8 +175,11 @@ _The following section is imported from the workflow's `config/README.md`_.
 
 {{ wf["config_from_readme"] }}
 
+
+{% if wf["schema_table"] %}
 ## Schema table
 {{ wf["schema_table"] }}
+{% endif %}
 
 ## Linting and formatting
 

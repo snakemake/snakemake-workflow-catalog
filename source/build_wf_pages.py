@@ -80,6 +80,7 @@ def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
 
 def schema_to_markdown_table(data):
     rows = []
+    data = yaml.safe_load(data)
     properties = data.get("properties", {})
 
     def parse_props(props, parent="", required_list=None):
@@ -88,7 +89,8 @@ def schema_to_markdown_table(data):
             full_name = f"{parent}.{name}" if parent else name
             param_type = details.get("type", "")
             description = details.get("description", "")
-            default = str(details.get("default") is True)
+            default_val = details.get("default")
+            default = str(default_val) if default_val is not None else ""
             required = "yes" if name in required_list else ""
 
             rows.append([full_name, param_type, description, required, default])
@@ -99,7 +101,7 @@ def schema_to_markdown_table(data):
     parse_props(properties)
     
     headers = ["Parameter", "Type", "Description", "Required", "Default"]
-    col_widths = [max(len(row[i]) for row in ([headers] + rows)) for i in range(len(headers))]
+    col_widths = [max(len(row[i]) for row in [headers, *rows]) for i in range(len(headers))]
 
     md = "| " + " | ".join(headers[i].ljust(col_widths[i]) for i in range(len(headers))) + " |\n"
     md += "| " + " | ".join("-" * col_widths[i] for i in range(len(headers))) + " |\n"
@@ -158,8 +160,9 @@ def build_wf_pages():
         wf_data["deployment"] = check_deployment(repo["software_stack_deployment"])
         # add configuration from readme; adjust header level if necessary
         wf_data["config_from_readme"] = check_readme(repo["config_readme"])
+        wf_data["schema_table"] = ""
         if repo.get("schema_content"):
-            wf_data["schema_table"] = schema_to_markdown_table(repo["schema_content"])
+            wf_data["schema_table"] = schema_to_markdown_table(repo.get("schema_content"))
         # render and export
         md_rendered = template.render(wf=wf_data)
         output_path = output_dir / f"{current_repo.split('/')[1]}.md"

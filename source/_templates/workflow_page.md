@@ -53,7 +53,7 @@
 {% endfor %}
 {%- endif %}
 
-{% if wf["rulegraph"] is not none %}
+{% if wf["rulegraph"] %}
 
 ## Workflow Rule Graph
 

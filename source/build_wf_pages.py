@@ -71,7 +71,7 @@ def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
                 check=True,
             )
         except sp.CalledProcessError:
-            break
+            return []
         modify_svg(svgfile, style)
         output_files.append(svgfile.name)
     return output_files

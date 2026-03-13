@@ -175,9 +175,14 @@ _The following section is imported from the workflow's `config/README.md`_.
 
 {{ wf["config_from_readme"] }}
 
-## Schema table
-{% if wf["schema_table"] %}
-{{ wf["schema_table"] }}
+{% if wf["config_from_schema"] %}
+
+## Workflow parameters
+
+_The following table is automatically parsed from the workflow's `config.schema.y(a)ml` file_.
+
+{{ wf["config_from_schema"] }}
+
 {% endif %}
 
 ## Linting and formatting

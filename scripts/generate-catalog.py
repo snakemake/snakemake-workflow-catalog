@@ -338,8 +338,11 @@ for i in range(offset, end):
             for schema_suffix in ["yml", "yaml"]:
                 path = tmp / schema_subdir / "schemas" / f"config.schema.{schema_suffix}"
                 if path.exists():
-                    with open(path, "r") as f:
-                        schema_content = json.dumps(yaml.safe_load(f), separators=(',', ':'))
+                    try:
+                        with open(path, "r") as f:
+                            schema_content = json.dumps(yaml.safe_load(f), separators=(',', ':'))
+                    except yaml.YAMLError as e:
+                        logging.warning(f"Could not parse schema {path}: {e}")
                     break
 
     topics = call_rate_limit_aware(repo.get_topics)
@@ -364,7 +367,7 @@ for i in range(offset, end):
 
     repos[repo_obj.__dict__["full_name"]] = repo_obj.__dict__
 
-if test_repo is None:
+if test_repo is not None:
     # Now add all old repos that haven't been covered by the current search.
     # This is necessary because Github limits search queries to 1000 items,
     # and we use up to 1000 repos with the most recent changes.

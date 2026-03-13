@@ -95,7 +95,7 @@ def build_wf_pages():
         wf_data = {}
         wf_data["full_name"] = current_repo
         wf_dir, wf_name = current_repo.split("/")
-        output_dir = Path(f"docs/workflows") / wf_dir
+        output_dir = Path("docs/workflows") / wf_dir
         if not output_dir.exists():
             output_dir.mkdir(parents=True, exist_ok=True)
         # plot rulegraph as SVG if available

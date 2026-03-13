@@ -182,7 +182,7 @@ _The following section is imported from the workflow's `config/README.md`_.
 
 {% if wf["linting"] == None %}
 
-```
+```text
 All tests passed!
 ```
 
@@ -207,7 +207,7 @@ All tests passed!
 
 {% if wf["formatting"] == None %}
 
-```
+```text
 All tests passed!
 ```
 

@@ -28,7 +28,7 @@ Workflows are automatically added to the Workflow Catalog. This is done by regul
 - The repository contains a workflow definition named either `Snakefile` or `workflow/Snakefile`.
 - If the repository contains a folder `rules` or `workflow/rules`, that folder must at least contain one file ending on `.smk`.
 - The repository is small enough to be cloned into a [Github Actions](https://docs.github.com/en/actions/about-github-actions/understanding-github-actions) job (very large files should be handled via [Git LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files), so that they can be stripped out during cloning).
-- The repository is not blacklisted here.
+- The repository is not blacklisted.
 
 ### Standardized usage workflows
 
@@ -53,6 +53,23 @@ usage:
 ```
 
 Once included in the standardized usage area you can link directly to the workflow page using the URL `https://snakemake.github.io/snakemake-workflow-catalog/docs/workflows/<owner>/<repo>`. Do not forget to replace the `<owner>` and `<repo>` tags at the end of the URL.
+
+### Workflow pages
+
+Each standardized workflow has its own page, which is linked on the summary tables or the 'top workflows' tiles.
+Workflow pages are **enhanced by information automatically parsed** from their Github repositories. Right now this includes:
+
+1. **Tube Maps**: A graphical representation of the workflow rulegraph, build using [snakevision](https://github.com/OpenOmics/snakevision).
+   Tube maps will automatically show up on your workflow page if the following command can be run for your workflow: `snakemake -s <snakefile> -c 1 -d .test --forceall --rulegraph`.
+   This means, you need to have a working test case defined in the `.test` sub-dir.
+
+2. **Workflow Configuration**: These are simply the configuration instructions from `config/README.md`.
+
+3. **Workflow Parameters**: If the repo contains a `workflow/schemas/config.schema.yaml` OR `config/schemas/config.schema.yaml` file, the parameters defined in this file will be parsed and displayed as a table on the workflow page.
+   The default fields that are recognized in the schema are `type`, `description`, `default` and `required`.
+   Config options can be arbitrarily nested in the schema using the `properties` field of an object.
+
+All these features are implemented in the [snakemake-workflow-template](https://github.com/snakemake-workflows/snakemake-workflow-template). If you want to create a standard-compliant workflow (page), the template is the ideal starting point.
 
 ### Release handling
 
@@ -82,54 +99,61 @@ Then, clone the forked repository:
 
 Make your changes to the catalog:
 
-1. Create a conda/mamba environment in order to work with the catalog locally.
+1. Download all software dependencies using [pixi](https://pixi.prefix.dev/latest/). Read up here [how to set up pixi](https://pixi.prefix.dev/latest/installation/) on your system.
 
 ```bash
-cd <path-to>/snakemake-workflow-catalog
-conda env create -n snakemake-workflow-catalog -f environment.yml
-conda activate snakemake-workflow-catalog
+pixi shell
 ```
 
-2. Set required environment variables.
-The variable `N_REPOS` can be used to fetch data from a limited number of repos.
-The variable `TEST_REPO` can be used to fetch only data from a single workflow.
-**Note:** Building the entire catalog from scratch will take several hours due to searching and testing thousands of Github repos.
+2. In order to run predefined tests, run one of:
+
+```bash
+pixi run test-generate-catalog              # tests 3 latest repos
+pixi run test-generate-catalog-single-repo  # tests a single predefined repo
+pixi run test-cleanup-catalog               # tests cleanup of the catalog
+```
+
+3. In order to run custom tests, set the required environment variables.
+   The variable `N_REPOS` can be used to fetch data from a limited number of repos.
+   The variable `LATEST_COMMIT` can be used to limit the search to repos which were updated within the last N days.
+   The `OFFSET` variable can be used to skip a number of repos in the search results.
+   The variable `TEST_REPO` can be used to fetch only data from a single workflow. It overrides the other settings.
+   **Note:** Building the entire catalog from scratch will take several hours due to searching and testing thousands of Github repos.
 
 ```bash
 export GITHUB_TOKEN="<your-github-token>"
-export OFFSET=0
-export LATEST_COMMIT=1000
 export N_REPOS=3
-export TEST_REPO="snakemake-workflows/rna-seq-star-deseq2"
+export LATEST_COMMIT=7
+export OFFSET=0
+export TEST_REPO="snakemake-workflows/dna-seq-varlociraptor"
 ```
 
-3. Build the catalog data sources using the test repository.
+4. Fetch the data for the catalog from Github:
 
 ```bash
-python scripts/generate-catalog.py
-python scripts/cleanup-catalog.py
+pixi run generate-catalog
+pixi run cleanup-catalog
 ```
 
-4. Build the catalog web page using sphinx autobuild (live reload).
+5. Build the catalog web page using sphinx.
+
+```bash
+pixi run render-catalog
+```
+
+6. Alternatively, build the catalog web page using sphinx autobuild (live reload).
 
 ```bash
 sphinx-autobuild source/ build/
 ```
 
-... or using the make file (static build).
+If you are happy with your changes, you can push them to your fork on Github and [start a Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request):
 
 ```bash
-make html
+git add .
+git commit -m "fix: your commit message"
+git push
 ```
-
-5. Run `git add .` to stage your changes.
-6. Run `git commit -m "fix: your commit message"` to commit your changes.
-7. Run `git push` to push your changes to your fork on Github.
-
-Finally, create a pull request:
-
-1. Go to your fork on Github.
-2. Follow the instructions on the [Github documentation: Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
 ## Using workflows from the catalog
 

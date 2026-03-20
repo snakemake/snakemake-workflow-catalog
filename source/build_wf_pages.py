@@ -3,7 +3,6 @@ import re
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import datetime
 from pathlib import Path
-from modify_svg import modify_svg
 import subprocess as sp
 
 
@@ -52,8 +51,20 @@ def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
     with open(dotfile, "w", encoding="utf-8") as f:
         f.write(rg_dot)
     styles = {
-        "light": ["label_arrow_stroke=lightgrey"],
-        "dark": ["node_stroke=black", "label_arrow_stroke=darkgrey"],
+        "light": [
+            "node_stroke=white",
+            "label_arrow_stroke=lightgrey",
+            "label_font_color=darkgrey",
+            "bridge_color=white",
+            "label_font_size=11",
+        ],
+        "dark": [
+            "node_stroke=black",
+            "label_arrow_stroke=darkgrey",
+            "label_font_color=darkgrey",
+            "bridge_color=black",
+            "label_font_size=11",
+        ],
     }
     snakevision_cmd = [
         "snakevision",
@@ -72,7 +83,6 @@ def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
             )
         except sp.CalledProcessError:
             return []
-        modify_svg(svgfile, style)
         output_files.append(svgfile.name)
     return output_files
 
@@ -99,6 +109,8 @@ def schema_to_markdown(data):
             spacer = " . " * nesting
             full_name = f"{spacer}{name}" if parent else f"**{name}**"
             param_type = details.get("type", "")
+            if param_type == "object":
+                param_type = ""
             description = details.get("description", "")
             required = "yes" if name in required_list else ""
             default = format_default(details.get("default"))

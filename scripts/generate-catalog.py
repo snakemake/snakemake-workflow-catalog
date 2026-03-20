@@ -150,7 +150,7 @@ logging.info(
 
 for i, repo in enumerate(repo_list):
     if i != 0:
-        # sleep for one minute +x to avoid running into secondary rate limit
+        # sleep for N seconds to avoid running into secondary rate limit
         time.sleep(5)
 
     if i % 10 == 0:
@@ -169,10 +169,7 @@ for i, repo in enumerate(repo_list):
     releases = call_rate_limit_aware(repo.get_releases)
     try:
         release = releases[0]
-        if release.created_at >= updated_at:
-            updated_at = release.created_at
-        else:
-            release = None
+        updated_at = max(updated_at, release.created_at)
     except IndexError:
         # no releases
         release = None

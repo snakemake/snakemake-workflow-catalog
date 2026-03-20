@@ -57,6 +57,16 @@ def call_rate_limit_aware(func, api_type="core"):
             rate_limit_wait(api_type)
 
 
+def has_snakefile(repo):
+    for fname in ["Snakefile", "workflow/Snakefile"]:
+        try:
+            repo.get_contents(fname)
+            return True
+        except UnknownObjectException:
+            continue
+    return False
+
+
 def register_skip(repo, skips):
     skips[repo.full_name] = {
         "full_name": repo.full_name,

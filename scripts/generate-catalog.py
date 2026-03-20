@@ -15,6 +15,7 @@ from github.PaginatedList import PaginatedList
 import json
 
 from common import (
+    has_snakefile,
     register_skip,
     store_data,
     call_rate_limit_aware,
@@ -116,9 +117,10 @@ class Repo:
 
 
 if test_repo is not None:
-    repo_search = [g.get_repo(test_repo)]
+    repo_list = [g.get_repo(test_repo)]
     total_count = 1
     offset = 0
+    end = 1
 else:
     assert "LATEST_COMMIT" in os.environ
     latest_commit = int(os.environ["LATEST_COMMIT"])
@@ -133,19 +135,23 @@ else:
     total_count = call_rate_limit_aware(
         lambda: repo_search.totalCount, api_type="search"
     )
+    # check before downloading a repo if it has a Snakefile
+    end = min(offset + n_repos, total_count)
+    repo_list = []
+    for i in range(offset, end):
+        checked_repo = call_rate_limit_aware(lambda: repo_search[i], api_type="search")
+        if has_snakefile(checked_repo):
+            repo_list.append(checked_repo)
 
-end = min(offset + n_repos, total_count)
-logging.info(f"Checking {total_count} repos, repo {offset}-{end-1}.")
 
-for i in range(offset, end):
-    if i != offset:
+logging.info(
+    f"Checking {total_count} repos ({offset}-{end-1}), of which {len(repo_list)} have a Snakefile."
+)
+
+for i, repo in enumerate(repo_list):
+    if i != 0:
         # sleep for one minute +x to avoid running into secondary rate limit
-        time.sleep(63)
-
-    # We access each repo by index instead of using an iterator
-    # in order to be able to retry the access in case we reach the search
-    # rate limit.
-    repo = call_rate_limit_aware(lambda: repo_search[i], api_type="search")
+        time.sleep(5)
 
     if i % 10 == 0:
         logging.info(f"{i} of {total_count} repos done.")
@@ -163,7 +169,10 @@ for i in range(offset, end):
     releases = call_rate_limit_aware(repo.get_releases)
     try:
         release = releases[0]
-        updated_at = max(updated_at, release.created_at)
+        if release.created_at >= updated_at:
+            updated_at = release.created_at
+        else:
+            release = None
     except IndexError:
         # no releases
         release = None
@@ -216,7 +225,7 @@ for i in range(offset, end):
         snakefile = workflow / "Snakefile"
 
         if not snakefile.exists():
-            log_skip("of missing Snakefile")
+            log_skip(f"of missing '{snakefile.relative_to(tmp)}'")
             skips = register_skip(repo, skips)
             continue
 

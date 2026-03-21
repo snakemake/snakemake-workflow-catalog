@@ -10,7 +10,11 @@ import urllib.request
 
 from ratelimit import limits, sleep_and_retry
 from github import Github
-from github.GithubException import UnknownObjectException, RateLimitExceededException
+from github.GithubException import (
+    GithubException,
+    UnknownObjectException,
+    RateLimitExceededException,
+)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -60,9 +64,12 @@ def call_rate_limit_aware(func, api_type="core"):
 def has_snakefile(repo):
     for fname in ["Snakefile", "workflow/Snakefile"]:
         try:
-            repo.get_contents(fname)
+            call_rate_limit_aware(lambda f=fname: repo.get_contents(f))
             return True
         except UnknownObjectException:
+            continue
+        except GithubException as e:
+            logging.warning(f"Error checking '{fname}' in {repo.full_name}: {e}")
             continue
     return False
 

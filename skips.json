@@ -652,6 +652,14 @@
     "updated_at": 1755217265.0
   },
   {
+    "full_name": "B300238-2025/tRNA-seq_Differential-Analysis-Validation-Pipeline",
+    "updated_at": 1785979340.0
+  },
+  {
+    "full_name": "B300238-2025/tRNA-seq_Three-pass_Alignment_Snakemake_Pipeline",
+    "updated_at": 1785979274.0
+  },
+  {
     "full_name": "BBerickson/BBerickson",
     "updated_at": 1771095763.0
   },
@@ -1404,6 +1412,14 @@
     "updated_at": 1786016614.0
   },
   {
+    "full_name": "DarrenLJS/tRNA-seq_Differential-Analysis-Validation-Pipeline",
+    "updated_at": 1785876889.0
+  },
+  {
+    "full_name": "DarrenLJS/tRNA-seq_Three-pass_Alignment_Snakemake_Pipeline",
+    "updated_at": 1785876968.0
+  },
+  {
     "full_name": "DarrianTalamantes/Mapping_and_QTL",
     "updated_at": 1751997580.0
   },
@@ -1598,6 +1614,10 @@
   {
     "full_name": "DuronioLab/transgenic_longread_map_snakemake",
     "updated_at": 1718738608.0
+  },
+  {
+    "full_name": "Dydx1989/geo-survcausal-snakemake",
+    "updated_at": 1785880723.0
   },
   {
     "full_name": "Dylkln/LAGOON",
@@ -4084,6 +4104,10 @@
     "updated_at": 1769712576.0
   },
   {
+    "full_name": "Nidhal212/PAD4-DB",
+    "updated_at": 1785973773.0
+  },
+  {
     "full_name": "Nigmat-future/Pipeline-Construction",
     "updated_at": 1768108640.0
   },
@@ -5058,6 +5082,10 @@
   {
     "full_name": "Seid-M-Adem/gene-annotation",
     "updated_at": 1738176301.0
+  },
+  {
+    "full_name": "Sendoel-Lab/crop-seq-analysis",
+    "updated_at": 1785945457.0
   },
   {
     "full_name": "SeqCrafter/SurroNPROT",
@@ -11157,7 +11185,7 @@
   },
   {
     "full_name": "iLivius/MetaFlux",
-    "updated_at": 1785482894.0
+    "updated_at": 1785854898.0
   },
   {
     "full_name": "iRNA-COSI/APAeval",
@@ -11749,7 +11777,7 @@
   },
   {
     "full_name": "jjevans25/GBM_Nerve_Tumor_Immune_Single_Cell_Analysis",
-    "updated_at": 1785286412.0
+    "updated_at": 1785883305.0
   },
   {
     "full_name": "jjjermiah/GCP-for-genomicworkflows",
@@ -14405,7 +14433,7 @@
   },
   {
     "full_name": "nextstrain/ncov-ingest",
-    "updated_at": 1784828781.0
+    "updated_at": 1785926693.0
   },
   {
     "full_name": "nextstrain/ncov-simple",
@@ -15096,6 +15124,10 @@
     "updated_at": 1776109185.0
   },
   {
+    "full_name": "peterthorpe5/DADA2_amplicon_runner",
+    "updated_at": 1785941266.0
+  },
+  {
     "full_name": "pfcv99/pfcv99",
     "updated_at": 1737057696.0
   },
@@ -15129,7 +15161,7 @@
   },
   {
     "full_name": "phindagijimana/dkt_connectome",
-    "updated_at": 1785018399.0
+    "updated_at": 1785958635.0
   },
   {
     "full_name": "photon-mosaic/photon-mosaic-pipeline",

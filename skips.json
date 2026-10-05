@@ -8433,7 +8433,11 @@
   },
   {
     "full_name": "cbib/nbd_extraction_pipeline",
-    "updated_at": 1776160984.0
+    "updated_at": 1790702118.0
+  },
+  {
+    "full_name": "cbib/rep_extraction_pipeline",
+    "updated_at": 1790701306.0
   },
   {
     "full_name": "cbib/snakemake_tcga_survival",
@@ -8441,7 +8445,7 @@
   },
   {
     "full_name": "cbib/uncertainty_aware_lnclassifier",
-    "updated_at": 1776185256.0
+    "updated_at": 1790709947.0
   },
   {
     "full_name": "cbp44/docker-copier",
@@ -9462,6 +9466,10 @@
   {
     "full_name": "dgruano/rep_extraction_pipeline",
     "updated_at": 1774810063.0
+  },
+  {
+    "full_name": "dgruano/secondrna",
+    "updated_at": 1790701598.0
   },
   {
     "full_name": "dgunasekaran/snp_svant",
@@ -11344,6 +11352,10 @@
     "updated_at": 1761945441.0
   },
   {
+    "full_name": "idehenjohnlinux/diptera-classification",
+    "updated_at": 1790698330.0
+  },
+  {
     "full_name": "idf-io/bioinformatics-at-the-dkfz",
     "updated_at": 1697228578.0
   },
@@ -12416,6 +12428,10 @@
     "updated_at": 1639170340.0
   },
   {
+    "full_name": "kelpopope/csi-genome-audit",
+    "updated_at": 1790736382.0
+  },
+  {
     "full_name": "kelseykeith/bix_workflows",
     "updated_at": 1641478246.0
   },
@@ -12733,7 +12749,7 @@
   },
   {
     "full_name": "l1stes0n/Metagenomic_pipeline",
-    "updated_at": 1790060399.0
+    "updated_at": 1790769364.0
   },
   {
     "full_name": "lab-biotek-bio-ugm/trycycler_ibnugroho",
@@ -13305,7 +13321,7 @@
   },
   {
     "full_name": "majssssa/ParaChrSNP",
-    "updated_at": 1785771878.0
+    "updated_at": 1790676870.0
   },
   {
     "full_name": "makhovds/BostonGene_Contest",
@@ -14265,7 +14281,7 @@
   },
   {
     "full_name": "mszg/pipeline",
-    "updated_at": 1790248259.0
+    "updated_at": 1790751861.0
   },
   {
     "full_name": "mtandon09/CCBR_GATK4_Exome_Seq_Pipeline",

@@ -87501,30 +87501,6 @@
   },
   {
     "config_readme": null,
-    "data_format": 3,
-    "description": null,
-    "formatting": "[DEBUG] \n[DEBUG] In file \"/tmp/tmp6e4vgz6u/workflow/Snakefile\":  Formatted content is different from original\n[INFO] 1 file(s) would be changed \ud83d\ude2c\n\nsnakefmt version: 0.11.5",
-    "full_name": "jonasGkT01/LLMmind_project",
-    "latest_release": null,
-    "linting": "/home/runner/work/snakemake-workflow-catalog/snakemake-workflow-catalog/.pixi/envs/default/lib/python3.13/site-packages/google/auth/transport/grpc.py:43: FutureWarning: grpcio < 1.83.0 does not support Post-Quantum Cryptography (PQC). Support for non-PQC environments is deprecated. In April 2027, google-auth will raise its minimum requirements to enforce grpcio >= 1.83.0. For more details on Google Cloud's post-quantum security migration, visit: https://cloud.google.com/security/resources/post-quantum-cryptography\n  warnings.warn(\nValueError in file \"/tmp/tmp6e4vgz6u/workflow/dataset_processing/caption_scene_dataset/Snakefile\", line 74:\nNo BOLD files found with glob: resources/datasets/caption_scene_dataset/V1/derivatives/pp_data/sub-*/func/sub-*_ses-*_task-CSD_run-*.nii.gz\n  File \"/tmp/tmp6e4vgz6u/workflow/dataset_processing/caption_scene_dataset/Snakefile\", line 74, in <module>\n",
-    "mandatory_flags": [],
-    "non_standardized_reason": [
-      "no .snakemake-workflow-catalog.yml found in repo root",
-      "no config/README.md found in repo root"
-    ],
-    "report": false,
-    "rulegraph": null,
-    "schemas": null,
-    "software_stack_deployment": null,
-    "standardized": false,
-    "stargazers_count": 0,
-    "subscribers_count": 0,
-    "topics": [],
-    "updated_at": 1791552789.0,
-    "wrappers": {}
-  },
-  {
-    "config_readme": null,
     "data_format": 2,
     "description": null,
     "formatting": "[DEBUG] \n[DEBUG] In file \"/tmp/tmpaeouhu3g/workflow/rules/trees.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpaeouhu3g/workflow/Snakefile\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpaeouhu3g/workflow/rules/alignment.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpaeouhu3g/workflow/rules/download_data.smk\":  Formatted content is different from original\n[INFO] 4 file(s) would be changed \ud83d\ude2c\n\nsnakefmt version: 0.10.2",
@@ -88942,30 +88918,6 @@
     "subscribers_count": 0,
     "topics": [],
     "updated_at": 1787289433.0,
-    "wrappers": {}
-  },
-  {
-    "config_readme": null,
-    "data_format": 3,
-    "description": "Pipeline for benchmark-driven embedding selection and latent-space interpretability in a single-cell atlas of bleomycin-induced dermal fibrosis.",
-    "formatting": "[DEBUG] \n[DEBUG] In file \"/tmp/tmpmg6hbdh6/Snakefile\":  Formatted content is different from original\n[INFO] 1 file(s) would be changed \ud83d\ude2c\n\nsnakefmt version: 0.11.5",
-    "full_name": "jvictorslvs/fibrosis-singlecell-benchmark",
-    "latest_release": null,
-    "linting": "Lints for rule organize_data (line 20, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule validate_organization (line 34, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule qc_rna (line 47, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule qc_atac (line 67, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule qc_visium (line 86, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule normalization (line 109, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule annotation (line 126, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule differential_abundance (line 144, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule pseudobulk_de (line 160, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule embedding_benchmark (line 172, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule multimodal_integration (line 189, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule xai_global_shap (line 206, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule xai_local_lime (line 228, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule final_metrics_gates (line 245, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule make_figures_ms1 (line 261, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule make_tables_ms1 (line 277, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule build_manuscript_ms1 (line 306, /tmp/tmpmg6hbdh6/Snakefile):\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\n",
-    "mandatory_flags": [],
-    "non_standardized_reason": [
-      "no .snakemake-workflow-catalog.yml found in repo root",
-      "no config/README.md found in repo root"
-    ],
-    "report": false,
-    "rulegraph": null,
-    "schemas": null,
-    "software_stack_deployment": null,
-    "standardized": false,
-    "stargazers_count": 0,
-    "subscribers_count": 0,
-    "topics": [],
-    "updated_at": 1785687301.0,
     "wrappers": {}
   },
   {
@@ -94111,30 +94063,6 @@
   {
     "config_readme": null,
     "data_format": 3,
-    "description": "Pipeline for checking circularity, misassemblies and polishing assemblies",
-    "formatting": "[DEBUG] \n[DEBUG] In file \"/tmp/tmpe7q2lzth/workflow/Snakefile\":  Formatted content is different from original\n[INFO] 1 file(s) would be changed \ud83d\ude2c\n\nsnakefmt version: 0.11.5",
-    "full_name": "l-gallucci/mamisa",
-    "latest_release": null,
-    "linting": "/home/runner/work/snakemake-workflow-catalog/snakemake-workflow-catalog/.pixi/envs/default/lib/python3.13/site-packages/google/auth/transport/grpc.py:43: FutureWarning: grpcio < 1.83.0 does not support Post-Quantum Cryptography (PQC). Support for non-PQC environments is deprecated. In April 2027, google-auth will raise its minimum requirements to enforce grpcio >= 1.83.0. For more details on Google Cloud's post-quantum security migration, visit: https://cloud.google.com/security/resources/post-quantum-cryptography\n  warnings.warn(\nLints for snakefile /tmp/tmpe7q2lzth/workflow/Snakefile:\n    * Path composition with '+' in line 23:\n      This becomes quickly unreadable. Usually, it is better to endure some\n      redundancy against having a more readable workflow. Hence, just repeat\n      common prefixes. If path composition is unavoidable, use pathlib or\n      (python >= 3.6) string formatting with f\"...\".\n\nLints for rule run_checkm2 (line 66, /tmp/tmpe7q2lzth/workflow/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Shell command directly uses variable EXT from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Param outdir is a prefix of input or output file but hardcoded:\n      If this is meant to represent a file path prefix, it will fail when\n      running workflow in environments without a shared filesystem. Instead,\n      provide a function that infers the appropriate prefix from the input or\n      output file, e.g.: lambda w, input: os.path.splitext(input[0])[0]\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n      https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#tutorial-input-functions\n\nLints for rule run_gtdbtk (line 83, /tmp/tmpe7q2lzth/workflow/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Shell command directly uses variable config from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Shell command directly uses variable EXT from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n\nLints for rule run_gunc (line 102, /tmp/tmpe7q2lzth/workflow/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Shell command directly uses variable EXT from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Shell command directly uses variable config from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n\nLints for rule run_mimag_rna (line 117, /tmp/tmpe7q2lzth/workflow/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Shell command directly uses variable EXT from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Shell command directly uses variable MIMAG_KING from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Param outdir is a prefix of input or output file but hardcoded:\n      If this is meant to represent a file path prefix, it will fail when\n      running workflow in environments without a shared filesystem. Instead,\n      provide a function that infers the appropriate prefix from the input or\n      output file, e.g.: lambda w, input: os.path.splitext(input[0])[0]\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n      https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#tutorial-input-functions\n\nLints for rule organize_mags (line 144, /tmp/tmpe7q2lzth/workflow/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Shell command directly uses variable GENOMES from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Shell command directly uses variable config from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Shell command directly uses variable config from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Shell command directly uses variable EXT from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Param outdir is a prefix of input or output file but hardcoded:\n      If this is meant to represent a file path prefix, it will fail when\n      running workflow in environments without a shared filesystem. Instead,\n      provide a function that infers the appropriate prefix from the input or\n      output file, e.g.: lambda w, input: os.path.splitext(input[0])[0]\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n      https://snakemake.readthedocs.io/en/stable/tutorial/advanced.html#tutorial-input-functions\n\nLints for rule check_chimeras (line 164, /tmp/tmpe7q2lzth/workflow/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Shell command directly uses variable GENOMES from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n    * Shell command directly uses variable EXT from outside of the rule:\n      It is recommended to pass all files as input and output, and non-file\n      parameters via the params directive. Otherwise, provenance tracking is\n      less accurate.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules\n\n",
-    "mandatory_flags": [],
-    "non_standardized_reason": [
-      "no .snakemake-workflow-catalog.yml found in repo root",
-      "no config/README.md found in repo root"
-    ],
-    "report": false,
-    "rulegraph": null,
-    "schemas": null,
-    "software_stack_deployment": null,
-    "standardized": false,
-    "stargazers_count": 0,
-    "subscribers_count": 0,
-    "topics": [],
-    "updated_at": 1791756522.0,
-    "wrappers": {}
-  },
-  {
-    "config_readme": null,
-    "data_format": 3,
     "description": null,
     "formatting": "[DEBUG] \n[DEBUG] In file \"/tmp/tmporr04ht4/workflow/Snakefile\":  Formatted content is different from original\n[INFO] 1 file(s) would be changed \ud83d\ude2c\n\nsnakefmt version: 0.11.5",
     "full_name": "lab-cats/EMRYS",
@@ -95303,30 +95231,6 @@
     "subscribers_count": 1,
     "topics": [],
     "updated_at": 1791373220.0,
-    "wrappers": {}
-  },
-  {
-    "config_readme": null,
-    "data_format": 3,
-    "description": "final project - Cellular automaton model of glioma growth",
-    "formatting": "[DEBUG] \n<unknown>:1: SyntaxWarning: invalid escape sequence '\\d'\n[DEBUG] In file \"/tmp/tmptx0lnu7b/Snakefile\":  Formatted content is different from original\n[INFO] 1 file(s) would be changed \ud83d\ude2c\n\nsnakefmt version: 0.11.5",
-    "full_name": "ldobosz/glioma-ca-model",
-    "latest_release": null,
-    "linting": "/tmp/tmptx0lnu7b/Snakefile:41: SyntaxWarning: invalid escape sequence '\\d'\n  \"results/figures/spatial_snapshots.png\"\nLints for rule run_untreated (line 10, /tmp/tmptx0lnu7b/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule run_treated (line 16, /tmp/tmptx0lnu7b/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule plot_growth (line 24, /tmp/tmptx0lnu7b/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\nLints for rule plot_comparison (line 32, /tmp/tmptx0lnu7b/Snakefile):\n    * No log directive defined:\n      Without a log directive, all output will be printed to the terminal. In\n      distributed environments, this means that errors are harder to discover.\n      In local environments, output of concurrent jobs will be mixed and become\n      unreadable.\n      Also see:\n      https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files\n    * Specify a conda environment or container for each rule.:\n      This way, the used software for each specific step is documented, and the\n      workflow can be executed on any machine without prerequisites.\n      Also see:\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#integrated-package-management\n      https://snakemake.readthedocs.io/en/latest/snakefiles/deployment.html#running-jobs-in-containers\n\n",
-    "mandatory_flags": [],
-    "non_standardized_reason": [
-      "no .snakemake-workflow-catalog.yml found in repo root",
-      "no config/README.md found in repo root"
-    ],
-    "report": false,
-    "rulegraph": null,
-    "schemas": null,
-    "software_stack_deployment": null,
-    "standardized": false,
-    "stargazers_count": 0,
-    "subscribers_count": 0,
-    "topics": [],
-    "updated_at": 1779878642.0,
     "wrappers": {}
   },
   {
@@ -97726,30 +97630,6 @@
   {
     "config_readme": null,
     "data_format": 3,
-    "description": null,
-    "formatting": "[DEBUG] \n[DEBUG] In file \"/tmp/tmpmfwvu_9_/Snakefile\":  Formatted content is different from original\n[INFO] 1 file(s) would be changed \ud83d\ude2c\n\nsnakefmt version: 0.11.5",
-    "full_name": "lthollinger/darpin_pipeline",
-    "latest_release": null,
-    "linting": "/home/runner/work/snakemake-workflow-catalog/snakemake-workflow-catalog/.pixi/envs/default/lib/python3.13/site-packages/google/auth/transport/grpc.py:43: FutureWarning: grpcio < 1.83.0 does not support Post-Quantum Cryptography (PQC). Support for non-PQC environments is deprecated. In April 2027, google-auth will raise its minimum requirements to enforce grpcio >= 1.83.0. For more details on Google Cloud's post-quantum security migration, visit: https://cloud.google.com/security/resources/post-quantum-cryptography\n  warnings.warn(\nKeyError in file \"/tmp/tmpmfwvu_9_/Snakefile\", line 9:\n'system'\n  File \"/tmp/tmpmfwvu_9_/Snakefile\", line 9, in <module>\n",
-    "mandatory_flags": [],
-    "non_standardized_reason": [
-      "no .snakemake-workflow-catalog.yml found in repo root",
-      "no config/README.md found in repo root"
-    ],
-    "report": false,
-    "rulegraph": null,
-    "schemas": null,
-    "software_stack_deployment": null,
-    "standardized": false,
-    "stargazers_count": 0,
-    "subscribers_count": 0,
-    "topics": [],
-    "updated_at": 1792338024.0,
-    "wrappers": {}
-  },
-  {
-    "config_readme": null,
-    "data_format": 3,
     "description": "SnakeGARD: A Scalable and Automated Workflow for Mitochondrial Genome Assembly from RNA-Seq Data",
     "formatting": "[DEBUG] \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/fastqc_raw_reads.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/index_reference.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/fastqc_trimmed_reads.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/download_reference.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/compress_fastq_raw_reads.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/multiqc_by_species.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/trim_fastq_raw_reads.smk\":  Formatted content is different from original\n[DEBUG] \n[ERROR] In file \"/tmp/tmpj9ebnfbs/workflow/Snakefile\":  InvalidPython: Black error:\n```\nCannot parse for target version Python 3.13: 36:0: <line number missing in source>\n\n(Note reported line number may be incorrect, as snakefmt could not determine the true line number)\n```\n\n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/Snakefile\":  \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/download_fastq_raw_reads.smk\":  Formatted content is different from original\n[DEBUG] \n[DEBUG] In file \"/tmp/tmpj9ebnfbs/workflow/rules/count_reads_stats.smk\":  Formatted content is different from original\n[INFO] 1 file(s) raised parsing errors \ud83e\udd15\n[INFO] 9 file(s) would be changed \ud83d\ude2c\n\nsnakefmt version: 0.11.5",
     "full_name": "luanrabelo/snakeseek",
@@ -99059,30 +98939,6 @@
     "subscribers_count": 1,
     "topics": [],
     "updated_at": 1748878206.0
-  },
-  {
-    "config_readme": null,
-    "data_format": 3,
-    "description": "A snakemake pipeline for prioritization of structural variants in short-read WGS data",
-    "formatting": "[DEBUG] \n[ERROR] In file \"/tmp/tmp3g4kwrhr/Snakefile\":  NameError: name 'config' is not defined\n[INFO] In file \"/tmp/tmp3g4kwrhr/Snakefile\":  1 file(s) raised parsing errors \ud83e\udd15\n\nsnakefmt version: 0.11.5",
-    "full_name": "maim02/SV-prioritization-workflow",
-    "latest_release": null,
-    "linting": "/home/runner/work/snakemake-workflow-catalog/snakemake-workflow-catalog/.pixi/envs/default/lib/python3.13/site-packages/google/auth/transport/grpc.py:44: FutureWarning: grpcio < 1.83.0 does not support Post-Quantum Cryptography (PQC). Support for non-PQC environments is deprecated. In October 2026, google-auth will raise its minimum requirements to enforce grpcio >= 1.83.0. For more details on Google Cloud's post-quantum security migration, visit: https://cloud.google.com/security/resources/post-quantum-cryptography\n  warnings.warn(\nSyntaxError in file \"/tmp/tmp3g4kwrhr/Snakefile\", line 369:\ninvalid syntax. Perhaps you forgot a comma?:\n\t\t\t\tpanel_genes = config [ \"regulatory_region_gene\" ]\n",
-    "mandatory_flags": [],
-    "non_standardized_reason": [
-      "no .snakemake-workflow-catalog.yml found in repo root",
-      "no config/README.md found in repo root"
-    ],
-    "report": false,
-    "rulegraph": null,
-    "schemas": null,
-    "software_stack_deployment": null,
-    "standardized": false,
-    "stargazers_count": 0,
-    "subscribers_count": 0,
-    "topics": [],
-    "updated_at": 1789732680.0,
-    "wrappers": {}
   },
   {
     "config_readme": null,

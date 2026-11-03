@@ -85,7 +85,9 @@ def plot_rulegraph(output: Path, rg_dot: str) -> list[str]:
         except sp.CalledProcessError as e:
             stderr = e.stderr.decode(errors="replace") if e.stderr else ""
             if "NetworkXUnfeasible" in stderr:
-                print(f"Skipping rulegraph for {output.name}: graph layout not feasible (probably cyclic).")
+                print(
+                    f"Skipping rulegraph for {output.name}: graph layout not feasible (probably cyclic)."
+                )
             return []
         output_files.append(svgfile.name)
     return output_files
@@ -122,16 +124,18 @@ def schema_to_markdown(data):
             rows.append([full_name, param_type, description, required, default])
 
             if "properties" in details:
-                child_props = details.get("properties", {})
-                child_required = details.get("required", [])
+                child_props = details.get("properties") or {}
+                child_required = details.get("required") or []
                 parse_props(child_props, full_name, child_required, nesting + 1)
 
     parse_props(
-        data.get("properties", {}), parent="", required_list=data.get("required", [])
+        data.get("properties") or {}, parent="", required_list=data.get("required", [])
     )
 
     headers = ["Parameter", "Type", "Description", "Required", "Default"]
     rows = [[str(cell) for cell in row] for row in rows]
+    if not rows:
+        return ""
     col_widths = [
         max(len(headers[i]), *(len(row[i]) for row in rows))
         for i in range(len(headers))
